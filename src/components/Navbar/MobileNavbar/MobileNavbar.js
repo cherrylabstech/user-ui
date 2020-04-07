@@ -2,7 +2,7 @@ import React from "react";
 import HomeIcon from "../../../images/HomeIcon.svg";
 import PopularIcon from "../../../images/PopularIcon.svg";
 import "./MobileNavbar.css";
-
+import { Link } from "react-router-dom";
 const MobileNavbar = props => {
   return (
     <React.Fragment>
@@ -31,6 +31,24 @@ const MobileNavbar = props => {
             Popular
           </a>
         </div>
+        <Link to="/KnowledgeBase">
+          <div className="channel mobile-nav">
+            <img src={PopularIcon} alt="Popular" className="channel-logo" />
+            <span className="channel-name">Knowledge Base</span>
+          </div>
+        </Link>
+        <Link to="/Profile">
+          <div className="channel mobile-nav">
+            <img src={PopularIcon} alt="Popular" className="channel-logo" />
+            <span className="channel-name">Profile</span>
+          </div>
+        </Link>
+        <Link to="/MyRequest">
+          <div className="channel mobile-nav">
+            <img src={PopularIcon} alt="Popular" className="channel-logo" />
+            <span className="channel-name">My Request</span>
+          </div>
+        </Link>
       </div>
     </React.Fragment>
   );

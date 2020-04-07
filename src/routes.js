@@ -3,16 +3,23 @@ import Navbar from "./components/Navbar/Navbar";
 import { Route, BrowserRouter, Switch } from "react-router-dom";
 import Home from "./containers/Home/Home";
 import Feed from "./containers/Feed/Feed";
-import { fetchPosts } from "./actions/postAction";
+//import { fetchPosts } from "./actions/postAction";
 import { connect } from "react-redux";
 import SideNavLeft from "./components/SideNavLeft/SideNavLeft";
 import SideNavRight from "./components/SideNavRight/SideNavRight";
 import KnowledgeBase from "./ReduxContainers/KnowledgeBase";
+import MyRequest from "./ReduxContainers/MyRequest";
+import MyRequestDetail from "./ReduxContainers/MyRequestDetail";
+import SignIn from "./ReduxContainers/SignIn";
+import SignUp from "./ReduxContainers/SignUp";
+import MyAssetDetail from "./ReduxContainers/MyAssetDetail";
+import MyAsset from "./ReduxContainers/MyAsset";
+import Profile from "./ReduxContainers/ Profile";
 
 class Routes extends Component {
-  componentDidMount() {
-    this.props.dispatch(fetchPosts());
-  }
+  //   componentDidMount() {
+  //     this.props.dispatch(fetchPosts());
+  //   }
   render() {
     return (
       <BrowserRouter>
@@ -29,6 +36,21 @@ class Routes extends Component {
                   path="/KnowledgeBase"
                   component={KnowledgeBase}
                 ></Route>
+                <Route exact path="/MyRequest" component={MyRequest}></Route>
+                <Route
+                  exact
+                  path="/MyRequestDetail"
+                  component={MyRequestDetail}
+                ></Route>
+                <Route exact path="/SignIn" component={SignIn}></Route>
+                <Route exact path="/SignUp" component={SignUp}></Route>
+                <Route exact path="/MyAsset" component={MyAsset}></Route>
+                <Route
+                  exact
+                  path="/MyAssetDetail"
+                  component={MyAssetDetail}
+                ></Route>
+                <Route exact path="/Profile" component={Profile}></Route>
               </Switch>
               <SideNavRight />
             </div>

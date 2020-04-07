@@ -29,10 +29,10 @@
   background-color: #ffffff;
 }
 .channel-name {
+  width: auto;
   margin-left: 10px;
   font-size: 14px;
   height: 16px;
-  width: 37px;
   color: #333333;
   letter-spacing: -0.23px;
   line-height: 16px;
