@@ -1,0 +1,22 @@
+.post-description {
+  color: var(--post-font-color);
+  font-size: 14px;
+  letter-spacing: -0.23px;
+  line-height: 20px;
+  margin: 6px 0;
+}
+
+.post-title {
+  color: var(--post-font-color);
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: -0.32px;
+  line-height: 23px;
+}
+
+.truncate-text {
+  color: #2477ea;
+  font-size: 14px;
+  letter-spacing: -0.2px;
+  line-height: 12px;
+}

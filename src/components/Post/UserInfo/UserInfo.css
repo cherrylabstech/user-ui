@@ -1,0 +1,40 @@
+.user-dp {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 6px;
+}
+.verified-icon {
+  margin-left: 5px;
+}
+.username-block {
+  display: flex;
+}
+.created-time {
+  color: #8294a5;
+  font-size: 12px;
+  letter-spacing: -0.12px;
+  line-height: 14px;
+}
+.create-time-container {
+  margin-left: auto;
+}
+.nickname {
+  color: #333333;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.03px;
+  line-height: 18px;
+}
+.company-name {
+  color: #5f748c;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: -0.03px;
+  line-height: 16px;
+}
+
+.user-info {
+  display: flex;
+  margin-bottom: 12px;
+}

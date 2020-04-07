@@ -1,0 +1,14 @@
+.tag {
+  padding: 3px 6px;
+  color: #5f748c;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: -0.23px;
+  line-height: 16px;
+  border-radius: 1px;
+  background-color: #ebf4ff;
+  margin-right: 6px;
+}
+.tag-container {
+  display: flex;
+}

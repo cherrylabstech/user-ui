@@ -1,0 +1,54 @@
+.header {
+  height: 50px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-wrapper {
+  box-shadow: rgba(41, 76, 102, 0.16) 0px 1px 3px 0px;
+  background: rgb(255, 255, 255);
+  position: fixed;
+  width: 100%;
+}
+
+.logo-block {
+  order: 1;
+}
+.search-block {
+  order: 2;
+}
+.user-profile-block {
+  order: 3;
+}
+.brand-logo {
+  width: 94px;
+  height: 32px;
+}
+.brand-text {
+  height: 18px;
+  margin-left: 6px;
+}
+.profile-pic {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+
+.search-form {
+  flex-grow: 1;
+}
+
+.search-box {
+  padding: 0 30px;
+  box-sizing: border-box;
+  height: 32px;
+  width: 452px;
+  border: 1px solid #b9cceb;
+  border-radius: 3px;
+  background-color: #ffffff;
+  background-image: url(../../images//SearchIcon.svg);
+  background-position: 7px 7px;
+  background-repeat: no-repeat;
+}
