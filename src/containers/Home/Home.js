@@ -29,8 +29,5 @@ Home.propTypes = {
   posts: PropTypes.array
 };
 
-Home = connect(
-  mapStateToProps,
-  null
-)(Home);
+Home = connect(mapStateToProps, null)(Home);
 export default withRouter(Home);
