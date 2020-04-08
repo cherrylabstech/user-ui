@@ -1,13 +1,7 @@
 import React, { Component } from "react";
 import Navbar from "./components/Navbar/Navbar";
-import {
-  Route,
-  BrowserRouter,
-  Switch,
-  Redirect,
-  withRouter
-} from "react-router-dom";
-import Home from "./containers/Home/Home";
+import { Route, BrowserRouter, Switch, withRouter } from "react-router-dom";
+// import Home from "./containers/Home/Home";
 import Feed from "./containers/Feed/Feed";
 //import { fetchPosts } from "./actions/postAction";
 import { connect } from "react-redux";
@@ -22,7 +16,7 @@ import MyAssetDetail from "./ReduxContainers/MyAssetDetail";
 import MyAsset from "./ReduxContainers/MyAsset";
 import Profile from "./ReduxContainers/ Profile";
 import LoginPage from "./components/Login/LoginPage";
-import HomePage from "./containers/HomePage/HomePage";
+import WelcomeMessage from "./components/WelcomeMessage/WelcomeMessage";
 class Routes extends Component {
   //   componentDidMount() {
   //     this.props.dispatch(fetchPosts());
@@ -30,23 +24,17 @@ class Routes extends Component {
 
   render() {
     const location = this.props.location.pathname;
-    const authPath = location === "/auth" ? true : false;
-    const token = localStorage.getItem("X-Auth-Token");
     return (
       <BrowserRouter>
-        {!token && location !== "/auth/login" && (
-          <Redirect to="/auth"></Redirect>
-        )}
         <div className="App wrapper">
-          {!authPath && token && <Navbar />}
-          <Route path="/auth" component={HomePage}></Route>
-          <Route exact path="/auth/login" component={LoginPage}></Route>
-
+          {location !== "/login" && <Navbar />}
+          <Route exact path="/login" component={LoginPage}></Route>
+          {/* <Redirect from="/" to="/home"></Redirect> */}
           <div className="container">
             <div className="columns">
-              {!authPath && token && <SideNavLeft />}
+              {location !== "/login" && <SideNavLeft />}
               <Switch>
-                <Route exact path="/home" component={Home} />
+                <Route exact path="/home" component={WelcomeMessage} />
                 <Route path="/post/:post_id" component={Feed} />
                 <Route
                   exact
@@ -69,7 +57,7 @@ class Routes extends Component {
                 ></Route>
                 <Route exact path="/Profile" component={Profile}></Route>
               </Switch>
-              {!authPath && token && <SideNavRight />}
+              {location !== "/login" && <SideNavRight />}
             </div>
           </div>
         </div>
