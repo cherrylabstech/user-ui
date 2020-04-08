@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import { userActions } from "../../ApiCall/AuthApi";
 import "./LoginPage.css";
-function LoginPage() {
+function LoginPage(props) {
   const [username, setUser] = useState("");
   const [password, setPass] = useState("");
   const dispatch = useDispatch();
@@ -20,14 +21,21 @@ function LoginPage() {
   const passwordChange = event => {
     setPass(event.target.value);
   };
+
   return (
     <div className="login-page main">
-      <p className="sign" align="center">
-        Sign in
-      </p>
+      <div className="sign-in-box">
+        <p className="sign" align="center">
+          Sign in
+        </p>
+        <div className="close-button">
+          <Link to="/auth"> X</Link>
+        </div>
+      </div>
       {error !== null && (
         <p>You have remaining loginAttemptsLeft is {error.loginAttemptsLeft}</p>
       )}
+
       <form
         style={loading ? { opacity: 0.5 } : { opacity: 1 }}
         onSubmit={authValidate}

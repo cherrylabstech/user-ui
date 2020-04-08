@@ -1,6 +1,12 @@
 import React, { Component } from "react";
 import Navbar from "./components/Navbar/Navbar";
-import { Route, BrowserRouter, Switch, Redirect } from "react-router-dom";
+import {
+  Route,
+  BrowserRouter,
+  Switch,
+  Redirect,
+  withRouter
+} from "react-router-dom";
 import Home from "./containers/Home/Home";
 import Feed from "./containers/Feed/Feed";
 //import { fetchPosts } from "./actions/postAction";
@@ -16,28 +22,29 @@ import MyAssetDetail from "./ReduxContainers/MyAssetDetail";
 import MyAsset from "./ReduxContainers/MyAsset";
 import Profile from "./ReduxContainers/ Profile";
 import LoginPage from "./components/Login/LoginPage";
-import TopBar from "./components/HomePage/TopBar/TopBar";
+import HomePage from "./containers/HomePage/HomePage";
 class Routes extends Component {
   //   componentDidMount() {
   //     this.props.dispatch(fetchPosts());
   //   }
 
   render() {
+    const location = this.props.location.pathname;
+    const authPath = location === "/auth" ? true : false;
     const token = localStorage.getItem("X-Auth-Token");
     return (
       <BrowserRouter>
-        {!token && <Redirect to="/"></Redirect>}
+        {!token && location !== "/auth/login" && (
+          <Redirect to="/auth"></Redirect>
+        )}
         <div className="App wrapper">
-          {token && <Navbar />}
-          {token === null && (
-            <>
-              <Route exact path="/" component={TopBar}></Route>
-              <Route exact path="/login" component={LoginPage}></Route>
-            </>
-          )}
+          {!authPath && token && <Navbar />}
+          <Route path="/auth" component={HomePage}></Route>
+          <Route exact path="/auth/login" component={LoginPage}></Route>
+
           <div className="container">
             <div className="columns">
-              {token && <SideNavLeft />}
+              {!authPath && token && <SideNavLeft />}
               <Switch>
                 <Route exact path="/home" component={Home} />
                 <Route path="/post/:post_id" component={Feed} />
@@ -61,10 +68,8 @@ class Routes extends Component {
                   component={MyAssetDetail}
                 ></Route>
                 <Route exact path="/Profile" component={Profile}></Route>
-
-                {token && <Redirect from="/" to="/home"></Redirect>}
               </Switch>
-              {token && <SideNavRight />}
+              {!authPath && token && <SideNavRight />}
             </div>
           </div>
         </div>
@@ -79,4 +84,4 @@ const mapStateToProps = state => {
 };
 
 Routes = connect(mapStateToProps, null)(Routes);
-export default Routes;
+export default withRouter(Routes);
