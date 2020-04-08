@@ -5,7 +5,17 @@ import Logo from "../../images/hush-logo.svg";
 import ProfileUser from "../../images/ProfileUser.jpg";
 import "./Navbar.css";
 
-const Navbar = () => {
+const Navbar = props => {
+  const token = localStorage.getItem("X-Auth-Token");
+  const handleLogin = () => {
+    props.history.push("/login");
+    window.location.reload();
+  };
+  const handleLogout = () => {
+    localStorage.clear();
+    props.history.push("/login");
+    window.location.reload();
+  };
   return (
     <div className="header-wrapper">
       <header>
@@ -30,15 +40,22 @@ const Navbar = () => {
               />
             </form>
           </div>
-          <Link className="user-profile-block cursor-pointer" to="/login">
-            <div>
-              <img
-                src={ProfileUser}
-                alt="logo"
-                className="brand-logo profile-pic"
-              />
-            </div>
-          </Link>
+          <div className="user-profile-block cursor-pointer">
+            {token ? (
+              <>
+                <img
+                  src={ProfileUser}
+                  alt="logo"
+                  className="brand-logo profile-pic"
+                />
+                <label onClick={handleLogout} className="logout-label">
+                  Logout
+                </label>
+              </>
+            ) : (
+              <button onClick={handleLogin}>Login</button>
+            )}
+          </div>
         </div>
 
         <div className="mobile-nav-block">

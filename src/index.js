@@ -4,13 +4,15 @@ import "./index.css";
 import registerServiceWorker from "./registerServiceWorker";
 import { Provider } from "react-redux";
 import "./css/responsive.css";
-
+import { BrowserRouter } from "react-router-dom";
 import Routes from "./routes";
 import { store } from "./Store/Store";
 
 ReactDOM.render(
   <Provider store={store}>
-    <Routes></Routes>
+    <BrowserRouter>
+      <Routes></Routes>
+    </BrowserRouter>
   </Provider>,
   document.getElementById("root")
 );

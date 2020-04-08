@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { userActions } from "../../ApiCall/AuthApi";
+import { userActions } from "../../ApiCall/rootApi";
+import { withRouter } from "react-router-dom";
 import "./LoginPage.css";
-function LoginPage() {
+function LoginPage(props) {
   const [username, setUser] = useState("");
   const [password, setPass] = useState("");
   const dispatch = useDispatch();
@@ -20,6 +21,11 @@ function LoginPage() {
   const passwordChange = event => {
     setPass(event.target.value);
   };
+  const goBack = e => {
+    e.preventDefault();
+    props.history.goBack();
+  };
+
   return (
     <div className="login-page main">
       <p className="sign" align="center">
@@ -28,6 +34,7 @@ function LoginPage() {
       {error !== null && (
         <p>You have remaining loginAttemptsLeft is {error.loginAttemptsLeft}</p>
       )}
+
       <form
         style={loading ? { opacity: 0.5 } : { opacity: 1 }}
         onSubmit={authValidate}
@@ -56,9 +63,17 @@ function LoginPage() {
         <button type="submit" className="submit" align="center">
           {loading ? " Loading.." : "Sign in"}
         </button>
+        <button
+          onClick={goBack}
+          type="submit"
+          className="submit back-button"
+          align="center"
+        >
+          back
+        </button>
       </form>
     </div>
   );
 }
 
-export default LoginPage;
+export default withRouter(LoginPage);

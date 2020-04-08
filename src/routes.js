@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Navbar from "./components/Navbar/Navbar";
-import { Route, BrowserRouter, Switch, Redirect } from "react-router-dom";
-import Home from "./containers/Home/Home";
+import { Route, BrowserRouter, Switch, withRouter } from "react-router-dom";
+// import Home from "./containers/Home/Home";
 import Feed from "./containers/Feed/Feed";
 //import { fetchPosts } from "./actions/postAction";
 import { connect } from "react-redux";
@@ -23,17 +23,18 @@ class Routes extends Component {
   //   }
 
   render() {
-    const token = localStorage.getItem("X-Auth-Token");
+    const location = this.props.location.pathname;
     return (
       <BrowserRouter>
-        {!token && <Redirect to="/"></Redirect>}
         <div className="App wrapper">
-          {token && <Navbar />}
+          {location !== "/login" && <Navbar />}
+          <Route exact path="/login" component={LoginPage}></Route>
+          {/* <Redirect from="/" to="/home"></Redirect> */}
           <div className="container">
             <div className="columns">
-              {token && <SideNavLeft />}
+              {location !== "/login" && <SideNavLeft />}
               <Switch>
-                <Route exact path="/home" component={Home} />
+                <Route exact path="/" component={WelcomeMessage} />
                 <Route path="/post/:post_id" component={Feed} />
                 <Route
                   exact
@@ -55,10 +56,8 @@ class Routes extends Component {
                   component={MyAssetDetail}
                 ></Route>
                 <Route exact path="/Profile" component={Profile}></Route>
-                <Route exact path="/" component={LoginPage}></Route>
-                {token && <Redirect from="/" to="/home"></Redirect>}
               </Switch>
-              {token && <SideNavRight />}
+              {location !== "/login" && <SideNavRight />}
             </div>
           </div>
         </div>
@@ -73,4 +72,4 @@ const mapStateToProps = state => {
 };
 
 Routes = connect(mapStateToProps, null)(Routes);
-export default Routes;
+export default withRouter(Routes);
