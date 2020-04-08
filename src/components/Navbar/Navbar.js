@@ -54,7 +54,11 @@ const Navbar = props => {
                 </label>
               </>
             ) : (
-              <Button onClick={handleLogin} text="Login"></Button>
+              <Button
+                className="primary-btn btn-wide btn-height"
+                onClick={handleLogin}
+                text="Login"
+              ></Button>
             )}
           </div>
         </div>
