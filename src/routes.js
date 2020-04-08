@@ -16,6 +16,7 @@ import MyAssetDetail from "./ReduxContainers/MyAssetDetail";
 import MyAsset from "./ReduxContainers/MyAsset";
 import Profile from "./ReduxContainers/ Profile";
 import LoginPage from "./components/Login/LoginPage";
+import TopBar from "./components/HomePage/TopBar/TopBar";
 class Routes extends Component {
   //   componentDidMount() {
   //     this.props.dispatch(fetchPosts());
@@ -28,6 +29,12 @@ class Routes extends Component {
         {!token && <Redirect to="/"></Redirect>}
         <div className="App wrapper">
           {token && <Navbar />}
+          {token === null && (
+            <>
+              <Route exact path="/" component={TopBar}></Route>
+              <Route exact path="/login" component={LoginPage}></Route>
+            </>
+          )}
           <div className="container">
             <div className="columns">
               {token && <SideNavLeft />}
@@ -54,9 +61,7 @@ class Routes extends Component {
                   component={MyAssetDetail}
                 ></Route>
                 <Route exact path="/Profile" component={Profile}></Route>
-                {token === null && (
-                  <Route exact path="/" component={LoginPage}></Route>
-                )}
+
                 {token && <Redirect from="/" to="/home"></Redirect>}
               </Switch>
               {token && <SideNavRight />}
