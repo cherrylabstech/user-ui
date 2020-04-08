@@ -17,6 +17,7 @@ import MyAsset from "./ReduxContainers/MyAsset";
 import Profile from "./ReduxContainers/ Profile";
 import LoginPage from "./components/Login/LoginPage";
 import WelcomeMessage from "./components/WelcomeMessage/WelcomeMessage";
+import "./Interceptor.js";
 class Routes extends Component {
   //   componentDidMount() {
   //     this.props.dispatch(fetchPosts());
@@ -29,7 +30,6 @@ class Routes extends Component {
         <div className="App wrapper">
           {location !== "/login" && <Navbar />}
           <Route exact path="/login" component={LoginPage}></Route>
-          {/* <Redirect from="/" to="/home"></Redirect> */}
           <div className="container">
             <div className="columns">
               {location !== "/login" && <SideNavLeft />}
