@@ -42,7 +42,7 @@ export function auth(email, password) {
         dispatch(authSuccess(email, password));
         localStorage.setItem("X-Auth-Token", res.data.access_token);
         localStorage.setItem("refresh-token", res.data.refresh_token);
-        history.push("/home");
+        history.push("/");
         window.location.reload();
       })
       .catch(error => {

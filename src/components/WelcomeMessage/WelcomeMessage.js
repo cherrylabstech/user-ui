@@ -17,6 +17,7 @@ function WelcomeMessage() {
   return (
     <div className="main welcome-message-box">
       {!Loading && WelcomeData === undefined && <div>Welcome </div>}
+      {Loading && <div>Loading...</div>}
       {!Loading && WelcomeData !== undefined && (
         <div className="welcome-message-box">
           <div>{WelcomeData.welcomeHeading}</div>

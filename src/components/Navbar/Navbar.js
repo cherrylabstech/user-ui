@@ -21,7 +21,7 @@ const Navbar = props => {
       <header>
         <div className="header">
           <div className="logo-block">
-            <Link to="/home">
+            <Link to="/">
               <img src={Logo} alt="logo" className="brand-logo" />
             </Link>
           </div>

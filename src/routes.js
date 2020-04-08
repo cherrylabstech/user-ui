@@ -34,7 +34,7 @@ class Routes extends Component {
             <div className="columns">
               {location !== "/login" && <SideNavLeft />}
               <Switch>
-                <Route exact path="/home" component={WelcomeMessage} />
+                <Route exact path="/" component={WelcomeMessage} />
                 <Route path="/post/:post_id" component={Feed} />
                 <Route
                   exact
