@@ -55,6 +55,7 @@ class Routes extends Component {
                 ></Route>
                 <Route exact path="/Profile" component={Profile}></Route>
                 <Route exact path="/" component={LoginPage}></Route>
+                {token && <Redirect from="/" to="/home"></Redirect>}
               </Switch>
               {token && <SideNavRight />}
             </div>
