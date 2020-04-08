@@ -16,6 +16,7 @@ import MyAssetDetail from "./ReduxContainers/MyAssetDetail";
 import MyAsset from "./ReduxContainers/MyAsset";
 import Profile from "./ReduxContainers/ Profile";
 import LoginPage from "./components/Login/LoginPage";
+import "./Interceptor.js";
 class Routes extends Component {
   //   componentDidMount() {
   //     this.props.dispatch(fetchPosts());
