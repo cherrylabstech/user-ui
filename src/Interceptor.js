@@ -16,7 +16,7 @@ axios.interceptors.response.use(
   },
   function(error) {
     if (error.response.status === 401) {
-      alert("Enter Correct Credentials");
+      console.log("Enter Correct Credentials");
     }
     return Promise.reject(error);
   }
