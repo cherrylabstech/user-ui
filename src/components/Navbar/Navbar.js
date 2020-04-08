@@ -4,6 +4,7 @@ import MobileNavbar from "./MobileNavbar/MobileNavbar";
 import Logo from "../../images/hush-logo.svg";
 import ProfileUser from "../../images/ProfileUser.jpg";
 import "./Navbar.css";
+import { Button } from "../Button/Button";
 
 const Navbar = props => {
   const token = localStorage.getItem("X-Auth-Token");
@@ -53,7 +54,11 @@ const Navbar = props => {
                 </label>
               </>
             ) : (
-              <button onClick={handleLogin}>Login</button>
+              <Button
+                className="primary-btn btn-wide btn-height"
+                onClick={handleLogin}
+                text="Login"
+              ></Button>
             )}
           </div>
         </div>
