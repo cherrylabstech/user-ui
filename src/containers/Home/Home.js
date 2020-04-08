@@ -5,7 +5,6 @@ import { connect } from "react-redux";
 // import Skeleton from "../../components/Skeleton/Skeleton";
 import PropTypes from "prop-types";
 import "./Home.css";
-import WelcomeMessage from "../../components/WelcomeMessage/WelcomeMessage"
 
 class Home extends React.Component {
   render() {
@@ -16,9 +15,7 @@ class Home extends React.Component {
     // ) : (
     //   <Skeleton count={3} />
     // );
-    return ( <div className="main-container">
-      <WelcomeMessage/>
-    </div> );
+    return <div className="main">Post List</div>;
   }
 }
 

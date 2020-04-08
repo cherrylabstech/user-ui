@@ -30,14 +30,17 @@ const Navbar = () => {
               />
             </form>
           </div>
-          <div className="user-profile-block cursor-pointer">
-            <img
-              src={ProfileUser}
-              alt="logo"
-              className="brand-logo profile-pic"
-            />
-          </div>
+          <Link className="user-profile-block cursor-pointer" to="/login">
+            <div>
+              <img
+                src={ProfileUser}
+                alt="logo"
+                className="brand-logo profile-pic"
+              />
+            </div>
+          </Link>
         </div>
+
         <div className="mobile-nav-block">
           <MobileNavbar />
         </div>

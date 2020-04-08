@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Navbar from "./components/Navbar/Navbar";
-import { Route, BrowserRouter, Switch } from "react-router-dom";
+import { Route, BrowserRouter, Switch, Redirect } from "react-router-dom";
 import Home from "./containers/Home/Home";
 import Feed from "./containers/Feed/Feed";
 //import { fetchPosts } from "./actions/postAction";
@@ -15,21 +15,24 @@ import SignUp from "./ReduxContainers/SignUp";
 import MyAssetDetail from "./ReduxContainers/MyAssetDetail";
 import MyAsset from "./ReduxContainers/MyAsset";
 import Profile from "./ReduxContainers/ Profile";
-
+import LoginPage from "./components/Login/LoginPage";
 class Routes extends Component {
   //   componentDidMount() {
   //     this.props.dispatch(fetchPosts());
   //   }
+
   render() {
+    const token = localStorage.getItem("X-Auth-Token");
     return (
       <BrowserRouter>
+        {!token && <Redirect to="/"></Redirect>}
         <div className="App wrapper">
-          <Navbar />
+          {token && <Navbar />}
           <div className="container">
             <div className="columns">
-              <SideNavLeft />
+              {token && <SideNavLeft />}
               <Switch>
-                <Route exact path="/" component={Home} />
+                <Route exact path="/home" component={Home} />
                 <Route path="/post/:post_id" component={Feed} />
                 <Route
                   exact
@@ -51,8 +54,12 @@ class Routes extends Component {
                   component={MyAssetDetail}
                 ></Route>
                 <Route exact path="/Profile" component={Profile}></Route>
+                {token === null && (
+                  <Route exact path="/" component={LoginPage}></Route>
+                )}
+                {token && <Redirect from="/" to="/home"></Redirect>}
               </Switch>
-              <SideNavRight />
+              {token && <SideNavRight />}
             </div>
           </div>
         </div>
