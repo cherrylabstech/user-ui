@@ -54,7 +54,9 @@ class Routes extends Component {
                   component={MyAssetDetail}
                 ></Route>
                 <Route exact path="/Profile" component={Profile}></Route>
-                <Route exact path="/" component={LoginPage}></Route>
+                {token === null && (
+                  <Route exact path="/" component={LoginPage}></Route>
+                )}
                 {token && <Redirect from="/" to="/home"></Redirect>}
               </Switch>
               {token && <SideNavRight />}
