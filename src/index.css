@@ -4,6 +4,8 @@
   --hush-body-background: #f2f4f7;
   --post-font-color: #333333;
   --post-container-background-color: #ffffff;
+  --primary: purple;
+  --secondary: red;
 }
 @import url("https://rsms.me/inter/inter.css");
 html {
@@ -108,4 +110,31 @@ body {
 
 a {
   text-decoration: none;
+}
+
+.primary-btn {
+  border: none;
+  background-image: linear-gradient(
+    to right,
+    #4c74ab 0%,
+    #348ac7 51%,
+    #0c479a 100%
+  );
+  border-radius: 2px;
+  color: white;
+  padding: 0 10px;
+  cursor: pointer;
+}
+
+.secondary-btn {
+  border: none;
+  background-color: var(--secondary);
+  border-radius: 2px;
+  color: white;
+  padding: 0 10px;
+  cursor: pointer;
+}
+
+.btn-wide {
+  height: 35px;
 }

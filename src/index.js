@@ -5,11 +5,14 @@ import registerServiceWorker from "./registerServiceWorker";
 import { Provider } from "react-redux";
 import "./css/responsive.css";
 import store from "./store";
+import { BrowserRouter } from "react-router-dom";
 import Routes from "./routes";
 
 ReactDOM.render(
   <Provider store={store}>
-    <Routes></Routes>
+    <BrowserRouter>
+      <Routes></Routes>
+    </BrowserRouter>
   </Provider>,
   document.getElementById("root")
 );
