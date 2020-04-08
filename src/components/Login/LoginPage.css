@@ -68,6 +68,7 @@ form.form1 {
 }
 
 .submit {
+  width: 125px;
   cursor: pointer;
   border-radius: 5em;
   color: #fff;
