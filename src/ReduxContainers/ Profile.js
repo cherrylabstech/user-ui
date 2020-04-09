@@ -8,7 +8,6 @@ function Profile() {
     const tokenApiCalls = () => {
       dispatch(userActions.profileDetailsApi());
     };
-
     token && tokenApiCalls();
   }, [dispatch]);
   return (

@@ -5,7 +5,6 @@
 import * as actionTypes from "../actions/ProfileDetailsAction";
 import { BASE_PATH, SERVICE_PATH } from "../ApiBasePath/ApiBasePath";
 import axios from "axios";
-import { token } from "../helpers/token";
 export const getProfileDetails = profileDetailsData => {
   return {
     type: actionTypes.GET_PROFILE_DETAILS_DATA
@@ -27,6 +26,7 @@ export const profileDetailsFail = error => {
 export const profileDetailsApi = () => {
   const url = `${BASE_PATH}${SERVICE_PATH}/profile/details/?v2=true`;
   return dispacth => {
+    const token = { "X-Auth-Token": localStorage.getItem("X-Auth-Token") };
     dispacth(getProfileDetails());
     axios
       .get(url, { headers: token })
@@ -34,7 +34,9 @@ export const profileDetailsApi = () => {
         dispacth(setProfileDetails(res.data));
       })
       .catch(error => {
-        dispacth(profileDetailsFail(error.response.data));
+        console.log(error.response);
+        error.response !== undefined &&
+          dispacth(profileDetailsFail(error.response.data));
       });
   };
 };

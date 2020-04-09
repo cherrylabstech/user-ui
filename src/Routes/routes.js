@@ -34,8 +34,7 @@ function Routes(props) {
     };
     location !== "/login" && apiCalls();
     token && tokenApiCalls();
-  }, [token, dispatch, location]);
-  console.log(props.location.pathname);
+  }, [token, dispatch]);
   return (
     <div className="App wrapper">
       {location !== "/login" && <Navbar />}
