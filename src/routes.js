@@ -17,6 +17,7 @@ import MyAsset from "./ReduxContainers/MyAsset";
 import Profile from "./ReduxContainers/ Profile";
 import LoginPage from "./components/Login/LoginPage";
 import WelcomeMessage from "./components/WelcomeMessage/WelcomeMessage";
+import CreateTicket from "./ReduxContainers/CreateTicket";
 import "./Interceptor.js";
 class Routes extends Component {
   //   componentDidMount() {
@@ -47,6 +48,7 @@ class Routes extends Component {
                   path="/MyRequestDetail"
                   component={MyRequestDetail}
                 ></Route>
+                <Route exact path="/CreateTicket" component={CreateTicket} />
                 <Route exact path="/SignIn" component={SignIn}></Route>
                 <Route exact path="/SignUp" component={SignUp}></Route>
                 <Route exact path="/MyAsset" component={MyAsset}></Route>
