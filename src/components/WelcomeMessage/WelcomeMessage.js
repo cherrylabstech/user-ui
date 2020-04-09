@@ -1,18 +1,12 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { userActions } from "../../ApiCall/rootApi";
+import React from "react";
+import { useSelector } from "react-redux";
 import Interweave from "interweave";
 import "./WelcomeMessage.css";
 function WelcomeMessage() {
-  const dispatch = useDispatch();
-
   const WelcomeData = useSelector(
     state => state.WelcomeMessageReducer.welcomeData
   );
   const Loading = useSelector(state => state.WelcomeMessageReducer.loading);
-  useEffect(() => {
-    dispatch(userActions.welcome());
-  }, [dispatch]);
 
   return (
     <div className="main welcome-message-box">

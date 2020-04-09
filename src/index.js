@@ -5,7 +5,7 @@ import registerServiceWorker from "./registerServiceWorker";
 import { Provider } from "react-redux";
 import "./css/responsive.css";
 import { BrowserRouter } from "react-router-dom";
-import Routes from "./routes";
+import Routes from "./Routes/routes";
 import { store } from "./Store/Store";
 
 ReactDOM.render(

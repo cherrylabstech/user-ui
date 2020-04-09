@@ -22,7 +22,7 @@ const Navbar = props => {
       <header>
         <div className="header">
           <div className="logo-block">
-            <Link to="/">
+            <Link to="/home">
               <img src={Logo} alt="logo" className="brand-logo" />
             </Link>
           </div>

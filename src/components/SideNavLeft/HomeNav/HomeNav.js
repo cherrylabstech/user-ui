@@ -9,7 +9,7 @@ const HomeNav = props => {
     {
       id: 1,
       label: "Home",
-      pathname: "/",
+      pathname: "/home",
       icon: HomeIcon
     },
     {

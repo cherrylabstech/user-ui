@@ -1,9 +1,10 @@
 import React, { Fragment } from "react";
-function KnowledgeBase() {
+import { withRouter } from "react-router-dom";
+function KnowledgeBase(props) {
   return (
     <Fragment>
       <div className="main">Knowledge Base</div>
     </Fragment>
   );
 }
-export default KnowledgeBase;
+export default withRouter(KnowledgeBase);
