@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import Navbar from "../components/Navbar/Navbar";
-import { Route, BrowserRouter, Switch, withRouter } from "react-router-dom";
+import { Route, withRouter, Switch } from "react-router-dom";
 // import Home from "./containers/Home/Home";
 import Feed from "../containers/Feed/Feed";
 //import { fetchPosts } from "./actions/postAction";
@@ -15,7 +15,7 @@ import MyAssetDetail from "../ReduxContainers/MyAssetDetail";
 import MyAsset from "../ReduxContainers/MyAsset";
 import Profile from "../ReduxContainers/ Profile";
 import LoginPage from "../components/Login/LoginPage";
-import WelcomeMessage from "../components/WelcomeMessage/WelcomeMessage";
+import WelcomeMessage from "../components/HomePage/WelcomeMessage/WelcomeMessage";
 import "../Interceptor.js";
 import { useDispatch } from "react-redux";
 //import { alertActions } from "../ApiCall/Alert";
@@ -28,58 +28,55 @@ function Routes(props) {
   useEffect(() => {
     const apiCalls = () => {
       dispatch(userActions.themeApi());
-      dispatch(userActions.welcome());
     };
     const tokenApiCalls = () => {
       dispatch(userActions.profileApi());
-      dispatch(userActions.profileDetailsApi());
     };
     location !== "/login" && apiCalls();
     token && tokenApiCalls();
   }, [token, dispatch, location]);
+  console.log(props.location.pathname);
   return (
-    <BrowserRouter key={12}>
-      <div className="App wrapper">
-        {location !== "/login" && <Navbar />}
-        <Route exact path="/login" component={LoginPage}></Route>
-        <div className="container">
-          <div className="columns">
-            {location !== "/login" && <SideNavLeft />}
-            <Switch>
-              <Route exact path="/home" component={WelcomeMessage} />
-              <Route path="/post/:post_id" component={Feed} />
-              <Route
-                exact
-                path="/KnowledgeBase"
-                component={KnowledgeBase}
-              ></Route>
-              <Route
-                exact
-                path="/MyRequest"
-                key={2}
-                component={MyRequest}
-              ></Route>
-              <Route
-                exact
-                path="/MyRequestDetail"
-                component={MyRequestDetail}
-              ></Route>
-              <Route exact path="/SignIn" component={SignIn}></Route>
-              <Route exact path="/SignUp" component={SignUp}></Route>
-              <Route exact path="/MyAsset" component={MyAsset}></Route>
-              <Route
-                exact
-                path="/MyAssetDetail"
-                component={MyAssetDetail}
-              ></Route>
-              <Route exact path="/Profile" component={Profile}></Route>
-            </Switch>
+    <div className="App wrapper">
+      {location !== "/login" && <Navbar />}
+      <Route exact path="/login" component={LoginPage}></Route>
+      <div className="container">
+        <div className="columns">
+          {location !== "/login" && <SideNavLeft />}
 
-            {location !== "/login" && <SideNavRight />}
-          </div>
+          <Switch>
+            <Route exact path="/home" component={WelcomeMessage} />
+            <Route path="/post/:post_id" component={Feed} />
+            <Route
+              exact
+              path="/KnowledgeBase"
+              component={KnowledgeBase}
+            ></Route>
+            <Route
+              exact
+              path="/MyRequest"
+              key={2}
+              component={MyRequest}
+            ></Route>
+            <Route
+              exact
+              path="/MyRequestDetail"
+              component={MyRequestDetail}
+            ></Route>
+            <Route exact path="/SignIn" component={SignIn}></Route>
+            <Route exact path="/SignUp" component={SignUp}></Route>
+            <Route exact path="/MyAsset" component={MyAsset}></Route>
+            <Route
+              exact
+              path="/MyAssetDetail"
+              component={MyAssetDetail}
+            ></Route>
+            <Route exact path="/Profile" component={Profile}></Route>
+          </Switch>
+          {location !== "/login" && <SideNavRight />}
         </div>
       </div>
-    </BrowserRouter>
+    </div>
   );
 }
 

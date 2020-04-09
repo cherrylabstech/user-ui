@@ -23,9 +23,10 @@ export const KnowledgeBaseFail = error => {
 export const KnowledgeBaseApi = () => {
   const url = `${BASE_PATH}${SERVICE_PATH}/kb/topic`;
   return dispacth => {
+    const apiToken = token !== null && { "X-Auth-Token": token };
     dispacth(getKnowledgeBase());
     axios
-      .get(url, { headers: token })
+      .get(url, { headers: apiToken })
       .then(res => {
         dispacth(setKnowledgeBase(res.data));
       })

@@ -1,1 +1,1 @@
-export const token = { "X-Auth-Token": localStorage.getItem("X-Auth-Token") };
+export const token = localStorage.getItem("X-Auth-Token");

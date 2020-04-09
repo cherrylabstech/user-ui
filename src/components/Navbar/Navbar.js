@@ -10,12 +10,10 @@ const Navbar = props => {
   const token = localStorage.getItem("X-Auth-Token");
   const handleLogin = () => {
     props.history.push("/login");
-    window.location.reload();
   };
   const handleLogout = () => {
     localStorage.clear();
     props.history.push("/login");
-    window.location.reload();
   };
   return (
     <div className="header-wrapper">

@@ -27,9 +27,10 @@ export const profileFail = error => {
 export const profileApi = () => {
   const url = `${BASE_PATH}${SERVICE_PATH}/profile`;
   return dispacth => {
+    const apiToken = token !== null && { "X-Auth-Token": token };
     dispacth(getProfile());
     axios
-      .get(url, { headers: token })
+      .get(url, { headers: apiToken })
       .then(res => {
         dispacth(setProfile(res.data));
       })

@@ -1,13 +1,25 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import Interweave from "interweave";
 import "./WelcomeMessage.css";
-function WelcomeMessage() {
+import { userActions } from "../../../ApiCall/rootApi";
+import { withRouter } from "react-router-dom";
+function WelcomeMessage(props) {
   const WelcomeData = useSelector(
     state => state.WelcomeMessageReducer.welcomeData
   );
-  const Loading = useSelector(state => state.WelcomeMessageReducer.loading);
+  const dispatch = useDispatch();
 
+  //const location = props.location.pathname
+
+  const Loading = useSelector(state => state.WelcomeMessageReducer.loading);
+  useEffect(() => {
+    const apiCall = () => {
+      dispatch(userActions.welcome());
+      dispatch(userActions.KnowledgeBaseApi());
+    };
+    apiCall();
+  }, [dispatch]);
   return (
     <div className="main welcome-message-box">
       {!Loading && WelcomeData === undefined && <div>Welcome </div>}
@@ -23,4 +35,4 @@ function WelcomeMessage() {
     </div>
   );
 }
-export default WelcomeMessage;
+export default withRouter(WelcomeMessage);
