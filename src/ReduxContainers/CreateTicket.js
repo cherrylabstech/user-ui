@@ -41,7 +41,7 @@ function CreateTicket(props) {
 
   return (
     <Fragment>
-      <div className="main-create-ticket">
+      <div className=" main main-create-ticket">
         Create Ticket
         <form onSubmit={handleSubmit}>
           <div className="create-ticket-field-cont">
