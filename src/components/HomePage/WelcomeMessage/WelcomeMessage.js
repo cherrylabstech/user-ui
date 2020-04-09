@@ -1,22 +1,38 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import Interweave from "interweave";
 import "./WelcomeMessage.css";
-function WelcomeMessage() {
+import { userActions } from "../../../ApiCall/rootApi";
+import { withRouter } from "react-router-dom";
+function WelcomeMessage(props) {
+  const WelcomeData = useSelector(
+    state => state.WelcomeMessageReducer.welcomeData
+  );
+  const dispatch = useDispatch();
+
+  //const location = props.location.pathname
+
+  const Loading = useSelector(state => state.WelcomeMessageReducer.loading);
+  useEffect(() => {
+    const apiCall = () => {
+      dispatch(userActions.welcome());
+      dispatch(userActions.KnowledgeBaseApi());
+    };
+    apiCall();
+  }, [dispatch]);
   return (
-    <div className="welcome-message-box">
-      <div className="welcome-message-first-half welcome-message-content">
-        <h1>Welcome to The Foo Support Portal</h1>
-        <h4>
-          A journey without you is impossible, We are here to help
-          you......always.
-        </h4>
-        <h4>Please check the link for Support</h4>
-      </div>
-      <div className="welcome-message-second-half ">
-        <h1>Welcome to Foo</h1>
-        <input type="text"></input>
-      </div>
+    <div className="main welcome-message-box">
+      {!Loading && WelcomeData === undefined && <div>Welcome </div>}
+      {Loading && <div>Loading...</div>}
+      {!Loading && WelcomeData !== undefined && (
+        <div className="welcome-message-box">
+          <div>{WelcomeData.welcomeHeading}</div>
+          <div>
+            <Interweave content={WelcomeData.welcomeMessage}></Interweave>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
-
-export default WelcomeMessage;
+export default withRouter(WelcomeMessage);

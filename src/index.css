@@ -72,6 +72,9 @@ body {
   align-items: center;
   padding: 0 24px;
 }
+.main-create-ticket {
+  align-items: flex-start !important;
+}
 
 .pull-right {
   float: right;
@@ -92,6 +95,10 @@ body {
 }
 .text-left {
   text-align: left;
+}
+
+.f-14 {
+  font-size: 14px;
 }
 
 .block {

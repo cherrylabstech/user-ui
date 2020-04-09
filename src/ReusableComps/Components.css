@@ -1,0 +1,20 @@
+.text-field {
+  padding: 0 10px;
+  height: 20px;
+  border-radius: 2px;
+  border: 1px solid;
+  margin-top: 10px;
+}
+.text-area {
+  padding: 0 10px;
+  min-height: 50px;
+  border-radius: 2px;
+  border: 1px solid;
+  margin-top: 10px;
+}
+.radio-field {
+  margin: 10px 0;
+}
+.create-ticket-field-cont {
+  margin: 20px 0;
+}

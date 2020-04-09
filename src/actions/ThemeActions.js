@@ -1,0 +1,3 @@
+export const GET_THEME_DATA = "GET_THEME_DATA";
+export const SET_THEME_DATA = "SET_THEME_DATA";
+export const THEME_DATA_FAIL = "THEME_DATA_FAIL";

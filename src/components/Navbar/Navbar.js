@@ -4,25 +4,26 @@ import MobileNavbar from "./MobileNavbar/MobileNavbar";
 import Logo from "../../images/hush-logo.svg";
 import ProfileUser from "../../images/ProfileUser.jpg";
 import "./Navbar.css";
-import { Button } from "../Button/Button";
+import Button from "../../ReusableComps/Button";
 
 const Navbar = props => {
   const token = localStorage.getItem("X-Auth-Token");
   const handleLogin = () => {
     props.history.push("/login");
-    window.location.reload();
   };
   const handleLogout = () => {
     localStorage.clear();
     props.history.push("/login");
-    window.location.reload();
+  };
+  const handleCreateTicket = () => {
+    props.history.push("/CreateTicket");
   };
   return (
     <div className="header-wrapper">
       <header>
         <div className="header">
           <div className="logo-block">
-            <Link to="/">
+            <Link to="/home">
               <img src={Logo} alt="logo" className="brand-logo" />
             </Link>
           </div>
@@ -43,16 +44,21 @@ const Navbar = props => {
           </div>
           <div className="user-profile-block cursor-pointer">
             {token ? (
-              <>
-                <img
-                  src={ProfileUser}
-                  alt="logo"
-                  className="brand-logo profile-pic"
-                />
-                <label onClick={handleLogout} className="logout-label">
-                  Logout
-                </label>
-              </>
+              <div className="nav-features">
+                <div className="nav-create-ticket" onClick={handleCreateTicket}>
+                  <label className="cursor-pointer">Ask Any Question?</label>
+                </div>
+                <div className="logout-btn">
+                  <img
+                    src={ProfileUser}
+                    alt="logo"
+                    className="brand-logo profile-pic"
+                  />
+                  <label onClick={handleLogout} className="logout-label">
+                    Logout
+                  </label>
+                </div>
+              </div>
             ) : (
               <Button
                 className="primary-btn btn-wide btn-height"

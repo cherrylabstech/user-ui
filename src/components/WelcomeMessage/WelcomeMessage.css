@@ -1,9 +1,0 @@
-.welcome-message-box {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  text-align: center;
-}
-.welcome-message-box a {
-  color: black;
-}

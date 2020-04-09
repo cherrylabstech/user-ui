@@ -1,16 +1,9 @@
 .welcome-message-box {
   display: flex;
-  background-color: blue;
-  color: white;
+  flex-direction: column;
   flex-wrap: wrap;
-  align-items: center;
-  height: 350px;
+  text-align: center;
 }
-
-.welcome-message-content {
-  margin-left: 30px;
-}
-
-.welcome-message-first-half {
-  width: 50%;
+.welcome-message-box a {
+  color: black;
 }
