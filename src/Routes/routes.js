@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import Navbar from "../components/Navbar/Navbar";
-import { Route, withRouter, Switch } from "react-router-dom";
+import { Route, withRouter, Switch, Redirect } from "react-router-dom";
 // import Home from "./containers/Home/Home";
 import Feed from "../containers/Feed/Feed";
 //import { fetchPosts } from "./actions/postAction";
@@ -20,6 +20,7 @@ import "../Interceptor.js";
 import { useDispatch } from "react-redux";
 //import { alertActions } from "../ApiCall/Alert";
 import { userActions } from "../ApiCall/rootApi";
+import CreateTicket from "../ReduxContainers/CreateTicket";
 function Routes(props) {
   const dispatch = useDispatch();
   //const themeData = useSelector(state => state.ThemeReducer.themeData);
@@ -34,16 +35,16 @@ function Routes(props) {
     };
     location !== "/login" && apiCalls();
     token && tokenApiCalls();
-  }, [token, dispatch]);
+  }, []);
   return (
     <div className="App wrapper">
       {location !== "/login" && <Navbar />}
-      <Route exact path="/login" component={LoginPage}></Route>
       <div className="container">
         <div className="columns">
           {location !== "/login" && <SideNavLeft />}
 
           <Switch>
+            <Route exact path="/login" component={LoginPage}></Route>
             <Route exact path="/home" component={WelcomeMessage} />
             <Route path="/post/:post_id" component={Feed} />
             <Route
@@ -71,6 +72,8 @@ function Routes(props) {
               component={MyAssetDetail}
             ></Route>
             <Route exact path="/Profile" component={Profile}></Route>
+            <Route exact path="/CreateTicket" component={CreateTicket} />
+            <Redirect from="/" to="/home"></Redirect>
           </Switch>
           {location !== "/login" && <SideNavRight />}
         </div>

@@ -57,3 +57,17 @@
   cursor: pointer;
   margin-left: 10px;
 }
+.logout-btn{
+  display: flex;
+  align-items: center;
+}
+
+.nav-features{
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+}
+.nav-create-ticket{
+  margin: 0 10px;
+}
+
