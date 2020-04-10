@@ -1,4 +1,5 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState,useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import TextField from "../ReusableComps/TextField";
 import Button from "../ReusableComps/Button";
 import TextArea from "../ReusableComps/TextArea";
@@ -7,6 +8,8 @@ import CheckBox from "../ReusableComps/CheckBox";
 import DropDown from "../ReusableComps/DropDown";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { userActions } from "../ApiCall/rootApi";
+
 const today = new Date(Date.now());
 
 function CreateTicket(props) {
@@ -15,7 +18,18 @@ function CreateTicket(props) {
   const [radio, setRadio] = useState();
   const [dropValue, setDropValue] = useState();
   const [selectedDate, setSelectedDate] = useState(today);
-  console.log(subject, email, radio, dropValue);
+  const dispatch = useDispatch();
+  
+  useEffect(() => {
+    const apiCall = () => {
+dispatch(userActions.CreateTicketApi(0))
+    };
+    apiCall();
+  }, [dispatch]);
+  const CreateFormData = useSelector(
+    state => state.createTicketReducer
+  );
+  console.log(CreateFormData);
   const handleSubject = event => {
     setSubject(event.target.value);
   };

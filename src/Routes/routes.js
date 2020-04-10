@@ -35,7 +35,7 @@ function Routes(props) {
     };
     location !== "/login" && apiCalls();
     token && tokenApiCalls();
-  }, []);
+  });
   return (
     <div className="App wrapper">
       {location !== "/login" && <Navbar />}
