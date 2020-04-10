@@ -1,5 +1,9 @@
 import React, { Fragment } from "react";
 function MyAssetDetail() {
-  return <Fragment>My Asset Detail</Fragment>;
+  return (
+    <Fragment>
+      <div className="main"> My Asset Detail</div>
+    </Fragment>
+  );
 }
 export default MyAssetDetail;

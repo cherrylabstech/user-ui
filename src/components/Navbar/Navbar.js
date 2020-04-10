@@ -59,12 +59,14 @@ const Navbar = props => {
                   </label>
                 </div>
               </div>
-            ) : (
+            ) : (<div className="nav-features"><div className="nav-create-ticket" onClick={handleCreateTicket}>
+                  <label className="cursor-pointer">Ask Any Question?</label>
+                </div>
               <Button
                 className="primary-btn btn-wide btn-height"
                 onClick={handleLogin}
                 text="Login"
-              ></Button>
+              ></Button> </div>
             )}
           </div>
         </div>

@@ -9,7 +9,7 @@ const KnowledgeBaseReducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionTypes.GET_KNOWLEDGE_BASE_TOPIC:
       return {
-        ...state,
+        KnowledgeBaseData: undefined,
         loading: true,
         error: null
       };
@@ -18,7 +18,7 @@ const KnowledgeBaseReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        KnowledgeBaseData: action
+        KnowledgeBaseData: action.KnowledgeBaseData
       };
 
     case ActionTypes.KNOWLEDGE_BASE_TOPIC_FAIL:

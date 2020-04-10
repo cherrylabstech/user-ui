@@ -4,13 +4,14 @@ import Interweave from "interweave";
 import "./WelcomeMessage.css";
 import { userActions } from "../../../ApiCall/rootApi";
 import { withRouter } from "react-router-dom";
+import { getKnowledgeBase } from "../../../ApiCall/KnowledgeBaseApi";
 function WelcomeMessage(props) {
   const WelcomeData = useSelector(
     state => state.WelcomeMessageReducer.welcomeData
   );
   const dispatch = useDispatch();
 
-  //const location = props.location.pathname
+  const location = props.location.pathname;
 
   const Loading = useSelector(state => state.WelcomeMessageReducer.loading);
   useEffect(() => {
@@ -20,6 +21,11 @@ function WelcomeMessage(props) {
     };
     apiCall();
   }, [dispatch]);
+  useEffect(() => {
+    return function cleanUp() {
+      dispatch(getKnowledgeBase());
+    };
+  }, [location, dispatch]);
   return (
     <div className="main welcome-message-box">
       {!Loading && WelcomeData === undefined && <div>Welcome </div>}
