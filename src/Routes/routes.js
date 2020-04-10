@@ -36,6 +36,7 @@ function Routes(props) {
     location !== "/login" && apiCalls();
     token && tokenApiCalls();
   }, []);
+
   return (
     <div className="App wrapper">
       {location !== "/login" && <Navbar />}
@@ -44,7 +45,6 @@ function Routes(props) {
           {location !== "/login" && <SideNavLeft />}
 
           <Switch>
-            <Route exact path="/login" component={LoginPage}></Route>
             <Route exact path="/home" component={WelcomeMessage} />
             <Route path="/post/:post_id" component={Feed} />
             <Route
@@ -58,6 +58,7 @@ function Routes(props) {
               path="/request/detail"
               component={MyRequestDetail}
             ></Route>
+            <Route exact path="/login" component={LoginPage}></Route>
             <Route exact path="/SignIn" component={SignIn}></Route>
             <Route exact path="/SignUp" component={SignUp}></Route>
             <Route exact path="/asset" component={MyAsset}></Route>

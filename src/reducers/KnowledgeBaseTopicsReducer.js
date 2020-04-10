@@ -1,6 +1,6 @@
 import * as ActionTypes from "../actions/KnowldgeBaseTopicsActions";
 const initialState = {
-  KnowledgeBaseTopicsData: undefined,
+  KnowledgeBaseTopicsData: [],
   loading: false,
   error: null
 };
@@ -9,7 +9,7 @@ const KnowledgeBaseTopicsReducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionTypes.GET_KNOWLEDGE_BASE_TOPIC_ARTICLE:
       return {
-        ...state,
+        KnowledgeBaseTopicsData: [],
         loading: true,
         error: null
       };
@@ -18,7 +18,10 @@ const KnowledgeBaseTopicsReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        KnowledgeBaseTopicsData: action.KnowledgeBaseTopicsData
+        KnowledgeBaseTopicsData: [
+          ...state.KnowledgeBaseTopicsData,
+          action.KnowledgeBaseTopicsData
+        ]
       };
 
     case ActionTypes.KNOWLEDGE_BASE_TOPIC_ARTICLE_FAIL:

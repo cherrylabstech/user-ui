@@ -6,10 +6,11 @@ export const getKnowledgeBaseTopics = KnowledgeBaseTopicsData => {
     type: actionTypes.GET_KNOWLEDGE_BASE_TOPIC_ARTICLE
   };
 };
-export const setKnowledgeBaseTopics = KnowledgeBaseTopicsData => {
+export const setKnowledgeBaseTopics = (KnowledgeBaseTopicsData, length) => {
   return {
     type: actionTypes.SET_KNOWLEDGE_BASE_TOPIC_ARTICLE,
-    KnowledgeBaseTopicsData: KnowledgeBaseTopicsData
+    KnowledgeBaseTopicsData: KnowledgeBaseTopicsData,
+    length: length
   };
 };
 export const KnowledgeBaseTopicsFail = error => {
@@ -19,17 +20,16 @@ export const KnowledgeBaseTopicsFail = error => {
   };
 };
 
-export const KnowledgeBaseTopicsApi = id => {
+export const KnowledgeBaseTopicsApi = (id, length) => {
   const token = localStorage.getItem("X-Auth-Token");
   const url = `${BASE_PATH}${SERVICE_PATH}/kb/topic/${id}`;
   return dispacth => {
     const apiToken = token !== null && { "X-Auth-Token": token };
-
     dispacth(getKnowledgeBaseTopics());
     axios
       .get(url, { headers: apiToken })
       .then(res => {
-        dispacth(setKnowledgeBaseTopics(res.data));
+        dispacth(setKnowledgeBaseTopics(res.data, length));
       })
       .catch(error => {
         console.log(error);
