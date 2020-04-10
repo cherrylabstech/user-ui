@@ -1,7 +1,6 @@
 import * as actionTypes from "../actions/KnowledgeBaseActions";
 import { BASE_PATH, SERVICE_PATH } from "../ApiBasePath/ApiBasePath";
 import axios from "axios";
-import { token } from "../helpers/token";
 export const getKnowledgeBase = KnowledgeBaseData => {
   return {
     type: actionTypes.GET_KNOWLEDGE_BASE_TOPIC
@@ -23,15 +22,16 @@ export const KnowledgeBaseFail = error => {
 export const KnowledgeBaseApi = () => {
   const url = `${BASE_PATH}${SERVICE_PATH}/kb/topic`;
   return dispacth => {
-    const apiToken = token !== null && { "X-Auth-Token": token };
     dispacth(getKnowledgeBase());
     axios
-      .get(url, { headers: apiToken })
+      .get(url)
       .then(res => {
         dispacth(setKnowledgeBase(res.data));
       })
       .catch(error => {
-        dispacth(KnowledgeBaseFail(error.response.data));
+        console.log(error);
+        error.response !== undefined &&
+          dispacth(KnowledgeBaseFail(error.response.data));
       });
   };
 };
