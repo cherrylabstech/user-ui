@@ -17,8 +17,8 @@ function KnowledgeBase(props) {
   useEffect(() => {
     const token = localStorage.getItem("X-Auth-Token");
     const tokenApiCalls = () => {
-      // dispatch(userActions.KnowledgeBaseArticleApi(422));
-      // dispatch(userActions.KnowledgeBaseTopicsApi(81));
+      dispatch(userActions.KnowledgeBaseArticleApi(422));
+      dispatch(userActions.KnowledgeBaseTopicsApi(81));
       dispatch(userActions.KnowledgeBaseApi());
     };
     token && tokenApiCalls();

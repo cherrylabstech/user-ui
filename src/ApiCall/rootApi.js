@@ -6,6 +6,7 @@ import { profileApi } from "./ProfileApi";
 import { KnowledgeBaseApi } from "./KnowledgeBaseApi";
 import { KnowledgeBaseArticleApi } from "./KnowledgeBaseArticlesApi";
 import { KnowledgeBaseTopicsApi } from "./KnowledgeBaseTopicsApi";
+import { CreateTicketApi } from "./CreateTicketApi";
 export const userActions = {
   auth,
   welcome,
@@ -14,5 +15,6 @@ export const userActions = {
   profileApi,
   KnowledgeBaseApi,
   KnowledgeBaseArticleApi,
-  KnowledgeBaseTopicsApi
+  KnowledgeBaseTopicsApi,
+  CreateTicketApi
 };

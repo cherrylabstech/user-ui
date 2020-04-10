@@ -35,6 +35,7 @@ export const profileApi = () => {
         dispacth(setProfile(res.data));
       })
       .catch(error => {
+        error.response !== undefined &&
         dispacth(profileFail(error.response.data));
       });
   };
