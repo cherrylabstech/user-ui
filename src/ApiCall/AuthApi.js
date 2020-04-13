@@ -24,7 +24,7 @@ export const authFail = error => {
 // };
 
 export function auth(email, password) {
-  const url = `${BASE_PATH}/Oauth/rest/client/auth?domain=agentui.asista.in`;
+  const url = `${BASE_PATH}/Oauth/rest/client/auth?domain=dev.asista.in`;
 
   const headers = {
     "Content-Type": "application/json",

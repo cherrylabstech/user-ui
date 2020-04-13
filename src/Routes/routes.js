@@ -31,11 +31,12 @@ function Routes(props) {
       dispatch(userActions.themeApi());
     };
     const tokenApiCalls = () => {
-      dispatch(userActions.profileApi());
+      dispatch(userActions.profileApi(),
+      dispatch(userActions.PlanApi()));
     };
     location !== "/login" && apiCalls();
     token && tokenApiCalls();
-  }, []);
+  });
 
   return (
     <div className="App wrapper">
