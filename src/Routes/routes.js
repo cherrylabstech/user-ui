@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Navbar from "../components/Navbar/Navbar";
 import { Route, withRouter, Switch, Redirect } from "react-router-dom";
 // import Home from "./containers/Home/Home";
@@ -38,6 +38,7 @@ function Routes(props) {
     };
     const tokenApiCalls = () => {
       dispatch(userActions.profileApi());
+      // dispatch(userActions.PlanApi());
     };
     location !== "/login" && apiCalls();
     token && tokenApiCalls();

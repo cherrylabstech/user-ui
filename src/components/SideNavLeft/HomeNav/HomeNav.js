@@ -5,37 +5,44 @@ import PopularIcon from "../../../images/PopularIcon.svg";
 import "./HomeNav.css";
 import { Link } from "react-router-dom";
 import { filterArray } from "../../../helpers/filterArray";
+//import queryString from "query-string"
 const HomeNav = props => {
+  //const query = queryString.parse(props.location.search)
   const token = localStorage.getItem("X-Auth-Token");
   const authorizedSideNavLeft = [
     {
       id: 3,
       label: "Profile",
       pathname: "/Profile",
+      search: "",
       icon: HomeIcon
     },
     {
       id: 4,
       label: "MyRequest",
-      pathname: "/request",
+      pathname: `/request`,
+      search: "page=1",
       icon: PopularIcon
     },
     {
       id: 5,
       label: "MyRequest Detail",
       pathname: "/request/detail",
+      search: "",
       icon: PopularIcon
     },
     {
       id: 6,
       label: "Asset",
       pathname: "/asset",
+      search: "",
       icon: PopularIcon
     },
     {
       id: 7,
       label: "Asset Detail",
       pathname: "/asset/detail",
+      search: "",
       icon: PopularIcon
     }
   ];
@@ -44,12 +51,14 @@ const HomeNav = props => {
       id: 1,
       label: "Home",
       pathname: "/home",
+      search: "",
       icon: HomeIcon
     },
     {
       id: 2,
       label: "Knowledge Base",
       pathname: "/KnowledgeBase",
+      search: "",
       icon: PopularIcon
     }
   ];
@@ -61,7 +70,13 @@ const HomeNav = props => {
     <div className="feed-group">
       <div className="hush-feed-label">HUSH FEED</div>
       {sideNavArray.map(data => (
-        <Link key={data.id} to={data.pathname}>
+        <Link
+          key={data.id}
+          to={{
+            pathname: data.pathname,
+            search: data.search
+          }}
+        >
           <div
             className={
               props.location.pathname === data.pathname

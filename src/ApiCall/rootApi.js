@@ -7,6 +7,10 @@ import { KnowledgeBaseApi } from "./KnowledgeBaseApi";
 import { KnowledgeBaseArticleApi } from "./KnowledgeBaseArticlesApi";
 import { KnowledgeBaseTopicsApi } from "./KnowledgeBaseTopicsApi";
 import { CreateTicketApi } from "./CreateTicketApi";
+import { PlanApi } from "./PlanApi";
+import { PriorityApi } from "./PriorityApi";
+import {DashBoardApi} from "./DashBoardApi" 
+import { TicketListApi } from "./TicketListApi";
 export const userActions = {
   auth,
   welcome,
@@ -16,5 +20,9 @@ export const userActions = {
   KnowledgeBaseApi,
   KnowledgeBaseArticleApi,
   KnowledgeBaseTopicsApi,
-  CreateTicketApi
+  CreateTicketApi,
+  PlanApi,
+  PriorityApi,
+  DashBoardApi,
+  TicketListApi
 };

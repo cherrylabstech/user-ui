@@ -2,7 +2,8 @@ import React, { Fragment, useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import TextField from "../ReusableComps/TextField";
 import Button from "../ReusableComps/Button";
-import TextArea from "../ReusableComps/TextArea";
+import FroalasEditor from "../FroalaEditor/FroalaEditor"
+// import TextArea from "../ReusableComps/TextArea";
 import Radio from "../ReusableComps/Radio";
 import CheckBox from "../ReusableComps/CheckBox";
 import DropDown from "../ReusableComps/DropDown";
@@ -31,8 +32,8 @@ function CreateTicket(props) {
   }, [dispatch]);
   const CreateFormData = useSelector(state => state.createTicketReducer);
   console.log(CreateFormData);
-  const handleSubject = event => {
-    setSubject(event.target.value);
+  const handleSubject = model => {
+    setSubject(model);
   };
   const handleMail = event => {
     setEmail(event.target.value);
@@ -78,11 +79,17 @@ function CreateTicket(props) {
             />
           </div>
           <div className="create-ticket-field-cont">
-            <TextArea
+            {/* <TextArea
               placeholder="Textarea"
               text="Description"
               required={true}
               onChange={handleSubject}
+            /> */}
+            <FroalasEditor
+              tag="textarea"
+              model={subject}
+              onModelChange={handleSubject}
+              name="description"
             />
           </div>
           <div className="create-ticket-field-cont">
