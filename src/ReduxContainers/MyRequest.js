@@ -31,7 +31,8 @@ function MyRequest(props) {
   //Ticket List
 
   useEffect(() => {
-    dispatch(userActions.TicketListApi(props.location.search));
+    dispatch(userActions.TicketListApi(props.location.search),
+    dispatch(userActions.TicketCountApi(-1)));
   }, [props.location.search, dispatch]);
   // const handleIncrement = () => {
   //   setPage(page + 1);
