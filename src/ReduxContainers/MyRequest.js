@@ -1,26 +1,22 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { userActions } from "../ApiCall/rootApi";
 import { withRouter } from "react-router-dom";
 import queryString from "query-string";
 function MyRequest(props) {
   const query = queryString.parse(props.location.search);
-  // const value = useSelector(state => state);
-  // console.log(value);
+  const value = useSelector(state => state);
+  console.log(value);
   const [page, setPage] = useState(parseInt(query.page) || 1);
   const dispatch = useDispatch();
   useEffect(() => {
     const apiCall = () => {
-      dispatch(
-        userActions.PriorityApi(),
-        dispatch(
-          userActions.DashBoardApi(),
-          dispatch(userActions.TicketListApi(props.location.search))
-        )
-      );
+      dispatch(userActions.PriorityApi(), dispatch(userActions.DashBoardApi()));
     };
     apiCall();
   }, [dispatch]);
+
+  //Ticket List
   useEffect(() => {
     dispatch(userActions.TicketListApi(props.location.search));
   }, [props.location.search, dispatch]);

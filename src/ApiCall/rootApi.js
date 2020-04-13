@@ -9,8 +9,9 @@ import { KnowledgeBaseTopicsApi } from "./KnowledgeBaseTopicsApi";
 import { CreateTicketApi } from "./CreateTicketApi";
 import { PlanApi } from "./PlanApi";
 import { PriorityApi } from "./PriorityApi";
-import {DashBoardApi} from "./DashBoardApi" 
+import { DashBoardApi } from "./DashBoardApi";
 import { TicketListApi } from "./TicketListApi";
+import { TicketListRefreshApi } from "./TicketListApi";
 export const userActions = {
   auth,
   welcome,
@@ -24,5 +25,6 @@ export const userActions = {
   PlanApi,
   PriorityApi,
   DashBoardApi,
-  TicketListApi
+  TicketListApi,
+  TicketListRefreshApi
 };

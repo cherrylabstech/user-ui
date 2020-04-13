@@ -13,6 +13,7 @@ import createTicketReducer from "./CreateTicketReducer";
 import PlanReducer from "./PlanReducer";
 import PriorityReducer from "./PriorityReducer";
 import DashBoardReducer from "./DashBoardReducer";
+import TicketListReducer from "./TicketListReducer";
 export default combineReducers({
   posts,
   AuthReducer,
@@ -27,5 +28,6 @@ export default combineReducers({
   createTicketReducer,
   PlanReducer,
   PriorityReducer,
-  DashBoardReducer
+  DashBoardReducer,
+  TicketListReducer
 });

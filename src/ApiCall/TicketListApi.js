@@ -45,3 +45,28 @@ export const TicketListApi = location => {
       });
   };
 };
+
+export const TicketListRefreshApi = location => {
+  const query = queryString.parse(location);
+  let page = parseInt(query.page);
+  let elementsPerPage = 10;
+  let to = page * elementsPerPage;
+  let from = to - elementsPerPage;
+  const token = localStorage.getItem("X-Auth-Token");
+  const url = `${BASE_PATH}${SERVICE_PATH}/requests/1?state=&from=${from ||
+    0}&to=${to || 10}&originated=false&order=desc&sortBy=UPDATE-TIME`;
+  return dispacth => {
+    const apiToken = token !== null && { "X-Auth-Token": token };
+
+    axios
+      .get(url, { headers: apiToken })
+      .then(res => {
+        dispacth(setTicketList(res.data));
+      })
+      .catch(error => {
+        console.log(error);
+        error.response !== undefined &&
+          dispacth(TicketListFail(error.response.data));
+      });
+  };
+};
