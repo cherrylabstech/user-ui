@@ -35,7 +35,7 @@ const HomeNav = props => {
       id: 6,
       label: "Asset",
       pathname: "/asset",
-      search: "",
+      search: "page=1",
       icon: PopularIcon
     },
     {

@@ -1,19 +1,43 @@
-import React, { Fragment,useEffect  } from "react";
+import React, { Fragment, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { userActions } from "../ApiCall/rootApi";
-function MyAsset() {
+import { withRouter } from "react-router-dom";
+//import queryString from "query-string";
+function MyAsset(props) {
+  //const query = queryString.parse(props.location.search);
+  //const asset = useSelector(state => state.AssetListReducer.AssetList);
+  // let params = new URLSearchParams(props.location.search);
+  // const [page, setPage] = useState(parseInt(query.page) || 1);
   const dispatch = useDispatch();
-  useEffect(()=>{
-    const apiCall=()=>{
-      dispatch(userActions.AssetListApi(),
-      dispatch(userActions.AssetCountApi()))
-    }
-    apiCall()
-  },[dispatch])
+  useEffect(() => {
+    const apiCall = () => {
+      dispatch(userActions.AssetCountApi());
+    };
+    apiCall();
+  }, [dispatch]);
+  useEffect(() => {
+    dispatch(userActions.AssetListApi(props.location.search));
+  }, [props.location.search, dispatch]);
+  // const handleIncrement = () => {
+  //   setPage(page + 1);
+  //   params.set("page", page + 1);
+  //   props.history.push({
+  //     pathname: "/asset",
+  //     search: params.toString()
+  //   });
+  // };
+  // const handleDecrement = () => {
+  //   setPage(page - 1);
+  //   params.set("page", page - 1);
+  //   props.history.push({
+  //     pathname: "/asset",
+  //     search: params.toString()
+  //   });
+  // };
   return (
     <Fragment>
       <div className="main">My Asset</div>
     </Fragment>
   );
 }
-export default MyAsset;
+export default withRouter(MyAsset);

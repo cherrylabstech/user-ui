@@ -2,7 +2,7 @@ import React, { Fragment, useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import TextField from "../ReusableComps/TextField";
 import Button from "../ReusableComps/Button";
-import FroalasEditor from "../FroalaEditor/FroalaEditor"
+import FroalasEditor from "../FroalaEditor/FroalaEditor";
 // import TextArea from "../ReusableComps/TextArea";
 import Radio from "../ReusableComps/Radio";
 import CheckBox from "../ReusableComps/CheckBox";

@@ -1,6 +1,7 @@
-    import * as actionTypes from "../actions/AssetListActions";
+import * as actionTypes from "../actions/AssetListActions";
 import { BASE_PATH, SERVICE_PATH } from "../ApiBasePath/ApiBasePath";
 import axios from "axios";
+import { Pagination } from "../helpers/Pagination";
 export const getAssetList = AssetList => {
   return {
     type: actionTypes.GET_ASSET_LIST
@@ -19,9 +20,12 @@ export const AssetListFail = error => {
   };
 };
 
-export const AssetListApi = () => {
+export const AssetListApi = location => {
+  const page = Pagination(location);
+  const from = page.from || 0;
+  const to = page.to || 10;
   const token = localStorage.getItem("X-Auth-Token");
-  const url = `${BASE_PATH}${SERVICE_PATH}/assets?query=&from=0&to=10`;
+  const url = `${BASE_PATH}${SERVICE_PATH}/assets?query=&from=${from}&to=${to}`;
   return dispacth => {
     const apiToken = token !== null && { "X-Auth-Token": token };
     dispacth(getAssetList());
