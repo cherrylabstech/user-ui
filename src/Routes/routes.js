@@ -38,7 +38,7 @@ function Routes(props) {
     };
     const tokenApiCalls = () => {
       dispatch(userActions.profileApi());
-      // dispatch(userActions.PlanApi());
+      dispatch(userActions.PlanApi());
     };
     location !== "/login" && apiCalls();
     token && tokenApiCalls();
