@@ -10,6 +10,13 @@ import KnowledgeBaseReducer from "./KnowledgeBaseRedcuer";
 import KnowledgeBaseArticleReducer from "./KnowledgeBaseArticlesReducer";
 import KnowledgeBaseTopicsReducer from "./KnowledgeBaseTopicsReducer";
 import createTicketReducer from "./CreateTicketReducer";
+import PlanReducer from "./PlanReducer";
+import PriorityReducer from "./PriorityReducer";
+import DashBoardReducer from "./DashBoardReducer";
+import TicketListReducer from "./TicketListReducer";
+import TicketCountReducer from "./TicketCountReducer";
+import AssetListReducer from "./AssetListReducer"
+import AssetCountReducer from "./AssetCountReducer"
 export default combineReducers({
   posts,
   AuthReducer,
@@ -21,5 +28,12 @@ export default combineReducers({
   KnowledgeBaseReducer,
   KnowledgeBaseArticleReducer,
   KnowledgeBaseTopicsReducer,
-  createTicketReducer
+  createTicketReducer,
+  PlanReducer,
+  PriorityReducer,
+  DashBoardReducer,
+  TicketListReducer,
+  TicketCountReducer,
+  AssetListReducer,
+  AssetCountReducer
 });

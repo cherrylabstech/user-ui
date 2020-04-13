@@ -19,6 +19,7 @@ function KnowledgeBase(props) {
   //   state => state.KnowledgeBaseTopicsReducer.KnowledgeBaseTopicsData
   // );
   //const topicsDataLoading = useSelector(state => state.KnowledgeBaseTopicsReducer.loading);
+
   useEffect(() => {
     const token = localStorage.getItem("X-Auth-Token");
     const tokenApiCalls = () => {

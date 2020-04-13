@@ -21,25 +21,31 @@ import { useDispatch } from "react-redux";
 //import { alertActions } from "../ApiCall/Alert";
 import { userActions } from "../ApiCall/rootApi";
 import CreateTicket from "../ReduxContainers/CreateTicket";
+import { getKnowledgeBase } from "../ApiCall/KnowledgeBaseApi";
 function Routes(props) {
   const dispatch = useDispatch();
   //const themeData = useSelector(state => state.ThemeReducer.themeData);
   const token = localStorage.getItem("X-Auth-Token");
   const location = props.location.pathname;
+
   useEffect(() => {
     const apiCalls = () => {
       dispatch(userActions.themeApi());
     };
     const tokenApiCalls = () => {
       dispatch(userActions.profileApi());
+      dispatch(userActions.PlanApi());
     };
     location !== "/login" && apiCalls();
     token && tokenApiCalls();
+    return function cleanUp() {
+      dispatch(getKnowledgeBase());
+    };
   }, []);
-
   return (
     <div className="App wrapper">
       {location !== "/login" && <Navbar />}
+
       <div className="container">
         <div className="columns">
           {location !== "/login" && <SideNavLeft />}

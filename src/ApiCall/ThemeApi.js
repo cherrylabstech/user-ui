@@ -23,15 +23,16 @@ export const themeFail = error => {
 
 export const themeApi = () => {
   const url = `${BASE_PATH}${SERVICE_PATH}/theme/?v2=true`;
-  return dispacth => {
-    dispacth(getTheme());
+  return dispatch => {
+    dispatch(getTheme());
     axios
       .get(url)
       .then(res => {
-        dispacth(setTheme(res.data));
+        dispatch(setTheme(res.data));
       })
       .catch(error => {
-        dispacth(themeFail(error.response.data));
+        error.response !== undefined &&
+          dispatch(themeFail(error.response.data));
       });
   };
 };

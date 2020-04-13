@@ -1,0 +1,3 @@
+export const GET_ASSET_COUNT = "GET_ASSET_COUNT";
+export const SET_ASSET_COUNT = "SET_ASSET_COUNT";
+export const ASSET_COUNT_FAIL = "ASSET_COUNT_FAIL";
