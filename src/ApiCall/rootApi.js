@@ -12,6 +12,9 @@ import { PriorityApi } from "./PriorityApi";
 import { DashBoardApi } from "./DashBoardApi";
 import { TicketListApi } from "./TicketListApi";
 import { TicketListRefreshApi } from "./TicketListApi";
+import { TicketCountApi } from "./TicketCountApi";
+import { AssetListApi } from "./AssetListApi";
+import { AssetCountApi } from "./AssetCountApi";
 export const userActions = {
   auth,
   welcome,
@@ -26,5 +29,8 @@ export const userActions = {
   PriorityApi,
   DashBoardApi,
   TicketListApi,
-  TicketListRefreshApi
+  TicketListRefreshApi,
+  TicketCountApi,
+  AssetListApi,
+  AssetCountApi
 };

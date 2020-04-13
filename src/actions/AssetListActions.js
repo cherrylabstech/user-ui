@@ -1,0 +1,3 @@
+export const GET_ASSET_LIST = "GET_ASSET_LIST";
+export const SET_ASSET_LIST = "SET_ASSET_LIST";
+export const ASSET_LIST_FAIL = "ASSET_LIST_FAIL";
