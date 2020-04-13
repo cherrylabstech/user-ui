@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar/Navbar";
 import { Route, withRouter, Switch, Redirect } from "react-router-dom";
 // import Home from "./containers/Home/Home";
@@ -21,11 +21,17 @@ import { useDispatch } from "react-redux";
 //import { alertActions } from "../ApiCall/Alert";
 import { userActions } from "../ApiCall/rootApi";
 import CreateTicket from "../ReduxContainers/CreateTicket";
+//import querySting from "query-string";
 function Routes(props) {
   const dispatch = useDispatch();
+  //let query = querySting.parse(props.location.search);
+  //let params = new URLSearchParams(props.location.search);
+
   //const themeData = useSelector(state => state.ThemeReducer.themeData);
   const token = localStorage.getItem("X-Auth-Token");
+  //const [page, setPage] = useState(parseInt(query.page) || 1);
   const location = props.location.pathname;
+
   useEffect(() => {
     const apiCalls = () => {
       dispatch(userActions.themeApi());
@@ -36,10 +42,18 @@ function Routes(props) {
     location !== "/login" && apiCalls();
     token && tokenApiCalls();
   }, []);
-
+  // useEffect(() => {
+  //   params.set("page", page);
+  //   props.history.push({
+  //     pathname: "/home",
+  //     search: params.toString()
+  //   });
+  //   console.log(page);
+  // }, [page]);
   return (
     <div className="App wrapper">
       {location !== "/login" && <Navbar />}
+
       <div className="container">
         <div className="columns">
           {location !== "/login" && <SideNavLeft />}
