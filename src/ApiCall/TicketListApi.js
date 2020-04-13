@@ -1,6 +1,7 @@
 import * as actionTypes from "../actions/TicketListActions";
 import { BASE_PATH, SERVICE_PATH } from "../ApiBasePath/ApiBasePath";
 import axios from "axios";
+import { Pagination } from "../helpers/Pagination";
 import queryString from "query-string";
 export const getTicketList = TicketList => {
   return {
@@ -21,14 +22,15 @@ export const TicketListFail = error => {
 };
 
 export const TicketListApi = location => {
+  const Page = Pagination(location);
   const query = queryString.parse(location);
-  let page = parseInt(query.page);
-  let elementsPerPage = 10;
-  let to = page * elementsPerPage;
-  let from = to - elementsPerPage;
+  const from = Page.from;
+  const to = Page.to;
   const token = localStorage.getItem("X-Auth-Token");
-  const url = `${BASE_PATH}${SERVICE_PATH}/requests/1?state=&from=${from ||
-    0}&to=${to || 10}&originated=false&order=desc&sortBy=UPDATE-TIME`;
+  const url = `${BASE_PATH}${SERVICE_PATH}/requests/1?state=${
+    query.state
+  }&from=${from || 0}&to=${to ||
+    10}&originated=false&order=desc&sortBy=UPDATE-TIME`;
   return dispacth => {
     const apiToken = token !== null && { "X-Auth-Token": token };
 
@@ -47,17 +49,17 @@ export const TicketListApi = location => {
 };
 
 export const TicketListRefreshApi = location => {
+  const Page = Pagination(location);
   const query = queryString.parse(location);
-  let page = parseInt(query.page);
-  let elementsPerPage = 10;
-  let to = page * elementsPerPage;
-  let from = to - elementsPerPage;
+  const from = Page.from;
+  const to = Page.to;
   const token = localStorage.getItem("X-Auth-Token");
-  const url = `${BASE_PATH}${SERVICE_PATH}/requests/1?state=&from=${from ||
-    0}&to=${to || 10}&originated=false&order=desc&sortBy=UPDATE-TIME`;
+  const url = `${BASE_PATH}${SERVICE_PATH}/requests/1?state=${
+    query.state
+  }&from=${from || 0}&to=${to ||
+    10}&originated=false&order=desc&sortBy=UPDATE-TIME`;
   return dispacth => {
     const apiToken = token !== null && { "X-Auth-Token": token };
-
     axios
       .get(url, { headers: apiToken })
       .then(res => {

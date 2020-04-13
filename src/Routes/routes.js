@@ -21,15 +21,11 @@ import { useDispatch } from "react-redux";
 //import { alertActions } from "../ApiCall/Alert";
 import { userActions } from "../ApiCall/rootApi";
 import CreateTicket from "../ReduxContainers/CreateTicket";
-//import querySting from "query-string";
+import { getKnowledgeBase } from "../ApiCall/KnowledgeBaseApi";
 function Routes(props) {
   const dispatch = useDispatch();
-  //let query = querySting.parse(props.location.search);
-  //let params = new URLSearchParams(props.location.search);
-
   //const themeData = useSelector(state => state.ThemeReducer.themeData);
   const token = localStorage.getItem("X-Auth-Token");
-  //const [page, setPage] = useState(parseInt(query.page) || 1);
   const location = props.location.pathname;
 
   useEffect(() => {
@@ -42,15 +38,10 @@ function Routes(props) {
     };
     location !== "/login" && apiCalls();
     token && tokenApiCalls();
+    return function cleanUp() {
+      dispatch(getKnowledgeBase());
+    };
   }, []);
-  // useEffect(() => {
-  //   params.set("page", page);
-  //   props.history.push({
-  //     pathname: "/home",
-  //     search: params.toString()
-  //   });
-  //   console.log(page);
-  // }, [page]);
   return (
     <div className="App wrapper">
       {location !== "/login" && <Navbar />}
