@@ -15,8 +15,9 @@ import PriorityReducer from "./PriorityReducer";
 import DashBoardReducer from "./DashBoardReducer";
 import TicketListReducer from "./TicketListReducer";
 import TicketCountReducer from "./TicketCountReducer";
-import AssetListReducer from "./AssetListReducer"
-import AssetCountReducer from "./AssetCountReducer"
+import AssetListReducer from "./AssetListReducer";
+import AssetCountReducer from "./AssetCountReducer";
+import AssetDetailReducer from "./AssetDetailReducer";
 export default combineReducers({
   posts,
   AuthReducer,
@@ -35,5 +36,6 @@ export default combineReducers({
   TicketListReducer,
   TicketCountReducer,
   AssetListReducer,
+  AssetDetailReducer,
   AssetCountReducer
 });

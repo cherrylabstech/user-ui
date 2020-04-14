@@ -14,6 +14,7 @@ import { TicketListApi } from "./TicketListApi";
 import { TicketListRefreshApi } from "./TicketListApi";
 import { TicketCountApi } from "./TicketCountApi";
 import { AssetListApi } from "./AssetListApi";
+import { AssetDetailApi } from "./AssetDetailApi";
 import { AssetCountApi } from "./AssetCountApi";
 export const userActions = {
   auth,
@@ -32,5 +33,6 @@ export const userActions = {
   TicketListRefreshApi,
   TicketCountApi,
   AssetListApi,
+  AssetDetailApi,
   AssetCountApi
 };

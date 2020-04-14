@@ -12,6 +12,7 @@ function MyAsset(props) {
   useEffect(() => {
     const apiCall = () => {
       dispatch(userActions.AssetCountApi());
+      dispatch(userActions.AssetDetailApi());
     };
     apiCall();
   }, [dispatch]);
