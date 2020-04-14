@@ -75,6 +75,7 @@ function CreateTicket(props) {
               placeholder="Type Mail Id"
               text="Mail Id"
               required={true}
+              value={email}
               onChange={handleMail}
             />
           </div>
@@ -96,13 +97,13 @@ function CreateTicket(props) {
             <div>
               <Radio
                 text="Public"
-                value="public"
+                value={radio}
                 onChange={handleRadio}
                 required={true}
               />
               <Radio
                 text="Private"
-                value="private"
+                value={radio}
                 onChange={handleRadio}
                 required={true}
               />
@@ -125,7 +126,7 @@ function CreateTicket(props) {
             </div>
           </div>
           <div className="create-ticket-field-cont">
-            <DropDown onChange={handleDrop} />
+            <DropDown value={dropValue} onChange={handleDrop} />
           </div>
           <div className="create-ticket-field-cont">
             <DatePicker

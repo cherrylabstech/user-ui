@@ -1,0 +1,8 @@
+.modal-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.modal-heading div {
+  cursor: pointer;
+}

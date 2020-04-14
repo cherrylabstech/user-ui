@@ -43,11 +43,14 @@ const Navbar = props => {
             </form>
           </div>
           <div className="user-profile-block cursor-pointer">
-            {token ? (
-              <div className="nav-features">
-                <div className="nav-create-ticket" onClick={handleCreateTicket}>
-                  <label className="cursor-pointer">Ask Any Question?</label>
-                </div>
+            <div className="nav-features">
+              <div className="nav-create-ticket" onClick={handleCreateTicket}>
+                <Button
+                  className="primary-btn btn-wide btn-height"
+                  text="Create Ticket"
+                ></Button>
+              </div>
+              {token ? (
                 <div className="logout-btn">
                   <img
                     src={ProfileUser}
@@ -58,16 +61,16 @@ const Navbar = props => {
                     Logout
                   </label>
                 </div>
-              </div>
-            ) : (<div className="nav-features"><div className="nav-create-ticket" onClick={handleCreateTicket}>
-                  <label className="cursor-pointer">Ask Any Question?</label>
+              ) : (
+                <div className="nav-features">
+                  <Button
+                    className="primary-btn btn-wide btn-height"
+                    onClick={handleLogin}
+                    text="Login"
+                  ></Button>
                 </div>
-              <Button
-                className="primary-btn btn-wide btn-height"
-                onClick={handleLogin}
-                text="Login"
-              ></Button> </div>
-            )}
+              )}
+            </div>
           </div>
         </div>
 

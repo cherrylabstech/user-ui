@@ -58,19 +58,34 @@ function Routes(props) {
               path="/KnowledgeBase"
               component={KnowledgeBase}
             ></Route>
-            <Route exact path="/request" key={2} component={MyRequest}></Route>
-            <Route
-              exact
-              path="/request/detail"
-              component={MyRequestDetail}
-            ></Route>
+            <Route exact path="/CreateTicket" component={CreateTicket} />
             <Route exact path="/login" component={LoginPage}></Route>
             <Route exact path="/SignIn" component={SignIn}></Route>
             <Route exact path="/SignUp" component={SignUp}></Route>
-            <Route exact path="/asset" component={MyAsset}></Route>
-            <Route exact path="/asset/detail" component={MyAssetDetail}></Route>
-            <Route exact path="/profile" component={Profile}></Route>
-            <Route exact path="/CreateTicket" component={CreateTicket} />
+            {token !== null ? (
+              <>
+                <Route
+                  exact
+                  path="/request"
+                  key={2}
+                  component={MyRequest}
+                ></Route>
+                <Route
+                  exact
+                  path="/request/detail"
+                  component={MyRequestDetail}
+                ></Route>
+                <Route exact path="/asset" component={MyAsset}></Route>
+                <Route
+                  exact
+                  path="/asset/detail"
+                  component={MyAssetDetail}
+                ></Route>
+                <Route exact path="/profile" component={Profile}></Route>
+              </>
+            ) : (
+              <Redirect to="/home"> </Redirect>
+            )}
             <Redirect from="/" to="/home"></Redirect>
           </Switch>
           {location !== "/login" && <SideNavRight />}
