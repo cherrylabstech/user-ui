@@ -46,7 +46,10 @@ const Navbar = props => {
             {token ? (
               <div className="nav-features">
                 <div className="nav-create-ticket" onClick={handleCreateTicket}>
-                  <label className="cursor-pointer">Ask Any Question?</label>
+                  <Button
+                    className="primary-btn btn-wide btn-height"
+                    text="Create Ticket"
+                  ></Button>
                 </div>
                 <div className="logout-btn">
                   <img
@@ -59,14 +62,17 @@ const Navbar = props => {
                   </label>
                 </div>
               </div>
-            ) : (<div className="nav-features"><div className="nav-create-ticket" onClick={handleCreateTicket}>
+            ) : (
+              <div className="nav-features">
+                <div className="nav-create-ticket" onClick={handleCreateTicket}>
                   <label className="cursor-pointer">Ask Any Question?</label>
                 </div>
-              <Button
-                className="primary-btn btn-wide btn-height"
-                onClick={handleLogin}
-                text="Login"
-              ></Button> </div>
+                <Button
+                  className="primary-btn btn-wide btn-height"
+                  onClick={handleLogin}
+                  text="Login"
+                ></Button>{" "}
+              </div>
             )}
           </div>
         </div>
