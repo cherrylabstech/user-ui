@@ -58,6 +58,7 @@ function Routes(props) {
               path="/KnowledgeBase"
               component={KnowledgeBase}
             ></Route>
+            <Route exact path="/CreateTicket" component={CreateTicket} />
             <Route exact path="/login" component={LoginPage}></Route>
             <Route exact path="/SignIn" component={SignIn}></Route>
             <Route exact path="/SignUp" component={SignUp}></Route>
@@ -81,7 +82,6 @@ function Routes(props) {
                   component={MyAssetDetail}
                 ></Route>
                 <Route exact path="/profile" component={Profile}></Route>
-                <Route exact path="/CreateTicket" component={CreateTicket} />
               </>
             ) : (
               <Redirect to="/home"> </Redirect>
