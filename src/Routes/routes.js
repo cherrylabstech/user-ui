@@ -60,7 +60,7 @@ function Routes(props) {
             ></Route>
             <Route exact path="/CreateTicket" component={CreateTicket} />
             <Route exact path="/login" component={LoginPage}></Route>
-            <Route exact path="/SignIn" component={SignIn}></Route>
+            <Route exact path="/SignI" component={SignIn}></Route>
             <Route exact path="/SignUp" component={SignUp}></Route>
             {token !== null ? (
               <>
