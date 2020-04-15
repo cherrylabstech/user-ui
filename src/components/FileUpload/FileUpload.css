@@ -1,0 +1,27 @@
+.upload-button {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+label.myLabel input[type="file"] {
+  position: absolute;
+  top: -1000px;
+}
+
+/***** Example custom styling *****/
+.myLabel {
+  border: 1px solid rgb(206, 206, 206);
+  padding: 10px;
+  margin: 2px;
+  background: rgb(247, 247, 247);
+  width: 60%;
+}
+.myLabel :hover {
+  background: rgb(243, 243, 243);
+}
+.myLabel span {
+  color: #636363;
+  display: flex;
+  justify-content: center;
+  font-size: 10px;
+}
