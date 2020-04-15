@@ -20,6 +20,8 @@ function CreateTicket(props) {
   const [radio, setRadio] = useState();
   const [dropValue, setDropValue] = useState();
   const [selectedDate, setSelectedDate] = useState(today);
+  const [assetCategory,setAssetCategory] =useState();
+  const [assetType,setAssetType] =useState();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -59,13 +61,20 @@ const handleName = e =>{
   const handleCheck = e => {
     console.log(e.target.value, e.target.checked);
   };
+
   const handleDrop = e => {
     setDropValue(e.target.value);
   };
+
   const handleDate = date => {
     setSelectedDate(date);
   };
-
+  const handleAssetCategory = e =>{
+    setAssetCategory(e.target.value)
+  }
+const handelAssetType = e=>{
+setAssetType(e.target.value)
+}
     const CreateFormData = useSelector(state => state.createTicketReducer.createTicketData);
   //  CATEGORY DROPDOWN LIST
     const CategoryOptions = useSelector(state => state.requestCategoryReducer.requestCategoryData)
@@ -83,15 +92,21 @@ const handleName = e =>{
       return <option value={data.id}>{data.model}</option>
     })
     // ASSET DROPDOWN LIST
-const AssetOptions= useSelector(state => state.ChooseAssetReducer.ChooseAssetData)
+// const AssetOptions= useSelector(state => state.ChooseAssetReducer.ChooseAssetData)
 
 //  const AssetList = (AssetOptions.payload||[]).map(data=>{
 //       return <option value={data.id}>{data.model}</option>
 //     })
-    
-    
-    
-  console.log(AssetOptions.payload);
+    const AssetGroup = (CreateFormData||[]).map(element=>{
+  if(element.field_type_id === 101){
+    return <DropDown value={assetCategory} onChange={handleAssetCategory} text={element.field_label} placeholder={element.field_placeholder} options={AssetCategoryList} />
+  } else if(element.field_type_id === 107){
+    return <DropDown value={assetType} onChange={handelAssetType} text={element.field_label} placeholder={element.field_placeholder} options={AssetTypeList} />}
+   else if(element.field_type_id === 4){
+    return <DropDown value={dropValue} onChange={handleDrop} text={element.field_label} placeholder={element.field_placeholder}  />
+  }
+  return true
+})
 
 const form = (CreateFormData || []).map((element,i) => {
   if (element.field_type_id === 80 ) {
@@ -199,16 +214,12 @@ return <div className="create-ticket-field-cont">
               onChange={handleDate}
             ></DatePicker></div>
           </div>
-} else if(element.field_type_id === 101){
-    return <DropDown value={dropValue} onChange={handleDrop} text={element.field_label} placeholder={element.field_placeholder} options={AssetCategoryList} />
-  } else if(element.field_type_id === 107){
-    return <DropDown value={dropValue} onChange={handleDrop} text={element.field_label} placeholder={element.field_placeholder} options={AssetTypeList} />}
-  // } else if(element.field_type_id === 4){
-  //   return <DropDown value={dropValue} onChange={handleDrop} text={element.field_label} placeholder={element.field_placeholder} options={AssetList} />
-  // }
-
+} else if(element.field_type_id === 4){
+  return <div>{AssetGroup}</div>
+}
       return true
 })
+
 
 
   return (
