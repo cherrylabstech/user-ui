@@ -29,8 +29,17 @@ function CreateTicket(props) {
         ? dispatch(userActions.CreateTicketApi(1))
         : dispatch(userActions.CreateTicketApi(0));
     };
+    dispatch(userActions.requestCategoryApi());
+    // dispatch(userActions.LocationApi());
+    // dispatch(userActions.UserApi());
+    // dispatch(userActions.CompanyApi());
+     dispatch(userActions.AssetCategoryApi());
+     dispatch(userActions.ChooseAssetApi());
+     dispatch(userActions.AssetTypeApi());
+
     apiCall();
   }, [dispatch]);
+
 const handleName = e =>{
   setName(e.target.value)
 }
@@ -58,7 +67,31 @@ const handleName = e =>{
   };
 
     const CreateFormData = useSelector(state => state.createTicketReducer.createTicketData);
-  console.log(CreateFormData);
+  //  CATEGORY DROPDOWN LIST
+    const CategoryOptions = useSelector(state => state.requestCategoryReducer.requestCategoryData)
+    const CategoryList = (CategoryOptions||[]).map(data=>{
+      return <option value={data.id}>{data.category}</option>
+    })
+    // ASSET CATEGORY DROPDOWN LIST
+    const AssetCategoryOptions= useSelector(state => state.AssetCategoryReducer.AssetCategoryData)
+    const AssetCategoryList = (AssetCategoryOptions||[]).map(data=>{
+      return <option value={data.id}>{data.categoryName}</option>
+    })
+    // ASSET TYPE DROPDOWN LIST
+    const AssetTypeOptions= useSelector(state => state.AssetTypeReducer.AssetTypeData)
+    const AssetTypeList = (AssetTypeOptions||[]).map(data=>{
+      return <option value={data.id}>{data.model}</option>
+    })
+    // ASSET DROPDOWN LIST
+const AssetOptions= useSelector(state => state.ChooseAssetReducer.ChooseAssetData)
+
+//  const AssetList = (AssetOptions.payload||[]).map(data=>{
+//       return <option value={data.id}>{data.model}</option>
+//     })
+    
+    
+    
+  console.log(AssetOptions.payload);
 
 const form = (CreateFormData || []).map((element,i) => {
   if (element.field_type_id === 80 ) {
@@ -104,7 +137,7 @@ const form = (CreateFormData || []).map((element,i) => {
           </div>);
       } else if (element.field_type_id === 16 || element.field_type_id === 84 ){
 return <div className="create-ticket-field-cont">
-            <DropDown value={dropValue} onChange={handleDrop} text={element.field_label} placeholder={element.field_placeholder} />
+            <DropDown value={dropValue} onChange={handleDrop} text={element.field_label} placeholder={element.field_placeholder} options={CategoryList}  />
           </div>
       } else if ( element.field_type === "dropdown" ){
 return <div className="create-ticket-field-cont">
@@ -166,7 +199,14 @@ return <div className="create-ticket-field-cont">
               onChange={handleDate}
             ></DatePicker></div>
           </div>
-}
+} else if(element.field_type_id === 101){
+    return <DropDown value={dropValue} onChange={handleDrop} text={element.field_label} placeholder={element.field_placeholder} options={AssetCategoryList} />
+  } else if(element.field_type_id === 107){
+    return <DropDown value={dropValue} onChange={handleDrop} text={element.field_label} placeholder={element.field_placeholder} options={AssetTypeList} />}
+  // } else if(element.field_type_id === 4){
+  //   return <DropDown value={dropValue} onChange={handleDrop} text={element.field_label} placeholder={element.field_placeholder} options={AssetList} />
+  // }
+
       return true
 })
 

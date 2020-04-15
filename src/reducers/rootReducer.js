@@ -18,6 +18,13 @@ import TicketCountReducer from "./TicketCountReducer";
 import AssetListReducer from "./AssetListReducer";
 import AssetCountReducer from "./AssetCountReducer";
 import AssetDetailReducer from "./AssetDetailReducer";
+import requestCategoryReducer from "./RequestCategoryReducer";
+import LocationReducer from "./LocationReducer";
+import CompanyReducer from "./CompanyReducer";
+import UserReducer from "./UserReducer";
+import ChooseAssetReducer from "./ChooseAssetReducer";
+import AssetCategoryReducer from "./AssetCategoryReducer";
+import AssetTypeReducer from "./AssetTypesReducer";
 export default combineReducers({
   posts,
   AuthReducer,
@@ -37,5 +44,12 @@ export default combineReducers({
   TicketCountReducer,
   AssetListReducer,
   AssetDetailReducer,
-  AssetCountReducer
+  AssetCountReducer,
+  requestCategoryReducer,
+  LocationReducer,
+  CompanyReducer,
+  UserReducer,
+  ChooseAssetReducer,
+  AssetCategoryReducer,
+  AssetTypeReducer
 });
