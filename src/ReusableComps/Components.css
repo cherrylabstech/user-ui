@@ -1,17 +1,27 @@
 .text-field {
   padding: 0 10px;
-  height: 20px;
+  height: 25px;
   border-radius: 2px;
-  border: 1px solid;
+  border: 1px solid grey;
   margin-top: 10px;
+  width: 50%;
 }
-.text-area {
+.def-dropdown{
+  margin-top: 10px;
+  border: 1px solid blue;
+    width: 54%;
+    height: 25px;
+    background: white;
+    border-radius: 2px;
+    padding: 0 5px;
+}
+/* .text-area {
   padding: 0 10px;
   min-height: 50px;
   border-radius: 2px;
   border: 1px solid;
   margin-top: 10px;
-}
+} */
 .radio-field {
   margin: 10px 0;
 }
