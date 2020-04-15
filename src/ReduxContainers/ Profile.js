@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { userActions } from "../ApiCall/rootApi";
+import FileUpload from "../components/FileUpload/FileUpload";
 function Profile() {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -12,7 +13,10 @@ function Profile() {
   }, [dispatch]);
   return (
     <Fragment>
-      <div className="main">My Profile</div>
+      <div className="main">
+        My Profile
+        <FileUpload></FileUpload>
+      </div>
     </Fragment>
   );
 }
