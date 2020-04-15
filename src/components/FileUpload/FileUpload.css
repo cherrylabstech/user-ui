@@ -20,7 +20,6 @@ label.myLabel input[type="file"] {
   background: rgb(243, 243, 243);
 }
 .myLabel span {
-  color: #636363;
   display: flex;
   justify-content: center;
   font-size: 10px;

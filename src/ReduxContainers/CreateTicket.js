@@ -28,9 +28,19 @@ function CreateTicket(props) {
         ? dispatch(userActions.CreateTicketApi(1))
         : dispatch(userActions.CreateTicketApi(0));
     };
+    dispatch(userActions.requestCategoryApi());
+    // dispatch(userActions.LocationApi());
+    // dispatch(userActions.UserApi());
+    // dispatch(userActions.CompanyApi());
+    // dispatch(userActions.AssetCategoryApi());
+    // dispatch(userActions.ChooseAssetApi());
+    // dispatch(userActions.AssetTypeApi());
+
     apiCall();
   }, [dispatch]);
-  const CreateFormData = useSelector(state => state.createTicketReducer);
+  const CreateFormData = useSelector(
+    state => state.createTicketReducer.createTicketData
+  );
   console.log(CreateFormData);
   const handleSubject = model => {
     setSubject(model);

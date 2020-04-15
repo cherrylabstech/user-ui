@@ -16,6 +16,13 @@ import { TicketCountApi } from "./TicketCountApi";
 import { AssetListApi } from "./AssetListApi";
 import { AssetDetailApi } from "./AssetDetailApi";
 import { AssetCountApi } from "./AssetCountApi";
+import { requestCategoryApi } from "./RequestCategoryApi";
+import { AssetCategoryApi } from "./AssetCategory";
+import { AssetTypeApi } from "./AssetTypeApi";
+import { ChooseAssetApi } from "./ChooseAssetApi";
+import { LocationApi } from "./LocationApi";
+import { UserApi } from "./UserApi";
+import { CompanyApi } from "./CompanyApi";
 export const userActions = {
   auth,
   welcome,
@@ -34,5 +41,12 @@ export const userActions = {
   TicketCountApi,
   AssetListApi,
   AssetDetailApi,
-  AssetCountApi
+  AssetCountApi,
+  requestCategoryApi,
+  AssetCategoryApi,
+  AssetTypeApi,
+  ChooseAssetApi,
+  LocationApi,
+  CompanyApi,
+  UserApi
 };
