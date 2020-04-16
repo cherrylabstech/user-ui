@@ -19,10 +19,11 @@ export const AssetCategoryFail = error => {
   };
 };
 
-export const AssetCategoryApi = clientId => {
+export const AssetCategoryApi = ({ userId }) => {
+  console.log(userId);
   const token = localStorage.getItem("X-Auth-Token");
-  const clientIds = clientId ? `/client/${clientId}` : ``;
-  const url = `${BASE_PATH}${SERVICE_PATH}/assetCategories${clientIds}`;
+  const clientId = userId ? `/client/${userId}` : ``;
+  const url = `${BASE_PATH}${SERVICE_PATH}/assetCategories${clientId}`;
   return dispatch => {
     const apiToken = token !== null && { "X-Auth-Token": token };
     dispatch(getAssetCategory());
