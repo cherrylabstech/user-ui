@@ -38,9 +38,20 @@ function CreateTicket(props) {
     //dispatch(userActions.LocationApi());
     // dispatch(userActions.CompanyApi());
     dispatch(userActions.PropertiesApi());
+
     apiCall();
   }, [dispatch]);
-
+  const assetCount = useSelector(state => state.AssetCountReducer.AssetCount);
+  useEffect(() => {
+    assetCount !== undefined &&
+      dispatch(
+        userActions.ChooseAssetApi({
+          assetCategoryId: assetCategory,
+          assetTypeId: assetType,
+          to: assetCount.assetCount
+        })
+      );
+  }, [assetCount, dispatch]);
   const categoryCall = () => {
     dispatch(userActions.requestCategoryApi());
   };
@@ -52,12 +63,10 @@ function CreateTicket(props) {
   };
 
   const assetCall = () => {
-    dispatch(userActions.AssetCountApi());
     dispatch(
-      userActions.ChooseAssetApi({
-        assetCategoryId: assetCategory,
-        assetTypeId: assetType,
-        to: 10
+      userActions.AssetCountApi({
+        categoryId: assetCategory,
+        assetTypeId: assetType
       })
     );
   };

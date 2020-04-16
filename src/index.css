@@ -157,7 +157,7 @@ a {
   color: black;
 }
 .close-upload-button:active {
-  border: none;
+  outline: none;
 }
 .close-upload-button:focus {
   border: none;
