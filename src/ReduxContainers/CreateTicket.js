@@ -356,6 +356,7 @@ function CreateTicket(props) {
         <form onSubmit={handleSubmit} style={{ width: "100%" }}>
           {form}
           <div className="create-ticket-field-cont">
+          <div className="f-14">Attachments</div>
             <FileUpload
               onChange={handleUpload}
               propertiesData={PropertiesData}
@@ -363,25 +364,27 @@ function CreateTicket(props) {
           </div>
 
           <div>
-            <span>
+            
               {imageUploadData.map((data, i) => {
                 return (
-                  <div>
-                    <span>{data.name}</span>
+                  <div className="uploaded-file">
+                    <label className="attachment-link">{data.name}</label>
+                    <div>
                     {messages.length >= 1 && (
-                      <a
+                      <a className="open-attachment"
                         target="_blank"
                         rel="noopener noreferrer"
                         href={messages[i] && messages[i].uploadUrl}
                       >
-                        CLICK
+                        Open
                       </a>
                     )}
                     <span>X</span>
+                    </div>
                   </div>
                 );
               })}
-            </span>
+            
           </div>
           <div>
             <Button text="Submit" className="primary-btn btn-wide" />
