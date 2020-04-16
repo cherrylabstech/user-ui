@@ -1,0 +1,3 @@
+export const GET_UPLOAD_DATA = "GET_UPLOAD_DATA";
+export const SET_UPLOAD_DATA = "SET_UPLOAD_DATA";
+export const UPLOAD_DATA_FAIL = "UPLOAD_DATA_FAIL";

@@ -10,16 +10,20 @@ import DropDown from "../ReusableComps/DropDown";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { userActions } from "../ApiCall/rootApi";
+import FileUpload from "../components/FileUpload/FileUpload";
+import { bytesToSize } from "../helpers/BytesToMb";
 
 const today = new Date(Date.now());
-
 function CreateTicket(props) {
   const [name, setName] = useState();
   const [subject, setSubject] = useState();
   const [email, setEmail] = useState();
   const [radio, setRadio] = useState();
   const [dropValue, setDropValue] = useState();
+  const [imageUploadData, setImageData] = useState([]);
+  const [imageId, setImageId] = useState([]);
   const [selectedDate, setSelectedDate] = useState(today);
+  const [apiData, setapiData] = useState([]);
   const [assetCategory, setAssetCategory] = useState();
   const [assetType, setAssetType] = useState();
   const dispatch = useDispatch();
@@ -31,16 +35,64 @@ function CreateTicket(props) {
         ? dispatch(userActions.CreateTicketApi(1))
         : dispatch(userActions.CreateTicketApi(0));
     };
-    dispatch(userActions.requestCategoryApi());
-    // dispatch(userActions.LocationApi());
-    // dispatch(userActions.UserApi());
+    // dispatch(userActions.requestCategoryApi());
+    //dispatch(userActions.LocationApi());
     // dispatch(userActions.CompanyApi());
-    // dispatch(userActions.AssetCategoryApi());
-    // dispatch(userActions.ChooseAssetApi());
-    // dispatch(userActions.AssetTypeApi());
+    dispatch(userActions.PropertiesApi());
 
     apiCall();
   }, [dispatch]);
+  const assetCount = useSelector(state => state.AssetCountReducer.AssetCount);
+  useEffect(() => {
+    assetCount !== undefined &&
+      dispatch(
+        userActions.ChooseAssetApi({
+          assetCategoryId: assetCategory,
+          assetTypeId: assetType,
+          to: assetCount.assetCount
+        })
+      );
+  }, [assetCount, dispatch]);
+  const imageInfo = [...imageUploadData];
+  const uploadData = useSelector(state => state.UploadReducer.UploadData);
+  const uploading = useSelector(state => state.UploadReducer.loading);
+  const uploadError = useSelector(state => state.UploadReducer.error);
+  useEffect(() => {
+    const removeArray = () => {
+      imageInfo.splice(imageInfo.length - 1, 1);
+      setImageData(imageInfo);
+    };
+    uploadError !== null &&
+      uploadError.status === 400 &&
+      uploadError.data.message === "unsupported mime type" &&
+      removeArray();
+  }, [uploadError]);
+  useEffect(() => {
+    const imageDetail = () => {
+      setapiData([...apiData, uploadData]);
+      setImageId([...imageId, { id: uploadData.id }]);
+    };
+    uploadData !== undefined && imageDetail();
+  }, [uploadData]);
+  console.log(imageId);
+  const categoryCall = () => {
+    dispatch(userActions.requestCategoryApi());
+  };
+  const assetCategoryCall = () => {
+    dispatch(userActions.AssetCategoryApi());
+  };
+  const assetTypeCall = () => {
+    dispatch(userActions.AssetTypeApi({ assetCategoryId: assetCategory }));
+  };
+
+  const assetCall = () => {
+    dispatch(
+      userActions.AssetCountApi({
+        categoryId: assetCategory,
+        assetTypeId: assetType
+      })
+    );
+  };
 
   const handleName = e => {
     setName(e.target.value);
@@ -75,6 +127,45 @@ function CreateTicket(props) {
   const handelAssetType = e => {
     setAssetType(e.target.value);
   };
+  const PropertiesData = useSelector(
+    state => state.PropertiesReducer.propertiesData
+  );
+
+  const SupportedSize = PropertiesData !== undefined && PropertiesData.fileSize;
+
+  const handleUpload = event => {
+    event.preventDefault();
+    const imagesData = event.target.files[0];
+    setImageData([...imageUploadData, imagesData]);
+    const supportedSize = bytesToSize(SupportedSize);
+    let formData = new FormData();
+    const imageUpload = () => {
+      return (
+        formData.append("file", imagesData || ""),
+        formData.append("type", imagesData.type || ""),
+        formData.append("filesize", imagesData.size || ""),
+        dispatch(userActions.UploadApi(formData))
+      );
+    };
+
+    imagesData.size >= supportedSize
+      ? alert(`Please choose the file less than ${supportedSize}`)
+      : imageUpload();
+
+    event.target.value = "";
+  };
+  const handleDelete = i => {
+    const imageInfo = [...imageUploadData];
+    const api = [...apiData];
+    const imageApiId = [...imageId];
+    imageInfo.splice(i, 1);
+    api.splice(i, 1);
+    imageApiId.splice(i, 1);
+    setImageData(imageInfo);
+    setapiData(api);
+    setImageId(imageApiId);
+  };
+
   const CreateFormData = useSelector(
     state => state.createTicketReducer.createTicketData
   );
@@ -108,32 +199,38 @@ function CreateTicket(props) {
   const AssetGroup = (CreateFormData || []).map(element => {
     if (element.field_type_id === 101) {
       return (
-        <DropDown
-          value={assetCategory}
-          onChange={handleAssetCategory}
-          text={element.field_label}
-          placeholder={element.field_placeholder}
-          options={AssetCategoryList}
-        />
+        <div onClick={assetCategoryCall}>
+          <DropDown
+            value={assetCategory}
+            onChange={handleAssetCategory}
+            text={element.field_label}
+            placeholder={element.field_placeholder}
+            options={AssetCategoryList}
+          />
+        </div>
       );
     } else if (element.field_type_id === 107) {
       return (
-        <DropDown
-          value={assetType}
-          onChange={handelAssetType}
-          text={element.field_label}
-          placeholder={element.field_placeholder}
-          options={AssetTypeList}
-        />
+        <div onClick={assetTypeCall}>
+          <DropDown
+            value={assetType}
+            onChange={handelAssetType}
+            text={element.field_label}
+            placeholder={element.field_placeholder}
+            options={AssetTypeList}
+          />
+        </div>
       );
     } else if (element.field_type_id === 4) {
       return (
-        <DropDown
-          value={dropValue}
-          onChange={handleDrop}
-          text={element.field_label}
-          placeholder={element.field_placeholder}
-        />
+        <div onClick={assetCall}>
+          <DropDown
+            value={dropValue}
+            onChange={handleDrop}
+            text={element.field_label}
+            placeholder={element.field_placeholder}
+          />
+        </div>
       );
     }
     return true;
@@ -189,7 +286,7 @@ function CreateTicket(props) {
       );
     } else if (element.field_type_id === 16 || element.field_type_id === 84) {
       return (
-        <div className="create-ticket-field-cont">
+        <div className="create-ticket-field-cont" onClick={categoryCall}>
           <DropDown
             value={dropValue}
             onChange={handleDrop}
@@ -292,6 +389,64 @@ function CreateTicket(props) {
         Create Ticket
         <form onSubmit={handleSubmit} style={{ width: "100%" }}>
           {form}
+          <div className="create-ticket-field-cont">
+            <div className="f-14">Attachments</div>
+            <FileUpload
+              onChange={handleUpload}
+              propertiesData={PropertiesData}
+            ></FileUpload>
+          </div>
+
+          <div>
+            {imageUploadData.map((data, i) => {
+              return (
+                <div>
+                  {apiData[i] ? (
+                    <div className="uploaded-file">
+                      <label className="attachment-link">{data.name}</label>
+                      {apiData && (
+                        <a
+                          className="open-attachment"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          href={apiData[i] && apiData[i].uploadUrl}
+                        >
+                          {" "}
+                          Open{" "}
+                        </a>
+                      )}
+                      <button
+                        className="close-upload-button"
+                        type="button"
+                        onClick={() => handleDelete(i)}
+                      >
+                        X
+                      </button>
+                    </div>
+                  ) : uploading ? (
+                    <div>Loading</div>
+                  ) : (
+                    <div className="uploaded-file">
+                      <label className="attachment-link">{data.name}</label>
+                      {apiData && (
+                        <a
+                          className="open-attachment"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          href={apiData[i] && apiData[i].uploadUrl}
+                        >
+                          Open
+                        </a>
+                      )}
+                      <button type="button" onClick={() => handleDelete(i)}>
+                        X
+                      </button>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
           <div>
             <Button text="Submit" className="primary-btn btn-wide" />
           </div>

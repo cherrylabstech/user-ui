@@ -23,6 +23,8 @@ import { ChooseAssetApi } from "./ChooseAssetApi";
 import { LocationApi } from "./LocationApi";
 import { UserApi } from "./UserApi";
 import { CompanyApi } from "./CompanyApi";
+import { PropertiesApi } from "./PropertiesApi";
+import { UploadApi } from "./UploadApi";
 export const userActions = {
   auth,
   welcome,
@@ -48,5 +50,7 @@ export const userActions = {
   ChooseAssetApi,
   LocationApi,
   CompanyApi,
-  UserApi
+  UserApi,
+  PropertiesApi,
+  UploadApi
 };

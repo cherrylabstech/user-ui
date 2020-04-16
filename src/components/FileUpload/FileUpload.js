@@ -1,10 +1,17 @@
 import React from "react";
 import "./FileUpload.css";
-function FileUpload() {
+function FileUpload(props) {
+  const supportedTypes =
+    props.propertiesData !== undefined && props.propertiesData.fileType;
   return (
     <div className="upload-button">
       <label className="myLabel">
-        <input type="file" required />
+        <input
+          accept={(supportedTypes || []).map(data => "." + data)}
+          type="file"
+          onChange={props.onChange}
+          required
+        />
         <span>Add file</span>
       </label>
     </div>

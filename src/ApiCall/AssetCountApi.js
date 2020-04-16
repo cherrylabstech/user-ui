@@ -1,4 +1,4 @@
-    import * as actionTypes from "../actions/AssetCountActions";
+import * as actionTypes from "../actions/AssetCountActions";
 import { BASE_PATH, SERVICE_PATH } from "../ApiBasePath/ApiBasePath";
 import axios from "axios";
 export const getAssetCount = AssetCount => {
@@ -19,21 +19,25 @@ export const AssetCountFail = error => {
   };
 };
 
-export const AssetCountApi = () => {
+export const AssetCountApi = values => {
   const token = localStorage.getItem("X-Auth-Token");
-  const url = `${BASE_PATH}${SERVICE_PATH}/assets/count?query=`;
-  return dispacth => {
+  const category =
+    values && values.categoryId ? `&categoryId=${values.categoryId}` : ``;
+  const assetType =
+    values && values.assetTypeId ? `&assetTypeId=${values.assetTypeId}` : ``;
+  const url = `${BASE_PATH}${SERVICE_PATH}/assets/count?query=${category}${assetType}`;
+  return dispatch => {
     const apiToken = token !== null && { "X-Auth-Token": token };
-    dispacth(getAssetCount());
+    dispatch(getAssetCount());
     axios
       .get(url, { headers: apiToken })
       .then(res => {
-        dispacth(setAssetCount(res.data));
+        dispatch(setAssetCount(res.data));
       })
       .catch(error => {
         console.log(error);
         error.response !== undefined &&
-          dispacth(AssetCountFail(error.response.data));
+          dispatch(AssetCountFail(error.response.data));
       });
   };
 };
