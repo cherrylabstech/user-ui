@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect, useCallback } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import TextField from "../ReusableComps/TextField";
 import Button from "../ReusableComps/Button";
@@ -14,7 +14,6 @@ import FileUpload from "../components/FileUpload/FileUpload";
 import { bytesToSize } from "../helpers/BytesToMb";
 
 const today = new Date(Date.now());
-let apiUploadData = [];
 function CreateTicket(props) {
   const [name, setName] = useState();
   const [subject, setSubject] = useState();
@@ -125,7 +124,7 @@ function CreateTicket(props) {
 
     event.target.value = "";
   };
-  const handleDelete = (e, i) => {
+  const handleDelete = i => {
     const imageInfo = [...imageUploadData];
     const api = [...apiData];
     imageInfo.splice(i, 1);
