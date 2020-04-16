@@ -46,16 +46,13 @@ function CreateTicket(props) {
     dispatch(userActions.AssetCategoryApi());
   };
   const assetTypeCall = () => {
-    dispatch(
-      userActions.AssetTypeApi({ userId: 1001, assetCategoryId: assetCategory })
-    );
+    dispatch(userActions.AssetTypeApi({ assetCategoryId: assetCategory }));
   };
 
   const assetCall = () => {
     dispatch(userActions.AssetCountApi());
     dispatch(
       userActions.ChooseAssetApi({
-        userId: 1001,
         assetCategoryId: assetCategory,
         assetTypeId: assetType,
         to: 10

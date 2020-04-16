@@ -19,17 +19,11 @@ export const chooseAssetFail = error => {
   };
 };
 
-export const ChooseAssetApi = ({
-  userId,
-  assetCategoryId,
-  assetTypeId,
-  to
-}) => {
+export const ChooseAssetApi = ({ assetCategoryId, assetTypeId, to }) => {
   const token = localStorage.getItem("X-Auth-Token");
-  const client = userId ? `/client/${userId || 10}` : ``;
   const categoryId = assetCategoryId ? `&categoryId=${assetCategoryId}` : ``;
   const modelId = assetTypeId ? `&modelId=${assetTypeId}` : ``;
-  const url = `${BASE_PATH}${SERVICE_PATH}/assets${client}?query=${modelId}${categoryId}&from=0&to=${to ||
+  const url = `${BASE_PATH}${SERVICE_PATH}/assets?query=${modelId}${categoryId}&from=0&to=${to ||
     10}`;
   return dispatch => {
     const apiToken = token !== null && { "X-Auth-Token": token };
