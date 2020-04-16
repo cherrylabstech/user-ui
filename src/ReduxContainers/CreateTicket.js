@@ -74,7 +74,6 @@ function CreateTicket(props) {
     };
     uploadData !== undefined && imageDetail();
   }, [uploadData]);
-  console.log(imageId);
   const categoryCall = () => {
     dispatch(userActions.requestCategoryApi());
   };
