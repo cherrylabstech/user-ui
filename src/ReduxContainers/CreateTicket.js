@@ -370,6 +370,7 @@ function CreateTicket(props) {
         <form onSubmit={handleSubmit} style={{ width: "100%" }}>
           {form}
           <div className="create-ticket-field-cont">
+            <div className="f-14">Attachments</div>
             <FileUpload
               onChange={handleUpload}
               propertiesData={PropertiesData}
@@ -377,49 +378,54 @@ function CreateTicket(props) {
           </div>
 
           <div>
-            <span>
-              {imageUploadData.map((data, i) => {
-                return (
-                  <div>
-                    {apiData[i] ? (
-                      <>
-                        <span>{data.name}</span>
-                        {apiData && (
-                          <a
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            href={apiData[i] && apiData[i].uploadUrl}
-                          >
-                            CLICK
-                          </a>
-                        )}
-                        <button type="button" onClick={() => handleDelete(i)}>
-                          X
-                        </button>
-                      </>
-                    ) : uploading ? (
-                      <div>Loading</div>
-                    ) : (
-                      <>
-                        <span>{data.name}</span>
-                        {apiData && (
-                          <a
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            href={apiData[i] && apiData[i].uploadUrl}
-                          >
-                            CLICK
-                          </a>
-                        )}
-                        <button type="button" onClick={() => handleDelete(i)}>
-                          X
-                        </button>
-                      </>
-                    )}
-                  </div>
-                );
-              })}
-            </span>
+            {imageUploadData.map((data, i) => {
+              return (
+                <div>
+                  {apiData[i] ? (
+                    <div className="uploaded-file">
+                      <label className="attachment-link">{data.name}</label>
+                      {apiData && (
+                        <a
+                          className="open-attachment"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          href={apiData[i] && apiData[i].uploadUrl}
+                        >
+                          {" "}
+                          Open{" "}
+                        </a>
+                      )}
+                      <button
+                        className="close-upload-button"
+                        type="button"
+                        onClick={() => handleDelete(i)}
+                      >
+                        X
+                      </button>
+                    </div>
+                  ) : uploading ? (
+                    <div>Loading</div>
+                  ) : (
+                    <div className="uploaded-file">
+                      <label className="attachment-link">{data.name}</label>
+                      {apiData && (
+                        <a
+                          className="open-attachment"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          href={apiData[i] && apiData[i].uploadUrl}
+                        >
+                          Open
+                        </a>
+                      )}
+                      <button type="button" onClick={() => handleDelete(i)}>
+                        X
+                      </button>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </div>
           <div>
             <Button text="Submit" className="primary-btn btn-wide" />

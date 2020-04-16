@@ -145,3 +145,20 @@ a {
 .btn-wide {
   height: 35px;
 }
+
+.close-upload-button {
+  background: none;
+  border: none;
+  font-size: 17px;
+  color: gray;
+  cursor: pointer;
+}
+.close-upload-button:hover {
+  color: black;
+}
+.close-upload-button:active {
+  border: none;
+}
+.close-upload-button:focus {
+  border: none;
+}

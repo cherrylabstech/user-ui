@@ -28,3 +28,18 @@
 .create-ticket-field-cont {
   margin: 20px 0;
 }
+.uploaded-file{
+  display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+}
+.open-attachment{
+  color: blue;
+    margin: 0 10px;
+}
+.attachment-link{
+  white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 80%;
+}
