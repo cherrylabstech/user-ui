@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useState, useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import TextField from "../ReusableComps/TextField";
 import Button from "../ReusableComps/Button";
@@ -23,8 +23,7 @@ function CreateTicket(props) {
   const [dropValue, setDropValue] = useState();
   const [imageUploadData, setImageData] = useState([]);
   const [selectedDate, setSelectedDate] = useState(today);
-  const [messages, setMessages] = useState([]);
-  const [abc, setAbc] = useState([{ name: "g" }, { name: "gok" }]);
+  const [apiData, setapiData] = useState([]);
   const [assetCategory, setAssetCategory] = useState();
   const [assetType, setAssetType] = useState();
   const dispatch = useDispatch();
@@ -104,6 +103,7 @@ function CreateTicket(props) {
   const uploading = useSelector(state => state.UploadReducer.loading);
   const uploadError = useSelector(state => state.UploadReducer.error);
   const SupportedSize = PropertiesData !== undefined && PropertiesData.fileSize;
+
   const handleUpload = event => {
     event.preventDefault();
     const imagesData = event.target.files[0];
@@ -125,13 +125,28 @@ function CreateTicket(props) {
 
     event.target.value = "";
   };
+  const handleDelete = (e, i) => {
+    const imageInfo = [...imageUploadData];
+    const api = [...apiData];
+    imageInfo.splice(i, 1);
+    api.splice(i, 1);
+    setImageData(imageInfo);
+    setapiData(api);
+  };
+  const imageInfo = [...imageUploadData];
   useEffect(() => {
-    uploadError !== null && abc.splice(0, 1);
+    const removeArray = () => {
+      imageInfo.splice(imageInfo.length - 1, 1);
+      setImageData(imageInfo);
+    };
+    uploadError !== null &&
+      uploadError.status === 400 &&
+      uploadError.data.message === "unsupported mime type" &&
+      removeArray();
   }, [uploadError]);
   useEffect(() => {
-    uploadData !== undefined && setMessages([...messages, uploadData]);
+    uploadData !== undefined && setapiData([...apiData, uploadData]);
   }, [uploadData]);
-
   const CreateFormData = useSelector(
     state => state.createTicketReducer.createTicketData
   );
@@ -367,17 +382,41 @@ function CreateTicket(props) {
               {imageUploadData.map((data, i) => {
                 return (
                   <div>
-                    <span>{data.name}</span>
-                    {messages.length >= 1 && (
-                      <a
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        href={messages[i] && messages[i].uploadUrl}
-                      >
-                        CLICK
-                      </a>
+                    {apiData[i] ? (
+                      <>
+                        <span>{data.name}</span>
+                        {apiData && (
+                          <a
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            href={apiData[i] && apiData[i].uploadUrl}
+                          >
+                            CLICK
+                          </a>
+                        )}
+                        <button type="button" onClick={() => handleDelete(i)}>
+                          X
+                        </button>
+                      </>
+                    ) : uploading ? (
+                      <div>Loading</div>
+                    ) : (
+                      <>
+                        <span>{data.name}</span>
+                        {apiData && (
+                          <a
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            href={apiData[i] && apiData[i].uploadUrl}
+                          >
+                            CLICK
+                          </a>
+                        )}
+                        <button type="button" onClick={() => handleDelete(i)}>
+                          X
+                        </button>
+                      </>
                     )}
-                    <span>X</span>
                   </div>
                 );
               })}
