@@ -19,15 +19,11 @@ export const assetTypeFail = error => {
   };
 };
 
-export const AssetTypeApi = values => {
+export const AssetTypeApi = (clientId, assetCategoryId) => {
   const token = localStorage.getItem("X-Auth-Token");
-  //   const clientId = values.clientId ? `/client/${values.clientId || 10}` : ``;
-  //   const categoryId = values.assetCategoryId
-  //     ? `&categoryId=${values.assetCategoryId}`
-  //     : ``;
-  //   const modelId = values.assetTypeId ? `&modelId=${values.assetTypeId}` : ``;
-  //${clientId}?query=${modelId}${categoryId}
-  const url = `${BASE_PATH}${SERVICE_PATH}/assetTypes`;
+  const client = clientId ? `/client/${clientId || 10}` : ``;
+  const categoryId = assetCategoryId ? `?categoryId=${assetCategoryId}&` : ``;
+  const url = `${BASE_PATH}${SERVICE_PATH}/assetTypes${client}${categoryId}`;
   return dispatch => {
     const apiToken = token !== null && { "X-Auth-Token": token };
     dispatch(getAssetType());

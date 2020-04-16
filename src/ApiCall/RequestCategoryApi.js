@@ -22,10 +22,12 @@ export const RequestCategoryFail = error => {
 export const requestCategoryApi = () => {
   const url = `${BASE_PATH}${SERVICE_PATH}/category/3`;
   return dispatch => {
-    const token = { "X-Auth-Token": localStorage.getItem("X-Auth-Token") };
+    const apiToken = localStorage.getItem("X-Auth-Token");
+    const token =
+      apiToken !== null ? { headers: { "X-Auth-Token": apiToken } } : ``;
     dispatch(getRequestCategory());
     axios
-      .get(url, { headers: token })
+      .get(url, token)
       .then(res => {
         dispatch(setRequestCategory(res.data));
       })

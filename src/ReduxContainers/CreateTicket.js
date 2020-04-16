@@ -32,12 +32,19 @@ function CreateTicket(props) {
         : dispatch(userActions.CreateTicketApi(0));
     };
     dispatch(userActions.requestCategoryApi());
-    // dispatch(userActions.LocationApi());
-    // dispatch(userActions.UserApi());
+    //dispatch(userActions.LocationApi());
     // dispatch(userActions.CompanyApi());
-    // dispatch(userActions.AssetCategoryApi());
-    // dispatch(userActions.ChooseAssetApi());
-    // dispatch(userActions.AssetTypeApi());
+    //  dispatch(userActions.UserApi(5, 16));
+    //dispatch(userActions.AssetCategoryApi(1001));
+    // dispatch(userActions.AssetTypeApi(1001, 35));
+    dispatch(
+      userActions.ChooseAssetApi({
+        userId: 1001,
+        assetCategoryId: 35,
+        assetTypeId: 49,
+        to: 10
+      })
+    );
 
     apiCall();
   }, [dispatch]);
@@ -82,33 +89,46 @@ function CreateTicket(props) {
   const CategoryOptions = useSelector(
     state => state.requestCategoryReducer.requestCategoryData
   );
-  const CategoryList = (CategoryOptions || []).map(data => {
-    return <option value={data.id}>{data.category}</option>;
+  const CategoryList = (CategoryOptions || []).map((data, i) => {
+    return (
+      <option key={i} value={data.id}>
+        {data.category}
+      </option>
+    );
   });
   // ASSET CATEGORY DROPDOWN LIST
   const AssetCategoryOptions = useSelector(
     state => state.AssetCategoryReducer.AssetCategoryData
   );
-  const AssetCategoryList = (AssetCategoryOptions || []).map(data => {
-    return <option value={data.id}>{data.categoryName}</option>;
+  const AssetCategoryList = (AssetCategoryOptions || []).map((data, i) => {
+    return (
+      <option key={i} value={data.id}>
+        {data.categoryName}
+      </option>
+    );
   });
   // ASSET TYPE DROPDOWN LIST
   const AssetTypeOptions = useSelector(
     state => state.AssetTypeReducer.AssetTypeData
   );
-  const AssetTypeList = (AssetTypeOptions || []).map(data => {
-    return <option value={data.id}>{data.model}</option>;
+  const AssetTypeList = (AssetTypeOptions || []).map((data, i) => {
+    return (
+      <option key={i} value={data.id}>
+        {data.model}
+      </option>
+    );
   });
   // ASSET DROPDOWN LIST
   // const AssetOptions= useSelector(state => state.ChooseAssetReducer.ChooseAssetData)
 
-  //  const AssetList = (AssetOptions.payload||[]).map(data=>{
+  //  const AssetList = (AssetOptions.payload||[]).map((data,i)=>{
   //       return <option value={data.id}>{data.model}</option>
   //     })
   const AssetGroup = (CreateFormData || []).map(element => {
     if (element.field_type_id === 101) {
       return (
         <DropDown
+          key={element.id}
           value={assetCategory}
           onChange={handleAssetCategory}
           text={element.field_label}
@@ -142,7 +162,7 @@ function CreateTicket(props) {
   const form = (CreateFormData || []).map((element, i) => {
     if (element.field_type_id === 80) {
       return (
-        <div className="create-ticket-field-cont">
+        <div key={element.id} className="create-ticket-field-cont">
           <TextField
             type="text"
             placeholder={element.field_placeholder}
@@ -237,9 +257,9 @@ function CreateTicket(props) {
         </div>
       );
     } else if (element.field_type === "radio") {
-      const list = element.field_options.map(data => {
+      const list = element.field_options.map((data, i) => {
         return (
-          <div style={{ margin: "10px 0" }}>
+          <div key={i} style={{ margin: "10px 0" }}>
             <Radio
               text={data.option_title}
               value={data.option_title}
