@@ -25,6 +25,7 @@ import UserReducer from "./UserReducer";
 import ChooseAssetReducer from "./ChooseAssetReducer";
 import AssetCategoryReducer from "./AssetCategoryReducer";
 import AssetTypeReducer from "./AssetTypesReducer";
+import PropertiesReducer from "./PropertiesReducer";
 export default combineReducers({
   posts,
   AuthReducer,
@@ -51,5 +52,6 @@ export default combineReducers({
   UserReducer,
   ChooseAssetReducer,
   AssetCategoryReducer,
-  AssetTypeReducer
+  AssetTypeReducer,
+  PropertiesReducer
 });

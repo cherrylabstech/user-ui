@@ -36,7 +36,6 @@ function CreateTicket(props) {
     //dispatch(userActions.LocationApi());
     // dispatch(userActions.CompanyApi());
     //  dispatch(userActions.UserApi({location : 5,companyId :  16}));
-
     apiCall();
   }, [dispatch]);
 
@@ -44,7 +43,7 @@ function CreateTicket(props) {
     dispatch(userActions.requestCategoryApi());
   };
   const assetCategoryCall = () => {
-    dispatch(userActions.AssetCategoryApi({ userId: "" }));
+    dispatch(userActions.AssetCategoryApi());
   };
   const assetTypeCall = () => {
     dispatch(

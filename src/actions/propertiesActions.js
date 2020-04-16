@@ -1,0 +1,4 @@
+///static/properties
+export const GET_PROPERTIES_DATA = "GET_PROPERTIES_DATA";
+export const SET_PROPERTIES_DATA = "SET_PROPERTIES_DATA";
+export const PROPERTIES_DATA_FAIL = "PROPERTIES_DATA_FAIL";
