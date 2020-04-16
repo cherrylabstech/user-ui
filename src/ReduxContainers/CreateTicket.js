@@ -31,16 +31,32 @@ function CreateTicket(props) {
         ? dispatch(userActions.CreateTicketApi(1))
         : dispatch(userActions.CreateTicketApi(0));
     };
-    dispatch(userActions.requestCategoryApi());
+    // dispatch(userActions.requestCategoryApi());
     // dispatch(userActions.LocationApi());
     // dispatch(userActions.UserApi());
     // dispatch(userActions.CompanyApi());
-     dispatch(userActions.AssetCategoryApi());
-     dispatch(userActions.ChooseAssetApi());
-     dispatch(userActions.AssetTypeApi());
+    //  dispatch(userActions.AssetCategoryApi());
+// dispatch(userActions.AssetCountApi())
+//      dispatch(userActions.ChooseAssetApi());
+    //  dispatch(userActions.AssetTypeApi());
 
     apiCall();
   }, [dispatch]);
+
+  const categoryCall = ()=>{
+    dispatch(userActions.requestCategoryApi());
+  }
+  const assetCategoryCall = ()=>{
+    dispatch(userActions.AssetCategoryApi());
+  }
+  const assetTypeCall = ()=>{
+    dispatch(userActions.AssetTypeApi());
+  }
+
+  const assetCall = ()=>{
+dispatch(userActions.AssetCountApi())
+     dispatch(userActions.ChooseAssetApi());
+  }
 
 const handleName = e =>{
   setName(e.target.value)
@@ -99,11 +115,11 @@ setAssetType(e.target.value)
 //     })
     const AssetGroup = (CreateFormData||[]).map(element=>{
   if(element.field_type_id === 101){
-    return <DropDown value={assetCategory} onChange={handleAssetCategory} text={element.field_label} placeholder={element.field_placeholder} options={AssetCategoryList} />
+    return <div onClick={assetCategoryCall}><DropDown value={assetCategory} onChange={handleAssetCategory} text={element.field_label} placeholder={element.field_placeholder} options={AssetCategoryList} /></div>
   } else if(element.field_type_id === 107){
-    return <DropDown value={assetType} onChange={handelAssetType} text={element.field_label} placeholder={element.field_placeholder} options={AssetTypeList} />}
+    return <div onClick={assetTypeCall}><DropDown value={assetType} onChange={handelAssetType} text={element.field_label} placeholder={element.field_placeholder} options={AssetTypeList} /></div>}
    else if(element.field_type_id === 4){
-    return <DropDown value={dropValue} onChange={handleDrop} text={element.field_label} placeholder={element.field_placeholder}  />
+    return <div onClick={assetCall}><DropDown value={dropValue} onChange={handleDrop} text={element.field_label} placeholder={element.field_placeholder}  /></div>
   }
   return true
 })
@@ -151,8 +167,8 @@ const form = (CreateFormData || []).map((element,i) => {
             </div>
           </div>);
       } else if (element.field_type_id === 16 || element.field_type_id === 84 ){
-return <div className="create-ticket-field-cont">
-            <DropDown value={dropValue} onChange={handleDrop} text={element.field_label} placeholder={element.field_placeholder} options={CategoryList}  />
+return <div className="create-ticket-field-cont" onClick={categoryCall} >
+            <DropDown value={dropValue} onChange={handleDrop} text={element.field_label} placeholder={element.field_placeholder} options={CategoryList}   />
           </div>
       } else if ( element.field_type === "dropdown" ){
 return <div className="create-ticket-field-cont">
