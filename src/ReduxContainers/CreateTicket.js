@@ -11,16 +11,20 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { userActions } from "../ApiCall/rootApi";
 import FileUpload from "../components/FileUpload/FileUpload";
+import { bytesToSize } from "../helpers/BytesToMb";
 
 const today = new Date(Date.now());
-
+let apiUploadData = [];
 function CreateTicket(props) {
   const [name, setName] = useState();
   const [subject, setSubject] = useState();
   const [email, setEmail] = useState();
   const [radio, setRadio] = useState();
   const [dropValue, setDropValue] = useState();
+  const [imageUploadData, setImageData] = useState([]);
   const [selectedDate, setSelectedDate] = useState(today);
+  const [messages, setMessages] = useState([]);
+  const [abc, setAbc] = useState([{ name: "g" }, { name: "gok" }]);
   const [assetCategory, setAssetCategory] = useState();
   const [assetType, setAssetType] = useState();
   const dispatch = useDispatch();
@@ -35,7 +39,7 @@ function CreateTicket(props) {
     // dispatch(userActions.requestCategoryApi());
     //dispatch(userActions.LocationApi());
     // dispatch(userActions.CompanyApi());
-    //  dispatch(userActions.UserApi({location : 5,companyId :  16}));
+    dispatch(userActions.PropertiesApi());
     apiCall();
   }, [dispatch]);
 
@@ -93,6 +97,41 @@ function CreateTicket(props) {
   const handelAssetType = e => {
     setAssetType(e.target.value);
   };
+  const PropertiesData = useSelector(
+    state => state.PropertiesReducer.propertiesData
+  );
+  const uploadData = useSelector(state => state.UploadReducer.UploadData);
+  const uploading = useSelector(state => state.UploadReducer.loading);
+  const uploadError = useSelector(state => state.UploadReducer.error);
+  const SupportedSize = PropertiesData !== undefined && PropertiesData.fileSize;
+  const handleUpload = event => {
+    event.preventDefault();
+    const imagesData = event.target.files[0];
+    setImageData([...imageUploadData, imagesData]);
+    const supportedSize = bytesToSize(SupportedSize);
+    let formData = new FormData();
+    const imageUpload = () => {
+      return (
+        formData.append("file", imagesData || ""),
+        formData.append("type", imagesData.type || ""),
+        formData.append("filesize", imagesData.size || ""),
+        dispatch(userActions.UploadApi(formData))
+      );
+    };
+
+    imagesData.size >= supportedSize
+      ? alert(`Please choose the file less than ${supportedSize}`)
+      : imageUpload();
+
+    event.target.value = "";
+  };
+  useEffect(() => {
+    uploadError !== null && abc.splice(0, 1);
+  }, [uploadError]);
+  useEffect(() => {
+    uploadData !== undefined && setMessages([...messages, uploadData]);
+  }, [uploadData]);
+
   const CreateFormData = useSelector(
     state => state.createTicketReducer.createTicketData
   );
@@ -317,7 +356,32 @@ function CreateTicket(props) {
         <form onSubmit={handleSubmit} style={{ width: "100%" }}>
           {form}
           <div className="create-ticket-field-cont">
-            <FileUpload></FileUpload>
+            <FileUpload
+              onChange={handleUpload}
+              propertiesData={PropertiesData}
+            ></FileUpload>
+          </div>
+
+          <div>
+            <span>
+              {imageUploadData.map((data, i) => {
+                return (
+                  <div>
+                    <span>{data.name}</span>
+                    {messages.length >= 1 && (
+                      <a
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        href={messages[i] && messages[i].uploadUrl}
+                      >
+                        CLICK
+                      </a>
+                    )}
+                    <span>X</span>
+                  </div>
+                );
+              })}
+            </span>
           </div>
           <div>
             <Button text="Submit" className="primary-btn btn-wide" />
