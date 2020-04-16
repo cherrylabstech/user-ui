@@ -21,6 +21,7 @@ function CreateTicket(props) {
   const [radio, setRadio] = useState();
   const [dropValue, setDropValue] = useState();
   const [imageUploadData, setImageData] = useState([]);
+  const [imageId, setImageId] = useState([]);
   const [selectedDate, setSelectedDate] = useState(today);
   const [apiData, setapiData] = useState([]);
   const [assetCategory, setAssetCategory] = useState();
@@ -52,6 +53,28 @@ function CreateTicket(props) {
         })
       );
   }, [assetCount, dispatch]);
+  const imageInfo = [...imageUploadData];
+  const uploadData = useSelector(state => state.UploadReducer.UploadData);
+  const uploading = useSelector(state => state.UploadReducer.loading);
+  const uploadError = useSelector(state => state.UploadReducer.error);
+  useEffect(() => {
+    const removeArray = () => {
+      imageInfo.splice(imageInfo.length - 1, 1);
+      setImageData(imageInfo);
+    };
+    uploadError !== null &&
+      uploadError.status === 400 &&
+      uploadError.data.message === "unsupported mime type" &&
+      removeArray();
+  }, [uploadError]);
+  useEffect(() => {
+    const imageDetail = () => {
+      setapiData([...apiData, uploadData]);
+      setImageId([...imageId, { id: uploadData.id }]);
+    };
+    uploadData !== undefined && imageDetail();
+  }, [uploadData]);
+  console.log(imageId);
   const categoryCall = () => {
     dispatch(userActions.requestCategoryApi());
   };
@@ -107,9 +130,7 @@ function CreateTicket(props) {
   const PropertiesData = useSelector(
     state => state.PropertiesReducer.propertiesData
   );
-  const uploadData = useSelector(state => state.UploadReducer.UploadData);
-  const uploading = useSelector(state => state.UploadReducer.loading);
-  const uploadError = useSelector(state => state.UploadReducer.error);
+
   const SupportedSize = PropertiesData !== undefined && PropertiesData.fileSize;
 
   const handleUpload = event => {
@@ -136,25 +157,15 @@ function CreateTicket(props) {
   const handleDelete = i => {
     const imageInfo = [...imageUploadData];
     const api = [...apiData];
+    const imageApiId = [...imageId];
     imageInfo.splice(i, 1);
     api.splice(i, 1);
+    imageApiId.splice(i, 1);
     setImageData(imageInfo);
     setapiData(api);
+    setImageId(imageApiId);
   };
-  const imageInfo = [...imageUploadData];
-  useEffect(() => {
-    const removeArray = () => {
-      imageInfo.splice(imageInfo.length - 1, 1);
-      setImageData(imageInfo);
-    };
-    uploadError !== null &&
-      uploadError.status === 400 &&
-      uploadError.data.message === "unsupported mime type" &&
-      removeArray();
-  }, [uploadError]);
-  useEffect(() => {
-    uploadData !== undefined && setapiData([...apiData, uploadData]);
-  }, [uploadData]);
+
   const CreateFormData = useSelector(
     state => state.createTicketReducer.createTicketData
   );
