@@ -12,6 +12,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { userActions } from "../ApiCall/rootApi";
 import FileUpload from "../components/FileUpload/FileUpload";
 import { bytesToSize } from "../helpers/BytesToMb";
+import Spinner from "../ReusableComps/Spinner";
 
 const today = new Date(Date.now());
 function CreateTicket(props) {
@@ -423,7 +424,13 @@ function CreateTicket(props) {
                       </button>
                     </div>
                   ) : uploading ? (
-                    <div>Loading</div>
+                    <div>
+                      <Spinner
+                        fontSize="30px"
+                        marginLeft="28%"
+                        marginBottom="2%"
+                      ></Spinner>
+                    </div>
                   ) : (
                     <div className="uploaded-file">
                       <label className="attachment-link">{data.name}</label>
@@ -446,6 +453,7 @@ function CreateTicket(props) {
               );
             })}
           </div>
+
           <div>
             <Button text="Submit" className="primary-btn btn-wide" />
           </div>
