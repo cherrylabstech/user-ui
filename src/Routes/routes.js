@@ -46,6 +46,11 @@ function Routes(props) {
       dispatch(getKnowledgeBase());
     };
   },[]);
+
+  const profileData = useSelector(state=>state.profileReducer.profileData)
+  console.log(profileData)
+profile=profileData
+
   return (
     <div className="App wrapper">
       {location !== "/login" && <Navbar />}

@@ -2,6 +2,7 @@ import React, { Fragment, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { userActions } from "../ApiCall/rootApi";
 import { withRouter } from "react-router-dom";
+import {Timestamp} from "../helpers/Timestamp"
 import  "/home/cherry-dev02/workspace/User-UI 2.0/user-ui/src/css/myAsset.css"
 import Spinner from "../ReusableComps/Spinner";
 //import queryString from "query-string";
@@ -51,10 +52,9 @@ function MyAsset(props) {
           <td>{element.category}</td>
           <td>{element.model}</td>
           <td>{element.state}</td>
-          <td>{element.startDate}</td>
-          {/* <td>
+          <td>
             {element.startDate === null ? null : Timestamp(element.startDate)}
-          </td> */}
+          </td>
         </tr>
       );
     });

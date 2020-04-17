@@ -6,15 +6,15 @@ import * as actionTypes from "../actions/ProfileActions";
 import { BASE_PATH, SERVICE_PATH } from "../ApiBasePath/ApiBasePath";
 import axios from "axios";
 import { token } from "../helpers/token";
-export const getProfile = profileDetailsData => {
+export const getProfile = profileData => {
   return {
     type: actionTypes.GET_PROFILE_DATA
   };
 };
-export const setProfile = profileDetailsData => {
+export const setProfile = profileData => {
   return {
     type: actionTypes.SET_PROFILE_DATA,
-    profileDetailsData: profileDetailsData
+    profileData: profileData
   };
 };
 export const profileFail = error => {
