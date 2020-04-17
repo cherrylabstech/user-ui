@@ -18,12 +18,11 @@ import Profile from "../ReduxContainers/ Profile";
 import LoginPage from "../components/Login/LoginPage";
 import WelcomeMessage from "../components/HomePage/WelcomeMessage/WelcomeMessage";
 import "../Interceptor.js";
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 //import { alertActions } from "../ApiCall/Alert";
 import { userActions } from "../ApiCall/rootApi";
 import CreateTicket from "../ReduxContainers/CreateTicket";
 import { getKnowledgeBase } from "../ApiCall/KnowledgeBaseApi";
-
 export let profile = "";
 
 function Routes(props) {
@@ -45,11 +44,10 @@ function Routes(props) {
     return function cleanUp() {
       dispatch(getKnowledgeBase());
     };
-  },[]);
+  }, []);
 
-  const profileData = useSelector(state=>state.profileReducer.profileData)
-  console.log(profileData)
-profile=profileData
+  const profileData = useSelector(state => state.profileReducer.profileData);
+  profile = profileData;
 
   return (
     <div className="App wrapper">
@@ -79,7 +77,11 @@ profile=profileData
               component={MyRequestDetail}
             ></Route>
             <Route exact path="/asset" component={MyAsset}></Route>
-            <Route exact path="/asset/detail" component={MyAssetDetail}></Route>
+            <Route
+              exact
+              path="/asset/detail/:id"
+              component={MyAssetDetail}
+            ></Route>
             <Route exact path="/profile" component={Profile}></Route>
 
             <Redirect from="/" to="/home"></Redirect>

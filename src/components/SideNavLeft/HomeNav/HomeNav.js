@@ -37,13 +37,6 @@ const HomeNav = props => {
       pathname: "/asset",
       search: "page=1",
       icon: PopularIcon
-    },
-    {
-      id: 7,
-      label: "Asset Detail",
-      pathname: "/asset/detail",
-      search: "",
-      icon: PopularIcon
     }
   ];
   const nonAuthorizedSideNav = [
