@@ -36,7 +36,7 @@ export const profileApi = () => {
       })
       .catch(error => {
         error.response !== undefined &&
-        dispacth(profileFail(error.response.data));
+          dispacth(profileFail(error.response.data));
       });
   };
 };
