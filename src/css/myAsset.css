@@ -5,6 +5,10 @@
 .asset-page {
   background: white;
 }
+.asset-detail-page{
+    background-color: white;
+    width: 100%;
+}
 .asset-table table > thead > tr > td {
   background-color: whitesmoke;
   font-size: 14px;
