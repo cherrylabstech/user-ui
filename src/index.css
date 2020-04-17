@@ -161,4 +161,5 @@ a {
 }
 .close-upload-button:focus {
   border: none;
+  outline: none;
 }
