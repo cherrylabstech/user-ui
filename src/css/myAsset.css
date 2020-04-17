@@ -1,0 +1,22 @@
+.asset-table{
+background: white;
+padding: 10px;
+}
+.asset-page{
+    background: white;
+    }
+.asset-table table>thead>tr>td {
+background-color: whitesmoke;
+font-size: 14px;
+}
+.asset-table table>tbody>tr>td {
+    font-size: 12px;
+}
+.asset-table table>tbody>tr:hover{
+    background-color: whitesmoke;
+}
+
+.count-row{
+    padding: 6px;
+    border: 1px solid grey;
+}

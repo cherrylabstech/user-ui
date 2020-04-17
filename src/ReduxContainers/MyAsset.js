@@ -2,6 +2,7 @@ import React, { Fragment, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { userActions } from "../ApiCall/rootApi";
 import { withRouter } from "react-router-dom";
+import  "/home/cherry-dev02/workspace/User-UI 2.0/user-ui/src/css/myAsset.css"
 import Spinner from "../ReusableComps/Spinner";
 //import queryString from "query-string";
 
@@ -40,12 +41,29 @@ function MyAsset(props) {
   //   });
   // };
   const assetDatas = assetData !== undefined && assetData.payload;
+  const list = (assetDatas || []).map(element => {
+      return (
+        <tr
+          key={element.id}
+          className="cursor-pointer"
+        >
+          <td>{element.item}</td>
+          <td>{element.category}</td>
+          <td>{element.model}</td>
+          <td>{element.state}</td>
+          <td>{element.startDate}</td>
+          {/* <td>
+            {element.startDate === null ? null : Timestamp(element.startDate)}
+          </td> */}
+        </tr>
+      );
+    });
   return (
     <Fragment>
       <div className="main">
         My Asset
-        <div>
-          asset count : {assetCount !== undefined && assetCount.assetCount}
+        <div className="asset-page">
+         <div className="count-row"> asset count : {assetCount !== undefined && assetCount.assetCount}
         </div>
         <div>
           {assetLoading ? (
@@ -53,11 +71,30 @@ function MyAsset(props) {
               <Spinner fontSize="40px"></Spinner>
             </div>
           ) : (
-            <div>
+            <div className="asset-table">
               {assetDatas &&
-                assetDatas.map(data => <div key={data.id}>{data.item}</div>)}
+                <table><thead>
+                  <tr>
+                    <td>
+                    Asset Name
+                    </td>
+                    <td>
+                    Category Name
+                    </td>
+                    <td>
+                    Asset Type
+                    </td>
+                    <td>
+                    Asset State
+                    </td>
+                    <td>
+                    Start Date
+                    </td>
+                  </tr>
+                </thead><tbody>{list}</tbody></table>}
             </div>
           )}
+        </div>
         </div>
       </div>
     </Fragment>
