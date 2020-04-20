@@ -29,6 +29,8 @@ import PropertiesReducer from "./PropertiesReducer";
 import UploadReducer from "./UploadReducer";
 import profilePictureUploadReducer from "./ProfilePicUploadReducer";
 import EditProfileReducer from "./EditProfilePostReducer";
+import TimeZoneReducer from "./TimeZoneReducer";
+import TimeZonePostReducer from "./TImeZonePostReducer";
 export default combineReducers({
   posts,
   AuthReducer,
@@ -59,5 +61,7 @@ export default combineReducers({
   PropertiesReducer,
   UploadReducer,
   profilePictureUploadReducer,
-  EditProfileReducer
+  EditProfileReducer,
+  TimeZoneReducer,
+  TimeZonePostReducer
 });

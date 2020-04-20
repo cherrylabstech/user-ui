@@ -106,7 +106,7 @@ function Routes(props) {
                 );
               }}
             ></Route>
-
+            <Route exact path="/activities"></Route>
             <Redirect from="/" to="/home"></Redirect>
           </Switch>
           {location !== "/login" && <SideNavRight />}
