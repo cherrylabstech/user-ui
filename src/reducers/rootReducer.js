@@ -27,6 +27,7 @@ import AssetCategoryReducer from "./AssetCategoryReducer";
 import AssetTypeReducer from "./AssetTypesReducer";
 import PropertiesReducer from "./PropertiesReducer";
 import UploadReducer from "./UploadReducer";
+import profilePictureUploadReducer from "./ProfilePicUploadReducer";
 export default combineReducers({
   posts,
   AuthReducer,
@@ -55,5 +56,6 @@ export default combineReducers({
   AssetCategoryReducer,
   AssetTypeReducer,
   PropertiesReducer,
-  UploadReducer
+  UploadReducer,
+  profilePictureUploadReducer
 });

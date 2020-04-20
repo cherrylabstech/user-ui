@@ -52,11 +52,13 @@ const Navbar = props => {
               </div>
               {token ? (
                 <div className="logout-btn">
-                  <img
-                    src={ProfileUser}
-                    alt="logo"
-                    className="brand-logo profile-pic"
-                  />
+                  {props.profilePicture && (
+                    <img
+                      src={props.profilePicture.thumbnail || ProfileUser}
+                      alt="logo"
+                      className="brand-logo profile-pic"
+                    />
+                  )}
                   <label onClick={handleLogout} className="logout-label">
                     Logout
                   </label>
