@@ -1,5 +1,4 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
 import Modal from "react-modal";
 import SlidingPane from "react-sliding-pane";
 import "react-sliding-pane/dist/react-sliding-pane.css";
