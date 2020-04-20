@@ -12,6 +12,7 @@ function TextField(props) {
         placeholder={props.placeholder}
         required={props.required}
         onChange={props.onChange}
+        value={props.value}
       />
     </Fragment>
   );

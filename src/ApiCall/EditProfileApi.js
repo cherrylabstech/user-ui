@@ -31,7 +31,7 @@ export const editProfileApi = editProfileData => {
       .post(url, editProfileData, { headers: apiToken })
       .then(res => {
         dispatch(setEditProfile(res.data));
-        dispatch(userActions.profileApi());
+        dispatch(userActions.profileDetailsApi());
       })
       .catch(error => {
         error.response !== undefined &&

@@ -1,50 +1,47 @@
-import React, { Fragment, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { Fragment, useState } from "react";
+import { useDispatch } from "react-redux";
 import { userActions } from "../ApiCall/rootApi";
 import TextField from "../ReusableComps/TextField";
 import ImageUpload from "../components/ImageUpload/ImageUpload";
-import DropDown from "../ReusableComps/DropDown";
 
 function EditProfile(props) {
-  const [firstName,setFirstName]=useState();
-  const [lastName,setLastName]=useState();
-  const [phone,setPhone]=useState();
-  const [email,setEmail]=useState();
+  const [firstName, setFirstName] = useState();
+  const [lastName, setLastName] = useState();
+  const [phone, setPhone] = useState();
+  const [email, setEmail] = useState("");
 
   const dispatch = useDispatch();
   const profileDetailData = props.profilePicture && props.profilePicture;
-  
-  const profileUpdate =()=>{
+
+  const profileUpdate = () => {
     const token = localStorage.getItem("X-Auth-Token");
     const tokenApiCalls = () => {
-      dispatch(userActions.profileDetailsApi());
-        dispatch(
-          userActions.editProfileApi({
-            first_Name: firstName || profileDetailData.first_name,
-            last_Name: lastName || profileDetailData.last_name,
-            notification_email: phone || profileDetailData.notification_email,
-            phone:email || profileDetailData.phone
-          })
-        );
+      dispatch(
+        userActions.editProfileApi({
+          first_Name: firstName || profileDetailData.first_name,
+          last_Name: lastName || profileDetailData.last_name,
+          notification_email: phone || profileDetailData.notification_email,
+          phone: email || profileDetailData.phone
+        })
+      );
     };
     token && tokenApiCalls();
-  }
+  };
 
-const prop=props.details
-  
- const handleFirstName=(e)=>{
-    setFirstName(e.target.value)
-  }
-  const handleLastName=(e)=>{
-    setLastName(e.target.value)
-  }
-  const handlePhone=(e)=>{
-    setPhone(e.target.value)
-  }
-  const handleEmail=(e)=>{
-    setEmail(e.target.value)
-  }
-  console.log(firstName,lastName,phone,email)
+  const prop = props.details;
+
+  const handleFirstName = e => {
+    setFirstName(e.target.value);
+  };
+  const handleLastName = e => {
+    setLastName(e.target.value);
+  };
+  const handlePhone = e => {
+    setPhone(e.target.value);
+  };
+  const handleEmail = e => {
+    setEmail(e.target.value);
+  };
   return (
     <Fragment>
       <div>
@@ -56,16 +53,38 @@ const prop=props.details
           ></ImageUpload>
         </div>
         <div className="my-10">
-        <TextField text="First Name" placeholder={prop.first_name} onChange={handleFirstName} />
+          <TextField
+            value={firstName || prop.first_name}
+            text="First Name"
+            placeholder={prop.first_name}
+            onChange={handleFirstName}
+          />
         </div>
         <div className="my-10">
-        <TextField text="Last Name" placeholder={prop.last_name} onChange={handleLastName} />
+          <TextField
+            value={lastName || prop.last_name}
+            text="Last Name"
+            placeholder={prop.last_name}
+            onChange={handleLastName}
+          />
         </div>
         <div className="my-10">
-        <TextField text="Phone" placeholder={prop.phone} type="number" onChange={handlePhone} />
+          <TextField
+            text="Phone"
+            placeholder={prop.phone}
+            type="number"
+            value={phone || prop.phone}
+            onChange={handlePhone}
+          />
         </div>
         <div className="my-10">
-        <TextField text="Email" placeholder={prop.email} type="email" onChange={handleEmail} />
+          <TextField
+            value={email || prop.email}
+            text="Email"
+            placeholder={prop.email}
+            type="email"
+            onChange={handleEmail}
+          />
         </div>
         <button onClick={profileUpdate}>Submit</button>
         {/* <div>
