@@ -1,8 +1,9 @@
-import React, { Fragment,useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { Fragment, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { userActions } from "../ApiCall/rootApi";
-import ImageUpload from "../components/ImageUpload/ImageUpload";
 import TextField from "../ReusableComps/TextField";
+import ImageUpload from "../components/ImageUpload/ImageUpload";
+import DropDown from "../ReusableComps/DropDown";
 
 function EditProfile(props) {
   const [firstName,setFirstName]=useState();
@@ -67,6 +68,16 @@ const prop=props.details
         <TextField text="Email" placeholder={prop.email} type="email" onChange={handleEmail} />
         </div>
         <button onClick={profileUpdate}>Submit</button>
+        {/* <div>
+          <label>TimeZone</label>
+          <DropDown
+            value={timeZone}
+            onChange={handleZoneChange}
+            options={
+              timeZoneLoading ? <option>Loading</option> : timeZoneoptions
+            }
+          ></DropDown>
+        </div> */}
       </div>
     </Fragment>
   );
