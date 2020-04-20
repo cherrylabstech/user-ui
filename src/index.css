@@ -154,7 +154,9 @@ a {
     display: flex;
     font-size: 14px;
 }
-
+.my-10{
+  margin: 10px 0;
+}
 .btn-wide {
   height: 35px;
 }

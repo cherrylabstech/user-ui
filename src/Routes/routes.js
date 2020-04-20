@@ -27,7 +27,13 @@ export let profile = "";
 
 function Routes(props) {
   const dispatch = useDispatch();
-  //const themeData = useSelector(state => state.ThemeReducer.themeData);
+  const profileDetailData = useSelector(
+    state => state.profileDetailsReducer.profileDetailsData
+  );
+  const profileDetailLoading = useSelector(
+    state => state.profileDetailsReducer.loading
+  );
+
   const token = localStorage.getItem("X-Auth-Token");
   const location = props.location.pathname;
 
@@ -38,6 +44,7 @@ function Routes(props) {
     const tokenApiCalls = () => {
       dispatch(userActions.profileApi());
       dispatch(userActions.PlanApi());
+      dispatch(userActions.profileDetailsApi());
     };
     location !== "/login" && apiCalls();
     token && tokenApiCalls();
@@ -52,7 +59,12 @@ function Routes(props) {
   }
   return (
     <div className="App wrapper">
-      {location !== "/login" && <Navbar />}
+      {location !== "/login" && (
+        <Navbar
+          profilePicture={profileDetailData}
+          loading={profileDetailLoading}
+        />
+      )}
 
       <div className="container">
         <div className="columns">
@@ -83,7 +95,18 @@ function Routes(props) {
               path="/asset/detail/:id"
               component={MyAssetDetail}
             ></Route>
-            <Route exact path="/profile" component={Profile}></Route>
+            <Route
+              exact
+              path="/profile"
+              render={() => {
+                return (
+                  <Profile
+                    profilePicture={profileDetailData}
+                    loading={profileDetailLoading}
+                  ></Profile>
+                );
+              }}
+            ></Route>
 
             <Redirect from="/" to="/home"></Redirect>
           </Switch>

@@ -1,0 +1,54 @@
+.upload-icon {
+  font-size: 30px;
+  position: absolute;
+  left: 145px;
+  top: 65px;
+  color: white;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  display: flex;
+  opacity: 0.5;
+  align-items: center;
+  justify-content: center;
+}
+
+.upload-icon:hover {
+  background: #0e38da;
+}
+
+.loading-icon {
+  font-size: 30px;
+  position: absolute !important;
+  left: 145px;
+  top: 10px;
+  color: white;
+}
+
+.profile-pic-upload {
+  width: 305px;
+  height: 125px;
+  object-fit: cover;
+}
+
+.cropper-box {
+  width: 288px;
+  height: 110px;
+  position: absolute;
+  top: 23px;
+}
+
+.profile-upload-box {
+  height: 125px;
+}
+
+.upload-button-box {
+  margin: 10px 0px;
+  display: flex;
+}
+
+.profile-upload-button {
+  border: 1px solid #6610f2;
+  background: white;
+  border-radius: 5%;
+}

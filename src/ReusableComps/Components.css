@@ -4,8 +4,9 @@
   border-radius: 2px;
   border: 1px solid grey;
   margin-top: 10px;
-  width: 50%;
+  width: -webkit-fill-available;
 }
+
 .def-dropdown{
   margin-top: 10px;
   border: 1px solid blue;

@@ -25,6 +25,7 @@ import { UserApi } from "./UserApi";
 import { CompanyApi } from "./CompanyApi";
 import { PropertiesApi } from "./PropertiesApi";
 import { UploadApi } from "./UploadApi";
+import { ProfilePicUploadApi } from "./ProfilePicUpload";
 export const userActions = {
   auth,
   welcome,
@@ -52,5 +53,6 @@ export const userActions = {
   CompanyApi,
   UserApi,
   PropertiesApi,
-  UploadApi
+  UploadApi,
+  ProfilePicUploadApi
 };

@@ -16,7 +16,7 @@ function MyAssetDetail(props) {
   const assetDetailData = assetDetail && assetDetail.payload;
   useEffect(() => {
     dispatch(userActions.AssetDetailApi(params.id));
-  }, [dispatch]);
+  }, [dispatch, params.id]);
 
   const extraData = assetDetailData && assetDetailData.customFields;
   const detailData =
@@ -71,7 +71,7 @@ function MyAssetDetail(props) {
                     <tr>
                       <td>Start Date</td>
                       <td>
-                        {assetDetailData.startDate === null
+                        {assetDetailData.startDate
                           ? null
                           : Timestamp(assetDetailData.startDate)}
                       </td>
@@ -79,8 +79,9 @@ function MyAssetDetail(props) {
                     <tr>
                       <td>End Date</td>
                       <td>
-                        {assetDetailData.endDate === 0 ||
-                        assetDetailData.endDate === null
+                        {assetDetailData.endDate &&
+                        (assetDetailData.endDate === 0 ||
+                          assetDetailData.endDate)
                           ? null
                           : Timestamp(assetDetailData.endDate)}
                       </td>
