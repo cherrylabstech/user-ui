@@ -72,6 +72,7 @@ body {
   flex-direction: column;
   align-items: center;
   padding: 0 24px;
+  background-color: white;
 }
 .main-create-ticket {
   align-items: flex-start !important;
@@ -141,6 +142,17 @@ a {
   color: white;
   padding: 0 10px;
   cursor: pointer;
+}
+
+.d-box{
+  height: 30px;
+    border: 1px solid grey;
+    border-radius: 3px;
+    margin: 10px 0;
+    padding: 0 5px;
+    align-items: center;
+    display: flex;
+    font-size: 14px;
 }
 
 .btn-wide {

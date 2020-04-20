@@ -47,8 +47,9 @@ function Routes(props) {
   }, []);
 
   const profileData = useSelector(state => state.profileReducer.profileData);
+  if(profileData !== undefined){
   profile = profileData;
-
+  }
   return (
     <div className="App wrapper">
       {location !== "/login" && <Navbar />}
