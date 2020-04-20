@@ -148,8 +148,8 @@ a {
   height: 30px;
     border: 1px solid grey;
     border-radius: 3px;
-    margin: 10px 0;
-    padding: 0 5px;
+    margin: 5px 0;
+    padding: 0 10px;
     align-items: center;
     display: flex;
     font-size: 14px;

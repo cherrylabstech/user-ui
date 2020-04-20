@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { userActions } from "../ApiCall/rootApi";
 import ImageUpload from "../components/ImageUpload/ImageUpload";
 import TextField from "../ReusableComps/TextField";
+
 function EditProfile(props) {
   const [firstName,setFirstName]=useState();
   const [lastName,setLastName]=useState();
@@ -10,22 +11,23 @@ function EditProfile(props) {
   const [email,setEmail]=useState();
 
   const dispatch = useDispatch();
-  //const profileDetailData = props.profilePicture && props.profilePicture;
-  useEffect(() => {
+  const profileDetailData = props.profilePicture && props.profilePicture;
+  
+  const profileUpdate =()=>{
     const token = localStorage.getItem("X-Auth-Token");
     const tokenApiCalls = () => {
       dispatch(userActions.profileDetailsApi());
-      //   dispatch(
-      //     userActions.editProfileApi({
-      //       first_Name: profileDetailData.first_name,
-      //       last_Name: profileDetailData.last_name,
-      //       notification_email: profileDetailData.notification_email,
-      //       phone: profileDetailData.phone
-      //     })
-      //   );
+        dispatch(
+          userActions.editProfileApi({
+            first_Name: firstName || profileDetailData.first_name,
+            last_Name: lastName || profileDetailData.last_name,
+            notification_email: phone || profileDetailData.notification_email,
+            phone:email || profileDetailData.phone
+          })
+        );
     };
     token && tokenApiCalls();
-  }, [dispatch]);
+  }
 
 const prop=props.details
   
@@ -64,6 +66,7 @@ const prop=props.details
         <div className="my-10">
         <TextField text="Email" placeholder={prop.email} type="email" onChange={handleEmail} />
         </div>
+        <button onClick={profileUpdate}>Submit</button>
       </div>
     </Fragment>
   );

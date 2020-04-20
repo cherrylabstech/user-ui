@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect,useState } from "react";
 import { useDispatch,useSelector } from "react-redux";
 import { userActions } from "../ApiCall/rootApi";
+import { profile } from "../Routes/routes";
 import Modal from "react-modal";
 import SlidingPane from "react-sliding-pane";
 import EditProfile from "./EditProfile";
@@ -33,7 +34,7 @@ function Profile(props) {
    
    const userDetails = proDetails || []
    
-   console.log(userDetails)
+   console.log(profile)
   return (
     <Fragment>
       <div className="main">My Profile<div><img
@@ -61,6 +62,10 @@ function Profile(props) {
                   <div className="cover-box">
                   Username/Email ID
                   <div className="d-box">{userDetails.email}</div>
+                  </div>
+                   <div className="cover-box">
+                  Timezone
+                  <div className="d-box">{profile.timezone}</div>
                   </div>
                    <div ref={ref => (el = ref)}>
         <button onClick={openSlidePane}>Edit Profile</button>
