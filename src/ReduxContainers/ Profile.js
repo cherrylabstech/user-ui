@@ -32,6 +32,18 @@ function Profile() {
                   First Name
                   <div className="d-box">{userDetails.first_name}</div>
                   </div>
+                  <div className="cover-box">
+                  Last Name
+                  <div className="d-box">{userDetails.last_name}</div>
+                  </div>
+                  <div className="cover-box">
+               Phone Number
+                  <div className="d-box">{userDetails.phone}</div>
+                  </div>
+                  <div className="cover-box">
+                  Username/Email ID
+                  <div className="d-box">{userDetails.email}</div>
+                  </div>
                   </div>
     </Fragment>
   );
