@@ -2,6 +2,7 @@ import React, { Fragment, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { userActions } from "../ApiCall/rootApi";
+import parse from "html-react-parser";
 import Spinner from "../ReusableComps/Spinner";
 
 function KnowledgeBaseArticle(props) {
@@ -24,7 +25,7 @@ function KnowledgeBaseArticle(props) {
         {articlesDataLoading && (
           <Spinner fontSize="60px" marginTop="40%"></Spinner>
         )}
-        {articlesData && <div>{articlesData.subject}</div>}
+        {articlesData && <div>{articlesData.subject}<div>{parse(articlesData.content)}</div></div>}
       </div>
     </Fragment>
   );
