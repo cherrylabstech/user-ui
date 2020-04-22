@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { userActions } from "../ApiCall/rootApi";
 import { getKnowledgeBase } from "../ApiCall/KnowledgeBaseApi";
 import Spinner from "../ReusableComps/Spinner";
+import "../css/knowledgeBase.css"
 
 function KnowledgeBase(props) {
   const dispatch = useDispatch();
@@ -29,6 +30,7 @@ function KnowledgeBase(props) {
     <Fragment>
       <div className="main">
         Knowledge Base
+        <div>
         {(kbDataLoading || topicsDataLoading) && (
           <Spinner fontSize="60px" marginTop="40%"></Spinner>
         )}
@@ -36,12 +38,12 @@ function KnowledgeBase(props) {
           !topicsDataLoading &&
           topicsData &&
           (topicsData || []).map(data => (
-            <div key={data.id}>
-              {data.topic}
+            <div key={data.id} className="kb-box">
+              <span className="kb-topic"><i className="fas fa-folder-open" style={{marginRight:"10px"}}/> {data.topic}</span>
               {data.kbArticles.length === 0 ? (
-                <div>No articles</div>
+                <div><ul>No articles</ul></div>
               ) : (
-                data.kbArticles.map(element => (
+                data.kbArticles.splice(0,5).map(element => (
                   <Link
                     key={element.id}
                     to={`/KnowledgeBase/topic/${element.id}`}
@@ -54,6 +56,7 @@ function KnowledgeBase(props) {
               )}
             </div>
           ))}
+          </div>
       </div>
     </Fragment>
   );

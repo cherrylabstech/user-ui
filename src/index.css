@@ -7,6 +7,26 @@
   --post-container-background-color: #ffffff;
   --primary: purple;
   --secondary: red;
+  --strong-orange: #2d2b37;
+    --light-orange: #fd975a;
+    --strong-brown: #342626;
+    --light-black: #323130;
+    --strong-silver: #605e5c;
+    --silver: #bbb;
+    --light-silver: #e8e9e8;
+    --strong-white: #f5f5f6;
+    --power-purple: #725ea7;
+    --power-green: #5cc856;
+    --power-red: #ff5b5b;
+    --power-blue: #63a4ef;
+    --main-bg-color: coral;
+    --facebook-logo-color: #2662e2;
+    --twitter-logo-color: #55acee;
+    --hover-color: #efefef;
+    --active-tab-color: #6860aa;
+    --button-color: #2d2b39;
+    --ticket-hover-color: #6860aa;
+    --text-light: #878787;
 }
 @import url("https://rsms.me/inter/inter.css");
 html {

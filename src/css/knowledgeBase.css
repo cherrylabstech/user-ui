@@ -1,0 +1,11 @@
+.kb-box {
+    border: 1px solid var(--light-silver);
+    padding: 20px;
+    margin: 8px;
+    width: 485px;
+}
+.kb-topic {
+    font-size: 18px;
+    font-weight: 500;
+    margin: 0 0 0 10px;
+}
