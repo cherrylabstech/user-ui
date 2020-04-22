@@ -6,36 +6,34 @@ import { getKnowledgeBase } from "../ApiCall/KnowledgeBaseApi";
 import Spinner from "../ReusableComps/Spinner";
 import "../css/knowledgeBase.css";
 
-function KnowledgeBase(props) {
+function KnowledgeBaseTopics(props) {
   const dispatch = useDispatch();
-  const kbDataLoading = useSelector(
-    state => state.KnowledgeBaseReducer.loading
-  );
   const topicsData = useSelector(
     state => state.KnowledgeBaseTopicsReducer.KnowledgeBaseTopicsData
   );
+
   const topicsDataLoading = useSelector(
     state => state.KnowledgeBaseTopicsReducer.loading
   );
+  console.log(props.match.params);
   useEffect(() => {
     const tokenApiCalls = () => {
-      dispatch(userActions.KnowledgeBaseApi(props.location.pathname));
+      dispatch(userActions.KnowledgeBaseTopicsApi(props.match.params.topicId));
     };
     tokenApiCalls();
     return function cleanUp() {
       dispatch(getKnowledgeBase());
     };
-  }, [dispatch, props.location.pathname]);
+  }, [dispatch, props.match.params.topicId]);
   return (
     <Fragment>
       <div className="main">
-        Knowledge Base
+        Knowledge Base Topics
         <div>
-          {(kbDataLoading || topicsDataLoading) && (
+          {topicsDataLoading && (
             <Spinner fontSize="60px" marginTop="40%"></Spinner>
           )}
-          {!kbDataLoading &&
-            !topicsDataLoading &&
+          {!topicsDataLoading &&
             topicsData &&
             (topicsData || []).map(data => (
               <div key={data.id} className="kb-box">
@@ -51,7 +49,7 @@ function KnowledgeBase(props) {
                     <ul>No articles</ul>
                   </div>
                 ) : (
-                  data.kbArticles.splice(0, 5).map(element => (
+                  data.kbArticles.map(element => (
                     <Link key={element.id} to={`/KnowledgeBase/${element.id}`}>
                       <ul>
                         <li>{element.subject}</li>
@@ -59,11 +57,6 @@ function KnowledgeBase(props) {
                     </Link>
                   ))
                 )}
-                <Link to={`/KnowledgeBase/topic/${data.id}`}>
-                  <ul>
-                    <li>See More</li>
-                  </ul>
-                </Link>
               </div>
             ))}
         </div>
@@ -71,4 +64,4 @@ function KnowledgeBase(props) {
     </Fragment>
   );
 }
-export default withRouter(KnowledgeBase);
+export default withRouter(KnowledgeBaseTopics);

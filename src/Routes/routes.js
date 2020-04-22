@@ -24,6 +24,8 @@ import { userActions } from "../ApiCall/rootApi";
 import CreateTicket from "../ReduxContainers/CreateTicket";
 import { getKnowledgeBase } from "../ApiCall/KnowledgeBaseApi";
 import knowledgeBaseArticle from "../ReduxContainers/KnowledgeBaseArticle";
+import KnowledgeBaseTopics from "../ReduxContainers/KnowledgeBaseTopics";
+import { getKnowledgeBaseTopics } from "../ApiCall/KnowledgeBaseTopicsApi";
 export let profile = "";
 
 function Routes(props) {
@@ -51,6 +53,7 @@ function Routes(props) {
     token && tokenApiCalls();
     return function cleanUp() {
       dispatch(getKnowledgeBase());
+      dispatch(getKnowledgeBaseTopics());
     };
   }, [token]);
   useEffect(() => {
@@ -72,9 +75,9 @@ function Routes(props) {
       <div className="container">
         <div className="columns">
           {location !== "/login" && <SideNavLeft />}
-          {token === null && props.location.pathname !== "/login" && (
+          {/* {token === null && props.location.pathname !== "/login" && (
             <Redirect to="/home"></Redirect>
-          )}
+          )} */}
           <Switch>
             <Route exact path="/home" component={WelcomeMessage} />
             <Route path="/post/:post_id" component={Feed} />
@@ -84,8 +87,14 @@ function Routes(props) {
               component={KnowledgeBase}
             ></Route>
             <Route
-              path="/KnowledgeBase/topic/:topicId"
+              exact
+              path="/KnowledgeBase/:articleId"
               component={knowledgeBaseArticle}
+            ></Route>
+            <Route
+              exact
+              path="/KnowledgeBase/topic/:topicId"
+              component={KnowledgeBaseTopics}
             ></Route>
             <Route exact path="/CreateTicket" component={CreateTicket} />
             <Route exact path="/login" component={LoginPage}></Route>

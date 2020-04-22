@@ -15,8 +15,8 @@ function KnowledgeBaseArticle(props) {
   );
 
   useEffect(() => {
-    dispatch(userActions.KnowledgeBaseArticleApi(props.match.params.topicId));
-  }, [props.match.params.topicId, dispatch]);
+    dispatch(userActions.KnowledgeBaseArticleApi(props.match.params.articleId));
+  }, [props.match.params.articleId, dispatch]);
   return (
     <Fragment>
       <div className="main">
