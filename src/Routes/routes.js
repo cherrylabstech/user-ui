@@ -26,6 +26,7 @@ import { getKnowledgeBase } from "../ApiCall/KnowledgeBaseApi";
 import knowledgeBaseArticle from "../ReduxContainers/KnowledgeBaseArticle";
 import KnowledgeBaseTopics from "../ReduxContainers/KnowledgeBaseTopics";
 import { getKnowledgeBaseTopics } from "../ApiCall/KnowledgeBaseTopicsApi";
+import { getKnowledgeBaseArticle } from "../ApiCall/KnowledgeBaseArticlesApi";
 export let profile = "";
 
 function Routes(props) {
@@ -54,6 +55,7 @@ function Routes(props) {
     return function cleanUp() {
       dispatch(getKnowledgeBase());
       dispatch(getKnowledgeBaseTopics());
+      dispatch(getKnowledgeBaseArticle());
     };
   }, [token]);
   useEffect(() => {

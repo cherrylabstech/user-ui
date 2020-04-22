@@ -25,7 +25,12 @@ function KnowledgeBaseArticle(props) {
         {articlesDataLoading && (
           <Spinner fontSize="60px" marginTop="40%"></Spinner>
         )}
-        {articlesData && <div>{articlesData.subject}<div>{parse(articlesData.content)}</div></div>}
+        {articlesData && (
+          <div>
+            {articlesData.subject}
+            <div>{parse(articlesData.content)}</div>
+          </div>
+        )}
       </div>
     </Fragment>
   );
