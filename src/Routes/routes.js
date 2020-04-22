@@ -23,6 +23,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { userActions } from "../ApiCall/rootApi";
 import CreateTicket from "../ReduxContainers/CreateTicket";
 import { getKnowledgeBase } from "../ApiCall/KnowledgeBaseApi";
+import knowledgeBaseArticle from "../ReduxContainers/KnowledgeBaseArticle";
 export let profile = "";
 
 function Routes(props) {
@@ -51,11 +52,13 @@ function Routes(props) {
     return function cleanUp() {
       dispatch(getKnowledgeBase());
     };
-  }, []);
-
+  }, [token]);
+  useEffect(() => {
+    dispatch(getKnowledgeBase());
+  }, [location]);
   const profileData = useSelector(state => state.profileReducer.profileData);
-  if(profileData !== undefined){
-  profile = profileData;
+  if (profileData !== undefined) {
+    profile = profileData;
   }
   return (
     <div className="App wrapper">
@@ -69,7 +72,9 @@ function Routes(props) {
       <div className="container">
         <div className="columns">
           {location !== "/login" && <SideNavLeft />}
-
+          {token === null && props.location.pathname !== "/login" && (
+            <Redirect to="/home"></Redirect>
+          )}
           <Switch>
             <Route exact path="/home" component={WelcomeMessage} />
             <Route path="/post/:post_id" component={Feed} />
@@ -77,6 +82,10 @@ function Routes(props) {
               exact
               path="/KnowledgeBase"
               component={KnowledgeBase}
+            ></Route>
+            <Route
+              path="/KnowledgeBase/topic/:topicId"
+              component={knowledgeBaseArticle}
             ></Route>
             <Route exact path="/CreateTicket" component={CreateTicket} />
             <Route exact path="/login" component={LoginPage}></Route>
@@ -108,7 +117,7 @@ function Routes(props) {
               }}
             ></Route>
             <Route exact path="/activities"></Route>
-            <Redirect from="/" to="/home"></Redirect>
+            <Redirect to="/home"></Redirect>
           </Switch>
           {location !== "/login" && <SideNavRight />}
         </div>

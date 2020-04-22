@@ -42,6 +42,7 @@ export function auth(email, password) {
         dispatch(authSuccess(email, password));
         localStorage.setItem("X-Auth-Token", res.data.access_token);
         localStorage.setItem("refresh-token", res.data.refresh_token);
+        window.location.reload();
         history.goBack();
       })
       .catch(error => {

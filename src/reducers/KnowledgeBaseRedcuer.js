@@ -1,7 +1,7 @@
 import * as ActionTypes from "../actions/KnowledgeBaseActions";
 const initialState = {
   KnowledgeBaseData: undefined,
-  loading: false,
+  loading: true,
   error: null
 };
 

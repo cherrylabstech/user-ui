@@ -1,50 +1,60 @@
 import React, { Fragment, useEffect } from "react";
-import { withRouter } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { withRouter, Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { userActions } from "../ApiCall/rootApi";
 import { getKnowledgeBase } from "../ApiCall/KnowledgeBaseApi";
+import Spinner from "../ReusableComps/Spinner";
 
 function KnowledgeBase(props) {
   const dispatch = useDispatch();
-  // const kbData = useSelector(
-  //   state => state.KnowledgeBaseReducer.KnowledgeBaseData
-  // );
-  // const articlesData = useSelector(
-  //   state => state.KnowledgeBaseArticleReducer.KnowledgeBaseArticleData
-  // );
-  // const articlesDataLoading = useSelector(
-  //   state => state.KnowledgeBaseReducer.loading
-  // );
-  // const topicsData = useSelector(
-  //   state => state.KnowledgeBaseTopicsReducer.KnowledgeBaseTopicsData
-  // );
-  //const topicsDataLoading = useSelector(state => state.KnowledgeBaseTopicsReducer.loading);
-
+  const kbDataLoading = useSelector(
+    state => state.KnowledgeBaseReducer.loading
+  );
+  const topicsData = useSelector(
+    state => state.KnowledgeBaseTopicsReducer.KnowledgeBaseTopicsData
+  );
+  const topicsDataLoading = useSelector(
+    state => state.KnowledgeBaseTopicsReducer.loading
+  );
   useEffect(() => {
-    const token = localStorage.getItem("X-Auth-Token");
     const tokenApiCalls = () => {
-      dispatch(userActions.KnowledgeBaseArticleApi(422));
-      dispatch(userActions.KnowledgeBaseTopicsApi(81));
-      dispatch(userActions.KnowledgeBaseApi());
+      dispatch(userActions.KnowledgeBaseApi(props.location.pathname));
     };
-    token && tokenApiCalls();
+    tokenApiCalls();
     return function cleanUp() {
       dispatch(getKnowledgeBase());
     };
-  }, [dispatch]);
-  // useEffect(() => {
-  //   const kbArray = [{ id: 82 }, { id: 81 }];
-  //   setTimeout(() => {
-  //     kbData !== undefined &&
-  //       kbArray.map(data =>
-  //         dispatch(userActions.KnowledgeBaseTopicsApi(data.id, kbArray.length))
-  //       );
-  //   }, 3000);
-  // }, [kbData, dispatch]);
-
+  }, [dispatch, props.location.pathname]);
   return (
     <Fragment>
-      <div className="main">Knowledge Base</div>
+      <div className="main">
+        Knowledge Base
+        {(kbDataLoading || topicsDataLoading) && (
+          <Spinner fontSize="60px" marginTop="40%"></Spinner>
+        )}
+        {!kbDataLoading &&
+          !topicsDataLoading &&
+          topicsData &&
+          (topicsData || []).map(data => (
+            <div key={data.id}>
+              {data.topic}
+              {data.kbArticles.length === 0 ? (
+                <div>No articles</div>
+              ) : (
+                data.kbArticles.map(element => (
+                  <Link
+                    key={element.id}
+                    to={`/KnowledgeBase/topic/${element.id}`}
+                  >
+                    <ul>
+                      <li>{element.subject}</li>
+                    </ul>
+                  </Link>
+                ))
+              )}
+            </div>
+          ))}
+      </div>
     </Fragment>
   );
 }
