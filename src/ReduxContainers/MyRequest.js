@@ -8,6 +8,14 @@ import {
   PaginationButton,
   PaginationPrevButton
 } from "../helpers/paginationButtonDisable";
+import { StateDrop} from "../helpers/StateDrop"
+import { PriorityDrop} from "../helpers/PriorityDrop"
+import { DetailsTimestamp } from "../helpers/Timestamp";
+import clock from "../icons/clock.svg";
+import web from "../icons/web.svg"
+
+import "../css/myRequest.css"
+
 function MyRequest(props) {
   const query = queryString.parse(props.location.search);
   let params = new URLSearchParams(props.location.search);
@@ -98,12 +106,20 @@ function MyRequest(props) {
         {ticketListLoading && (
           <Spinner fontSize="40px" marginTop="60%"></Spinner>
         )}
-        <div>
+        <div style={{width:"100%"}}>
           {!ticketListLoading &&
             ticketList &&
             ticketList.map(data => (
               <div key={data.requestId} className="post-container">
-                <span>{data.requestId}</span>
+              <div className="src-img"><img src={web} alt="src"/></div>
+              <div style={{width:"325px"}}>
+                <div className="ticket-subject-row"><div>{data.requestId}</div><div className="ticket-subject">{data.subject}</div></div>
+                <div className="ticket-mini-info">
+                <div className="d-flex mr-5"><img src={clock} width="15px" alt="created"/>{DetailsTimestamp(data.createTime)}</div>
+                <div className="d-flex mr-5"><img src={clock} width="15px" alt="created"/>{DetailsTimestamp(data.createTime)}</div></div>
+              </div>
+              <div><PriorityDrop priorityName={data.priority}/></div>
+              <div><StateDrop stateName={data.state}/></div>
               </div>
             ))}
         </div>

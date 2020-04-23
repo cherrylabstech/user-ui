@@ -11,3 +11,13 @@ export const Timestamp = date => {
       .format("MMM Do YYYY");
   return date !== undefined && formatted;
 };
+
+export const DetailsTimestamp = timeDate => {
+  let zone = profile.timezoneOfset;
+  let timeOffset = parseInt(timeDate) + parseInt(zone);
+  let moment = require("moment");
+  let formatted = moment
+    .unix(timeOffset)
+    .utc()
+    .format("Do MMM YYYY, h:mm a ");
+    return formatted}
