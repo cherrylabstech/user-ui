@@ -20,17 +20,11 @@ const HomeNav = props => {
     {
       id: 4,
       label: "MyRequest",
-      pathname: `/request`,
+      pathname: `/ticket`,
       search: "state=&page=1",
       icon: PopularIcon
     },
-    {
-      id: 5,
-      label: "MyRequest Detail",
-      pathname: "/request/detail",
-      search: "",
-      icon: PopularIcon
-    },
+
     {
       id: 6,
       label: "Asset",

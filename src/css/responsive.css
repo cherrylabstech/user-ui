@@ -61,6 +61,15 @@
 }
 
 @media only screen and (max-width: 770px) {
+  
+  .kb-box{
+    width:380px !important
+  }
+
+.main-create-ticket{
+  padding: 15px !important;
+}
+
   .container {
     margin-left: 0px !important;
     margin-right: 0px !important;

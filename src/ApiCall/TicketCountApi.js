@@ -1,6 +1,7 @@
 import * as actionTypes from "../actions/TicketCountActions";
 import { BASE_PATH, SERVICE_PATH } from "../ApiBasePath/ApiBasePath";
 import axios from "axios";
+import queryString from "query-string";
 export const getTicketCount = TicketCount => {
   return {
     type: actionTypes.GET_TICKET_COUNT
@@ -19,7 +20,9 @@ export const TicketCountFail = error => {
   };
 };
 
-export const TicketCountApi = (state) => {
+export const TicketCountApi = location => {
+  const query = queryString.parse(location);
+  const state = query.state || -1;
   const token = localStorage.getItem("X-Auth-Token");
   const url = `${BASE_PATH}${SERVICE_PATH}/requests/1/count/?state=${state}&originated=false`;
   return dispacth => {
