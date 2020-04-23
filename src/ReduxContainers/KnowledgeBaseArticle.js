@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { userActions } from "../ApiCall/rootApi";
 import parse from "html-react-parser";
 import Spinner from "../ReusableComps/Spinner";
+import { getKnowledgeBaseArticle } from "../ApiCall/KnowledgeBaseArticlesApi";
 
 function KnowledgeBaseArticle(props) {
   const dispatch = useDispatch();
@@ -17,6 +18,9 @@ function KnowledgeBaseArticle(props) {
 
   useEffect(() => {
     dispatch(userActions.KnowledgeBaseArticleApi(props.match.params.articleId));
+    return function cleanUp() {
+      dispatch(getKnowledgeBaseArticle());
+    };
   }, [props.match.params.articleId, dispatch]);
   return (
     <Fragment>
@@ -25,7 +29,12 @@ function KnowledgeBaseArticle(props) {
         {articlesDataLoading && (
           <Spinner fontSize="60px" marginTop="40%"></Spinner>
         )}
-        {articlesData && <div>{articlesData.subject}<div>{parse(articlesData.content)}</div></div>}
+        {!articlesDataLoading && articlesData && (
+          <div>
+            {articlesData.subject}
+            <div>{parse(articlesData.content)}</div>
+          </div>
+        )}
       </div>
     </Fragment>
   );
