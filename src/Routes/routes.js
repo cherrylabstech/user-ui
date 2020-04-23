@@ -94,46 +94,35 @@ function Routes(props) {
             ></Route>
             <Route exact path="/CreateTicket" component={CreateTicket} />
             <Route exact path="/login" component={LoginPage}></Route>
-            {token ? (
-              <>
-                <Route
-                  exact
-                  path="/request"
-                  key={2}
-                  component={MyRequest}
-                ></Route>
-                <Route
-                  exact
-                  path="/request/detail"
-                  component={MyRequestDetail}
-                ></Route>
-                <Route exact path="/asset" component={MyAsset}></Route>
-                <Route
-                  exact
-                  path="/asset/detail/:id"
-                  component={MyAssetDetail}
-                ></Route>
-                <Route
-                  exact
-                  path="/profile"
-                  render={() => {
-                    return (
-                      <Profile
-                        profilePicture={profileDetailData}
-                        loading={profileDetailLoading}
-                      ></Profile>
-                    );
-                  }}
-                ></Route>
-                <Route exact path="/activities"></Route>
-                {props.location.pathname === "/" && (
-                  <Redirect from="/" to="/home"></Redirect>
-                )}
-              </>
-            ) : (
-              <Redirect to="/home"></Redirect>
-            )}
+
+            <Route exact path="/ticket" key={2} component={MyRequest}></Route>
+            <Route
+              exact
+              path="/ticket/detail/:ticketId"
+              component={MyRequestDetail}
+            ></Route>
+            <Route exact path="/asset" component={MyAsset}></Route>
+            <Route
+              exact
+              path="/asset/detail/:id"
+              component={MyAssetDetail}
+            ></Route>
+            <Route
+              exact
+              path="/profile"
+              render={() => {
+                return (
+                  <Profile
+                    profilePicture={profileDetailData}
+                    loading={profileDetailLoading}
+                  ></Profile>
+                );
+              }}
+            ></Route>
+            <Route exact path="/activities"></Route>
+            <Redirect from="*" to="/home"></Redirect>
           </Switch>
+
           {location !== "/login" && <SideNavRight />}
         </div>
       </div>

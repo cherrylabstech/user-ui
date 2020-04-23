@@ -12,7 +12,7 @@ function MyRequest(props) {
   const query = queryString.parse(props.location.search);
   let params = new URLSearchParams(props.location.search);
   const [page, setPage] = useState(parseInt(query.page) || 1);
-  const [state, setState] = useState(parseInt(query.state) || "");
+  //const [state, setState] = useState(parseInt(query.state) || "");
   const ticketListData = useSelector(
     state => state.TicketListReducer.TicketList
   );
@@ -22,6 +22,7 @@ function MyRequest(props) {
   const ticketListCount = useSelector(
     state => state.TicketCountReducer.TicketCount
   );
+
   const ticketList = ticketListData && ticketListData.payload;
   const dispatch = useDispatch();
   useEffect(() => {
@@ -75,6 +76,9 @@ function MyRequest(props) {
       count: ticketListCount.request_count,
       to: parseInt(query.page) * 10
     });
+  const handleTicketDetail = id => {
+    props.history.push(`/ticket/detail/${id}`);
+  };
   return (
     <Fragment>
       <div className="main">
@@ -102,7 +106,11 @@ function MyRequest(props) {
           {!ticketListLoading &&
             ticketList &&
             ticketList.map(data => (
-              <div key={data.requestId} className="post-container">
+              <div
+                onClick={() => handleTicketDetail(data.requestId)}
+                key={data.requestId}
+                className="post-container"
+              >
                 <span>{data.requestId}</span>
               </div>
             ))}

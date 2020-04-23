@@ -31,6 +31,8 @@ import profilePictureUploadReducer from "./ProfilePicUploadReducer";
 import EditProfileReducer from "./EditProfilePostReducer";
 import TimeZoneReducer from "./TimeZoneReducer";
 import TimeZonePostReducer from "./TImeZonePostReducer";
+import TicketDetailReducer from "./TicketDetailReducer";
+import TicketDetailStateReducer from "./TicketDetailStateReducer";
 export default combineReducers({
   posts,
   AuthReducer,
@@ -63,5 +65,7 @@ export default combineReducers({
   profilePictureUploadReducer,
   EditProfileReducer,
   TimeZoneReducer,
-  TimeZonePostReducer
+  TimeZonePostReducer,
+  TicketDetailReducer,
+  TicketDetailStateReducer
 });

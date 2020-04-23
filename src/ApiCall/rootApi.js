@@ -29,6 +29,8 @@ import { ProfilePicUploadApi } from "./ProfilePicUpload";
 import { editProfileApi } from "./EditProfileApi";
 import { TimeZoneApi } from "./TimeZoneApi";
 import { TimeZonePostApi } from "./TimeZonePostApi";
+import { TicketDetailApi } from "./TicketDetailApi";
+import { TicketDetailStateApi } from "./TicketDetailStateApi";
 export const userActions = {
   auth,
   welcome,
@@ -60,5 +62,7 @@ export const userActions = {
   ProfilePicUploadApi,
   editProfileApi,
   TimeZoneApi,
-  TimeZonePostApi
+  TimeZonePostApi,
+  TicketDetailApi,
+  TicketDetailStateApi
 };
