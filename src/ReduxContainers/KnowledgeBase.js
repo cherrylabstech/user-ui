@@ -51,7 +51,7 @@ function KnowledgeBase(props) {
                     <ul>No articles</ul>
                   </div>
                 ) : (
-                  data.kbArticles.splice(0, 5).map(element => (
+                  data.kbArticles.slice(0, 5).map(element => (
                     <Link key={element.id} to={`/KnowledgeBase/${element.id}`}>
                       <ul>
                         <li>{element.subject}</li>

@@ -5,6 +5,7 @@ import { userActions } from "../ApiCall/rootApi";
 import { getKnowledgeBase } from "../ApiCall/KnowledgeBaseApi";
 import Spinner from "../ReusableComps/Spinner";
 import "../css/knowledgeBase.css";
+import { getKnowledgeBaseArticle } from "../ApiCall/KnowledgeBaseArticlesApi";
 
 function KnowledgeBaseTopics(props) {
   const dispatch = useDispatch();
@@ -15,7 +16,6 @@ function KnowledgeBaseTopics(props) {
   const topicsDataLoading = useSelector(
     state => state.KnowledgeBaseTopicsReducer.loading
   );
-  console.log(props.match.params);
   useEffect(() => {
     const tokenApiCalls = () => {
       dispatch(userActions.KnowledgeBaseTopicsApi(props.match.params.topicId));
@@ -23,6 +23,7 @@ function KnowledgeBaseTopics(props) {
     tokenApiCalls();
     return function cleanUp() {
       dispatch(getKnowledgeBase());
+      dispatch(getKnowledgeBaseArticle());
     };
   }, [dispatch, props.match.params.topicId]);
   return (

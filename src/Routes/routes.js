@@ -10,8 +10,6 @@ import SideNavRight from "../components/SideNavRight/SideNavRight";
 import KnowledgeBase from "../ReduxContainers/KnowledgeBase";
 import MyRequest from "../ReduxContainers/MyRequest";
 import MyRequestDetail from "../ReduxContainers/MyRequestDetail";
-import SignIn from "../ReduxContainers/SignIn";
-import SignUp from "../ReduxContainers/SignUp";
 import MyAssetDetail from "../ReduxContainers/MyAssetDetail";
 import MyAsset from "../ReduxContainers/MyAsset";
 import Profile from "../ReduxContainers/ Profile";
@@ -75,9 +73,7 @@ function Routes(props) {
       <div className="container">
         <div className="columns">
           {location !== "/login" && <SideNavLeft />}
-          {/* {token === null && props.location.pathname !== "/login" && (
-            <Redirect to="/home"></Redirect>
-          )} */}
+
           <Switch>
             <Route exact path="/home" component={WelcomeMessage} />
             <Route path="/post/:post_id" component={Feed} />
@@ -98,35 +94,45 @@ function Routes(props) {
             ></Route>
             <Route exact path="/CreateTicket" component={CreateTicket} />
             <Route exact path="/login" component={LoginPage}></Route>
-            <Route exact path="/SignIn" component={SignIn}></Route>
-            <Route exact path="/SignUp" component={SignUp}></Route>
-
-            <Route exact path="/request" key={2} component={MyRequest}></Route>
-            <Route
-              exact
-              path="/request/detail"
-              component={MyRequestDetail}
-            ></Route>
-            <Route exact path="/asset" component={MyAsset}></Route>
-            <Route
-              exact
-              path="/asset/detail/:id"
-              component={MyAssetDetail}
-            ></Route>
-            <Route
-              exact
-              path="/profile"
-              render={() => {
-                return (
-                  <Profile
-                    profilePicture={profileDetailData}
-                    loading={profileDetailLoading}
-                  ></Profile>
-                );
-              }}
-            ></Route>
-            <Route exact path="/activities"></Route>
-            <Redirect to="/home"></Redirect>
+            {token ? (
+              <>
+                <Route
+                  exact
+                  path="/request"
+                  key={2}
+                  component={MyRequest}
+                ></Route>
+                <Route
+                  exact
+                  path="/request/detail"
+                  component={MyRequestDetail}
+                ></Route>
+                <Route exact path="/asset" component={MyAsset}></Route>
+                <Route
+                  exact
+                  path="/asset/detail/:id"
+                  component={MyAssetDetail}
+                ></Route>
+                <Route
+                  exact
+                  path="/profile"
+                  render={() => {
+                    return (
+                      <Profile
+                        profilePicture={profileDetailData}
+                        loading={profileDetailLoading}
+                      ></Profile>
+                    );
+                  }}
+                ></Route>
+                <Route exact path="/activities"></Route>
+                {props.location.pathname === "/" && (
+                  <Redirect from="/" to="/home"></Redirect>
+                )}
+              </>
+            ) : (
+              <Redirect to="/home"></Redirect>
+            )}
           </Switch>
           {location !== "/login" && <SideNavRight />}
         </div>
