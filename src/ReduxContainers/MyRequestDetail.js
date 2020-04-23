@@ -12,9 +12,9 @@ function MyRequestDetail(props) {
   const ticketDetailLoading = useSelector(
     state => state.TicketDetailReducer.loading
   );
-  const stateData = useSelector(
-    state => state.TicketDetailStateReducer.TicketDetailStateData
-  );
+  // const stateData = useSelector(
+  //   state => state.TicketDetailStateReducer.TicketDetailStateData
+  // );
   const ticketDetailData = ticketDetailDatas && ticketDetailDatas.payload;
   useEffect(() => {
     dispatch(userActions.TicketDetailApi(props.match.params.ticketId));

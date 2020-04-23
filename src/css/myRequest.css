@@ -1,0 +1,34 @@
+.ticket-subject-row{
+    display: flex;
+    font-size: 14px;
+    margin-bottom: 5px;
+    height: fit-content;
+}
+.ticket-subject{
+    margin-left:10px;
+}
+
+.src-img{
+    margin: 10px;
+}
+
+.ticket-mini-info {
+    font-size: 12px;
+    display: flex;
+    justify-content: flex-start;
+    white-space: nowrap;
+    align-items: center;
+  }
+
+  .quick-edit-state {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 400;
+    width: 68px;
+  }
+  
+  .quick-state{
+    display: flex;
+    align-items: center;
+  }

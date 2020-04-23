@@ -1,10 +1,10 @@
-import web from "../Component/IconImages/web.svg";
-import email from "../Component/IconImages/email.svg";
-import facebook from "../Component/IconImages/facebook.svg";
-import twitter from "../Component/IconImages/twitter.svg";
-import phone from "../Component/IconImages/phone.svg";
-import crossTenant from "../Component/IconImages/cross-tenant.svg";
-import send from "../Component/IconImages/send.svg";
+import web from "../components/IconImages/web.svg";
+import email from "../components/IconImages/email.svg";
+import facebook from "../components/IconImages/facebook.svg";
+import twitter from "../components/IconImages/twitter.svg";
+import phone from "../components/IconImages/phone.svg";
+import crossTenant from "../components/IconImages/crossTenant.svg";
+import send from "../components/IconImages/send.svg";
 export const sourceIcon = source => {
   switch (source) {
     case 0:
