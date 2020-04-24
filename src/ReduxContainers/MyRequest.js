@@ -219,6 +219,7 @@ function MyRequest(props) {
           isOpen={isOpen}
           heading="Enter Comment"
           closeModal={handleCloseModal}
+          className="ticket-listing"
         >
           <FroalasEditor
             model={model}

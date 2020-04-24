@@ -30,6 +30,7 @@ function PopUp(props) {
         ariaHideApp={false}
         style={customStyles}
         contentLabel="Example Modal"
+        className={props.className}
       >
         <div className="modal-heading">
           <h2

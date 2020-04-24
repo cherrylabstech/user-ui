@@ -11,6 +11,6 @@
   color: black !important;
 }
 
-.ReactModal__Content {
+.ticket-listing .ReactModal__Content {
   width: 40% !important;
 }

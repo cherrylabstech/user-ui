@@ -39,3 +39,17 @@
   justify-content: space-between;
   align-items: center;
 }
+
+.ticket-listing {
+  width: 42%;
+  margin-top: 19%;
+  box-shadow: 3px 3px 11px 0px grey;
+  left: 10%;
+  padding: 26px;
+  background: white;
+  right: 50%;
+  bottom: 0%;
+  margin-left: 47%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+}
