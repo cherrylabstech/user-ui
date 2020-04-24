@@ -244,23 +244,28 @@ function MyRequest(props) {
             </button>
           </div>
         </PopUp>
-        {ticketListCount && (
-          <>
-            <button
-              disabled={PaginationPrevButton(parseInt(query.page))}
-              onClick={handleDecrement}
-            >
-              {"<"}
-            </button>
-            |
-            <button disabled={nextButtonDisable} onClick={handleIncrement}>
-              {">"}
-            </button>
-          </>
-        )}
-        <span>
-          Request Count is : {ticketListCount && ticketListCount.request_count}
-        </span>
+        <div className="ticket-list-top-bar">
+          <div className="ticket-list-search-box">
+            <input type="text" />
+          </div>
+          {ticketListCount && (
+            <>
+              <span> {ticketListCount && ticketListCount.request_count}</span>
+              <div className="pagination-button">
+                <button
+                  disabled={PaginationPrevButton(parseInt(query.page))}
+                  onClick={handleDecrement}
+                >
+                  {"<"}
+                </button>
+
+                <button disabled={nextButtonDisable} onClick={handleIncrement}>
+                  {">"}
+                </button>
+              </div>
+            </>
+          )}
+        </div>
         {ticketListLoading && (
           <Spinner fontSize="60px" marginTop="40%"></Spinner>
         )}
