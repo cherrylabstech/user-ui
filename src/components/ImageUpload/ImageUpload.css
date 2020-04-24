@@ -52,3 +52,17 @@
   background: white;
   border-radius: 5%;
 }
+
+.cropper-bg {
+  width: 309px !important;
+  height: 128px !important;
+  top: 13px;
+}
+
+.cropper-modal {
+  opacity: 0 !important;
+}
+
+.cropper-canvas {
+  top: 8px !important;
+}

@@ -38,7 +38,7 @@ export const ProfilePicUploadApi = imageData => {
       .catch(error => {
         console.log(error.response);
         error.response !== undefined &&
-          dispatch(profilePictureFail(error.response.data));
+          dispatch(profilePictureFail(error.response));
       });
   };
 };

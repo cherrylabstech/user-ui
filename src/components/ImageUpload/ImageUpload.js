@@ -14,6 +14,9 @@ function ImageUpload(props) {
   const imageUploading = useSelector(
     state => state.profilePictureUploadReducer.loading
   );
+  const imageError = useSelector(
+    state => state.profilePictureUploadReducer.error
+  );
   useEffect(() => {
     props.profilePicture && setCropResult(props.profilePicture.image);
   }, [props.profilePicture]);
@@ -56,21 +59,35 @@ function ImageUpload(props) {
     // setImageUploading(true);
     cropImage();
   };
+  useEffect(() => {
+    imageError !== null &&
+      imageError.status === 400 &&
+      props.profilePicture &&
+      setCropResult(props.profilePicture.image);
+  }, [imageError]);
+  console.log(imageError);
   return (
     <div>
       <div className="profile-picture-upload-box">
         <div className="profile-upload-box">
+          {imageUploading && (
+            <Spinner
+              className="upload-icon-box"
+              marginTop="10%"
+              position="absolute"
+              marginLeft="39%"
+              fontSize="50px"
+            ></Spinner>
+          )}
           <img src={cropResult} alt="cropped" className="profile-pic-upload" />
-          {imageUploading ? (
-            <div>
-              <Spinner className="upload-icon-box" fontSize="50px"></Spinner>
-            </div>
-          ) : (
+
+          {!imageUploading && (
             <label
               htmlFor="files"
               className="fas fa-cloud-upload-alt cursor-pointer upload-icon"
             />
           )}
+
           <input
             id="files"
             style={{ visibility: "hidden" }}
