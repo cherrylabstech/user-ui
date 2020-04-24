@@ -130,6 +130,11 @@ function CreateTicket(props) {
   const PropertiesData = useSelector(
     state => state.PropertiesReducer.propertiesData
   );
+  const slaTooltip = [
+    { slaTooltip: "Breached Response/Resolution Time" },
+    { slaTooltip: "Response/Resolution due today" },
+    { slaTooltip: "Open and Not Assigned to Agent" }
+  ];
 
   const SupportedSize = PropertiesData !== undefined && PropertiesData.fileSize;
 

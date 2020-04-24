@@ -8,7 +8,7 @@ import { KnowledgeBaseArticleApi } from "./KnowledgeBaseArticlesApi";
 import { KnowledgeBaseTopicsApi } from "./KnowledgeBaseTopicsApi";
 import { CreateTicketApi } from "./CreateTicketApi";
 import { PlanApi } from "./PlanApi";
-import { PriorityApi } from "./PriorityApi";
+import { PriorityApi, PriorityPostApi } from "./PriorityApi";
 import { DashBoardApi } from "./DashBoardApi";
 import { TicketListApi } from "./TicketListApi";
 import { TicketListRefreshApi } from "./TicketListApi";
@@ -30,7 +30,10 @@ import { editProfileApi } from "./EditProfileApi";
 import { TimeZoneApi } from "./TimeZoneApi";
 import { TimeZonePostApi } from "./TimeZonePostApi";
 import { TicketDetailApi } from "./TicketDetailApi";
-import { TicketDetailStateApi } from "./TicketDetailStateApi";
+import {
+  TicketDetailStateApi,
+  TicketDetailStatePostApi
+} from "./TicketDetailStateApi";
 export const userActions = {
   auth,
   welcome,
@@ -43,6 +46,7 @@ export const userActions = {
   CreateTicketApi,
   PlanApi,
   PriorityApi,
+  PriorityPostApi,
   DashBoardApi,
   TicketListApi,
   TicketListRefreshApi,
@@ -64,5 +68,6 @@ export const userActions = {
   TimeZoneApi,
   TimeZonePostApi,
   TicketDetailApi,
-  TicketDetailStateApi
+  TicketDetailStateApi,
+  TicketDetailStatePostApi
 };

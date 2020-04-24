@@ -15,6 +15,9 @@ import clock from "../icons/clock.svg";
 import "../css/myRequest.css";
 import { sourceIcon } from "../helpers/SourceIcon";
 import { getTicketDetailState } from "../ApiCall/TicketDetailStateApi";
+import PopUp from "../components/PopUp/PopUp";
+import FroalasEditor from "../FroalaEditor/FroalaEditor";
+import Radio from "../ReusableComps/Radio";
 export const loading = [
   {
     label: "Loading",
@@ -31,6 +34,11 @@ function MyRequest(props) {
   const query = queryString.parse(props.location.search);
   let params = new URLSearchParams(props.location.search);
   const [page, setPage] = useState(parseInt(query.page) || 1);
+  const [isOpen, setIsOpen] = useState(false);
+  const [model, setModelChange] = useState("");
+  const [requestId, setRequestId] = useState("");
+  const [status, setStatus] = useState("");
+  const [radio, setRadio] = useState(false);
   //const [state, setState] = useState(parseInt(query.state) || "");
   const ticketListData = useSelector(
     state => state.TicketListReducer.TicketList
@@ -59,14 +67,14 @@ function MyRequest(props) {
     apiCall();
   }, [dispatch]);
   //Ticket List Refresh
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     dispatch(userActions.TicketListRefreshApi(props.location.search));
-  //   }, 10000);
-  //   return () => {
-  //     clearInterval(interval);
-  //   };
-  // });
+  useEffect(() => {
+    const interval = setInterval(() => {
+      dispatch(userActions.TicketListRefreshApi(props.location.search));
+    }, 60000);
+    return () => {
+      clearInterval(interval);
+    };
+  });
   //Ticket List
   useEffect(() => {
     dispatch(userActions.TicketCountApi(props.location.search));
@@ -101,14 +109,79 @@ function MyRequest(props) {
     dispatch(userActions.TicketDetailStateApi(ticketId));
   };
 
-  const handleStateChange = value => {
-    console.log(value);
+  const handleRadioChange = () => {
+    setRadio(!radio);
   };
   const handleStateBlur = () => {
     dispatch(getTicketDetailState());
   };
-  const handlePriorityChange = value => {
-    console.log(value);
+  const handleCloseModal = () => {
+    setIsOpen(false);
+  };
+  const handleModelChange = model => {
+    setModelChange(model);
+  };
+  function handlePriorityChange(id) {
+    const priorityChange = selectedOption => {
+      dispatch(
+        userActions.PriorityPostApi({
+          ticketId: id,
+          location: props.location.search,
+          priorityId: selectedOption.key,
+          pathname: props.location.pathname
+        })
+      );
+    };
+    return priorityChange; // you can also do return _onChange.bind(this) if you need the scope.
+  }
+  function handleStateChange(id) {
+    const stateChange = selectedOption => {
+      setStatus(selectedOption.key);
+      setRequestId(id);
+      let state = () => {
+        dispatch(
+          userActions.TicketDetailStatePostApi({
+            stateData: {
+              contentType: "text/html",
+              requestId: id,
+              role: 1,
+              status: selectedOption.key
+            },
+            location: {
+              location: props.location.pathname,
+              search: props.location.search
+            }
+          })
+        );
+      };
+
+      selectedOption.status === true ? setIsOpen(true) : state();
+    };
+    return stateChange; // you can also do return _onChange.bind(this) if you need the scope.
+  }
+
+  const onStateNoteChange = () => {
+    setIsOpen(false);
+    dispatch(
+      userActions.TicketDetailStatePostApi({
+        stateData: {
+          contentType: "text/html",
+          is_private: radio,
+          requestId: requestId,
+          role: 1,
+          status: status,
+          subject: model
+        },
+        location: {
+          location: props.location.pathname,
+          search: props.location.search
+        }
+      })
+    );
+    setModelChange("");
+    setRequestId("");
+    setRadio(false);
+    setStatus("");
   };
   const nextButtonDisable =
     ticketListCount &&
@@ -125,6 +198,7 @@ function MyRequest(props) {
       return {
         value: data.state_type,
         label: data.state_type,
+        status: data.note_status,
         key: data.id
       };
     });
@@ -141,6 +215,34 @@ function MyRequest(props) {
   return (
     <Fragment>
       <div className="main">
+        <PopUp
+          isOpen={isOpen}
+          heading="Enter Comment"
+          closeModal={handleCloseModal}
+        >
+          <FroalasEditor
+            model={model}
+            onModelChange={handleModelChange}
+          ></FroalasEditor>
+          <div className="state-modal-dialog">
+            <Radio
+              checked={!radio}
+              text="Public"
+              onChange={handleRadioChange}
+            />
+            <Radio
+              checked={radio}
+              text="Private"
+              onChange={handleRadioChange}
+            />
+            <button
+              disabled={model.length >= 1 ? false : true}
+              onClick={onStateNoteChange}
+            >
+              Submit
+            </button>
+          </div>
+        </PopUp>
         {ticketListCount && (
           <>
             <button
@@ -159,7 +261,7 @@ function MyRequest(props) {
           Request Count is : {ticketListCount && ticketListCount.request_count}
         </span>
         {ticketListLoading && (
-          <Spinner fontSize="40px" marginTop="50%"></Spinner>
+          <Spinner fontSize="60px" marginTop="40%"></Spinner>
         )}
         <div style={{ width: "100%" }}>
           {!ticketListLoading &&
@@ -190,7 +292,7 @@ function MyRequest(props) {
                 </div>
                 <div>
                   <SelectDropDown
-                    onChange={handlePriorityChange}
+                    onChange={handlePriorityChange(data.requestId)}
                     name={data.priority}
                     options={
                       priorityLoading
@@ -204,7 +306,7 @@ function MyRequest(props) {
                   onClick={() => handleState(data.requestId)}
                 >
                   <SelectDropDown
-                    onChange={handleStateChange}
+                    onChange={handleStateChange(data.requestId)}
                     options={stateLoading ? loading : dropDownOptions}
                     name={data.state}
                   />

@@ -12,37 +12,35 @@ const customStyles = {
   }
 };
 
-function PopUp() {
+function PopUp(props) {
   var subtitle;
-  const [modalIsOpen, setIsOpen] = React.useState(false);
-  function openModal() {
-    setIsOpen(true);
-  }
+
   function afterOpenModal() {
     // references are now sync'd and can be accessed.
     subtitle.style.color = "#f00";
   }
 
-  function closeModal() {
-    setIsOpen(false);
-  }
-
+  const abc = props.children;
   return (
     <div>
-      <button onClick={openModal}>Open Modal</button>
       <Modal
-        isOpen={modalIsOpen}
+        isOpen={props.isOpen}
         onAfterOpen={afterOpenModal}
-        onRequestClose={closeModal}
+        onRequestClose={props.closeModal}
         ariaHideApp={false}
         style={customStyles}
         contentLabel="Example Modal"
       >
         <div className="modal-heading">
-          <h2 ref={_subtitle => (subtitle = _subtitle)}>Hello</h2>
-          <div onClick={closeModal}>X</div>
+          <h2
+            style={{ color: "black !important" }}
+            ref={_subtitle => (subtitle = _subtitle)}
+          >
+            {props.heading}
+          </h2>
+          <div onClick={props.closeModal}>X</div>
         </div>
-        <div>I am a modal</div>
+        <div>{abc}</div>
       </Modal>
     </div>
   );

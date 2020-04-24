@@ -1,6 +1,7 @@
 import * as actionTypes from "../actions/PriorityActions";
 import { BASE_PATH, SERVICE_PATH } from "../ApiBasePath/ApiBasePath";
 import axios from "axios";
+import { userActions } from "./rootApi";
 export const getPriorityData = PriorityData => {
   return {
     type: actionTypes.GET_PRIORITY_DATA
@@ -35,6 +36,28 @@ export const PriorityApi = () => {
         console.log(error);
         error.response !== undefined &&
           dispacth(PriorityDataFail(error.response.data));
+      });
+  };
+};
+
+export const PriorityPostApi = value => {
+  const token = localStorage.getItem("X-Auth-Token");
+  const url = `${BASE_PATH}${SERVICE_PATH}/priority/1`;
+  const postData = {
+    priorityId: value.priorityId,
+    requestId: value.ticketId
+  };
+  return dispatch => {
+    const apiToken = token !== null && { "X-Auth-Token": token };
+    axios
+      .post(url, postData, { headers: apiToken })
+      .then(res => {
+        value.pathname === "/ticket" &&
+          dispatch(userActions.TicketListApi(value.location));
+      })
+      .catch(error => {
+        console.log(error);
+        error.response !== undefined && alert(error.response.data.message);
       });
   };
 };

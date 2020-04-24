@@ -8,6 +8,7 @@ function Radio(props) {
         type="radio"
         id={props.text}
         name="radio"
+        checked={props.checked || false}
         value={props.value}
         onChange={props.onChange}
         required={props.required}

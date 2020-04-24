@@ -6,3 +6,11 @@
 .modal-heading div {
   cursor: pointer;
 }
+
+.modal-heading h2 {
+  color: black !important;
+}
+
+.ReactModal__Content {
+  width: 40% !important;
+}

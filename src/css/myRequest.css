@@ -33,3 +33,9 @@
   display: flex;
   align-items: center;
 }
+
+.state-modal-dialog {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

@@ -3,6 +3,7 @@
 import * as actionTypes from "../actions/TicketDetailsAction";
 import { BASE_PATH, SERVICE_PATH } from "../ApiBasePath/ApiBasePath";
 import axios from "axios";
+import { userActions } from "./rootApi";
 export const getTicketDetailState = TicketDetailStateData => {
   return {
     type: actionTypes.GET_TICKET_DETAIL_STATE_DATA
@@ -38,6 +39,28 @@ export const TicketDetailStateApi = id => {
         console.log(error);
         error.response !== undefined &&
           dispacth(TicketDetailStateFail(error.response.data));
+      });
+  };
+};
+
+export const TicketDetailStatePostApi = ({ stateData, location }) => {
+  const token = localStorage.getItem("X-Auth-Token");
+  const url = `${BASE_PATH}${SERVICE_PATH}/states/`;
+  return dispatch => {
+    const apiToken = token !== null && { "X-Auth-Token": token };
+    let ticketApi = () => {
+      dispatch(userActions.TicketListApi(location.search));
+      dispatch(userActions.TicketCountApi(location.search));
+      dispatch(userActions.DashBoardApi());
+    };
+    axios
+      .post(url, stateData, { headers: apiToken })
+      .then(res => {
+        location.location === "/ticket" && ticketApi();
+      })
+      .catch(error => {
+        console.log(error);
+        error.response !== undefined && alert(error.response.data.message);
       });
   };
 };

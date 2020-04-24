@@ -64,8 +64,7 @@ function ImageUpload(props) {
       imageError.status === 400 &&
       props.profilePicture &&
       setCropResult(props.profilePicture.image);
-  }, [imageError]);
-  console.log(imageError);
+  }, [imageError, props.profilePicture]);
   return (
     <div>
       <div className="profile-picture-upload-box">

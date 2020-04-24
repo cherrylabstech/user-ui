@@ -60,7 +60,12 @@ function LoginPage(props) {
           required
         />
 
-        <button type="submit" className="submit" align="center">
+        <button
+          disabled={loading}
+          type="submit"
+          className="submit"
+          align="center"
+        >
           {loading ? " Loading.." : "Sign in"}
         </button>
         <button

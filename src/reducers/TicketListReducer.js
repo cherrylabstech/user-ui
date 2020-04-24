@@ -1,7 +1,7 @@
 import * as ActionTypes from "../actions/TicketListActions";
 const initialState = {
   TicketList: undefined,
-  loading: false,
+  loading: true,
   error: null
 };
 
