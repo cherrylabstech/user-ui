@@ -59,11 +59,13 @@ function KnowledgeBase(props) {
                     </Link>
                   ))
                 )}
-                <Link to={`/KnowledgeBase/topic/${data.id}`}>
-                  <ul>
-                    <li>See More</li>
-                  </ul>
-                </Link>
+                {data.kbArticles.length >= 5 && (
+                  <Link to={`/KnowledgeBase/topic/${data.id}`}>
+                    <ul>
+                      <li>See More</li>
+                    </ul>
+                  </Link>
+                )}
               </div>
             ))}
         </div>

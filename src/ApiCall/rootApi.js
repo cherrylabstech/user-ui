@@ -34,6 +34,7 @@ import {
   TicketDetailStateApi,
   TicketDetailStatePostApi
 } from "./TicketDetailStateApi";
+import { PasswordApi } from "./PasswordApi";
 export const userActions = {
   auth,
   welcome,
@@ -69,5 +70,6 @@ export const userActions = {
   TimeZonePostApi,
   TicketDetailApi,
   TicketDetailStateApi,
-  TicketDetailStatePostApi
+  TicketDetailStatePostApi,
+  PasswordApi
 };

@@ -21,8 +21,8 @@ export const TicketListFail = error => {
   };
 };
 
-export const TicketListApi = location => {
-  const Page = Pagination(location);
+export const TicketListApi = (location, value) => {
+  const Page = Pagination(location, value);
   const query = queryString.parse(location);
   const from = Page.from;
   const to = Page.to;

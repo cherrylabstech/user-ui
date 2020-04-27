@@ -18,6 +18,7 @@ import { getTicketDetailState } from "../ApiCall/TicketDetailStateApi";
 import PopUp from "../components/PopUp/PopUp";
 import FroalasEditor from "../FroalaEditor/FroalaEditor";
 import Radio from "../ReusableComps/Radio";
+import { Pagination } from "../helpers/Pagination";
 export const loading = [
   {
     label: "Loading",
@@ -36,10 +37,13 @@ function MyRequest(props) {
   const [page, setPage] = useState(parseInt(query.page) || 1);
   const [isOpen, setIsOpen] = useState(false);
   const [model, setModelChange] = useState("");
+  const [elementsPerPage] = useState(10);
   const [requestId, setRequestId] = useState("");
+  const [refreshRequestId, setRefreshRequestId] = useState("");
   const [status, setStatus] = useState("");
   const [radio, setRadio] = useState(false);
   //const [state, setState] = useState(parseInt(query.state) || "");
+
   const ticketListData = useSelector(
     state => state.TicketListReducer.TicketList
   );
@@ -58,6 +62,13 @@ function MyRequest(props) {
 
   const priorityData = useSelector(state => state.PriorityReducer.PriorityData);
   const priorityLoading = useSelector(state => state.PriorityReducer.loading);
+  const statePostLoading = useSelector(
+    state => state.TicketDetailPostStateReducer.loading
+  );
+  const priorityPostLoading = useSelector(
+    state => state.PriorityPostReducer.loading
+  );
+  //PriorityPostReducer
   const ticketList = ticketListData && ticketListData.payload;
   const dispatch = useDispatch();
   useEffect(() => {
@@ -69,7 +80,7 @@ function MyRequest(props) {
   //Ticket List Refresh
   useEffect(() => {
     const interval = setInterval(() => {
-      dispatch(userActions.TicketListRefreshApi(props.location.search));
+      dispatch(userActions.TicketListRefreshApi(props.location.search, 10));
     }, 60000);
     return () => {
       clearInterval(interval);
@@ -80,7 +91,7 @@ function MyRequest(props) {
     dispatch(userActions.TicketCountApi(props.location.search));
   }, [query.state, dispatch]);
   useEffect(() => {
-    dispatch(userActions.TicketListApi(props.location.search));
+    dispatch(userActions.TicketListApi(props.location.search, elementsPerPage));
   }, [props.location.search, dispatch]);
   const handleIncrement = () => {
     setPage(page + 1);
@@ -123,6 +134,7 @@ function MyRequest(props) {
   };
   function handlePriorityChange(id) {
     const priorityChange = selectedOption => {
+      setRefreshRequestId(id);
       dispatch(
         userActions.PriorityPostApi({
           ticketId: id,
@@ -138,6 +150,7 @@ function MyRequest(props) {
     const stateChange = selectedOption => {
       setStatus(selectedOption.key);
       setRequestId(id);
+      setRefreshRequestId(id);
       let state = () => {
         dispatch(
           userActions.TicketDetailStatePostApi({
@@ -211,7 +224,9 @@ function MyRequest(props) {
         key: data.priority_id
       };
     });
-
+  const paginations = Pagination(props.location.search, elementsPerPage);
+  const from = paginations.from || 0;
+  const to = paginations.to || 10;
   return (
     <Fragment>
       <div className="main">
@@ -250,7 +265,10 @@ function MyRequest(props) {
           </div>
           {ticketListCount && (
             <>
-              <span> {ticketListCount && ticketListCount.request_count}</span>
+              <div className="page-count-details">
+                {from} &nbsp;- &nbsp; {to} &nbsp; &nbsp;
+                {ticketListCount && ticketListCount.request_count}
+              </div>
               <div className="pagination-button">
                 <button
                   disabled={PaginationPrevButton(parseInt(query.page))}
@@ -273,10 +291,27 @@ function MyRequest(props) {
           {!ticketListLoading &&
             ticketList &&
             ticketList.map(data => (
-              <div key={data.requestId} className="post-container">
+              <div
+                key={data.requestId}
+                className="post-container"
+                style={
+                  (statePostLoading || priorityPostLoading) &&
+                  refreshRequestId === data.requestId
+                    ? { opacity: 0.5 }
+                    : { opacity: 1 }
+                }
+              >
                 <div className="src-img">
                   <img src={sourceIcon(data.source)} alt="src" />
                 </div>
+                {(statePostLoading || priorityPostLoading) &&
+                  refreshRequestId === data.requestId && (
+                    <Spinner
+                      fontSize="30px"
+                      position="absolute"
+                      marginLeft="20%"
+                    ></Spinner>
+                  )}
                 <div style={{ width: "325px" }}>
                   <div
                     onClick={() => handleTicketDetail(data.requestId)}
@@ -290,6 +325,7 @@ function MyRequest(props) {
                       <img src={clock} width="15px" alt="created" />
                       {DetailsTimestamp(data.createTime)}
                     </div>
+                    <div></div>
                     <div className="d-flex mr-5">
                       <img src={clock} width="15px" alt="created" />
                       {DetailsTimestamp(data.createTime)}

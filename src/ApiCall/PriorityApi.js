@@ -39,6 +39,22 @@ export const PriorityApi = () => {
       });
   };
 };
+export const getPriorityPost = () => {
+  return {
+    type: actionTypes.GET_POST_PRIORITY_DATA
+  };
+};
+export const setPriorityPost = () => {
+  return {
+    type: actionTypes.SET_POST_PRIORITY_DATA
+  };
+};
+export const PriorityPostFail = error => {
+  return {
+    type: actionTypes.POST_PRIORITY_DATA_FAIL,
+    error: error
+  };
+};
 
 export const PriorityPostApi = value => {
   const token = localStorage.getItem("X-Auth-Token");
@@ -48,16 +64,22 @@ export const PriorityPostApi = value => {
     requestId: value.ticketId
   };
   return dispatch => {
+    dispatch(getPriorityPost());
     const apiToken = token !== null && { "X-Auth-Token": token };
     axios
       .post(url, postData, { headers: apiToken })
       .then(res => {
         value.pathname === "/ticket" &&
           dispatch(userActions.TicketListApi(value.location));
+
+        dispatch(setPriorityPost());
       })
       .catch(error => {
-        console.log(error);
+        console.log(error.response);
+        dispatch(userActions.TicketListRefreshApi(value.location));
         error.response !== undefined && alert(error.response.data.message);
+        error.response !== undefined &&
+          dispatch(PriorityPostFail(error.response));
       });
   };
 };

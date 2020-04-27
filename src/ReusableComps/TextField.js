@@ -8,7 +8,7 @@ function TextField(props) {
       </div>
       <input
         className={"text-field" || props.className}
-        type={props.type}
+        type={props.type || "text"}
         placeholder={props.placeholder}
         required={props.required}
         onChange={props.onChange}

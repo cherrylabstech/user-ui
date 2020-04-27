@@ -1,15 +1,18 @@
 import React, { Fragment, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { userActions } from "../ApiCall/rootApi";
 import TextField from "../ReusableComps/TextField";
 import ImageUpload from "../components/ImageUpload/ImageUpload";
+import Spinner from "../ReusableComps/Spinner";
 
 function EditProfile(props) {
   const [firstName, setFirstName] = useState();
   const [lastName, setLastName] = useState();
   const [phone, setPhone] = useState();
   const [email, setEmail] = useState("");
-
+  const editProfileLoading = useSelector(
+    state => state.EditProfileReducer.loading
+  );
   const dispatch = useDispatch();
   const profileDetailData = props.profilePicture && props.profilePicture;
 
@@ -20,8 +23,8 @@ function EditProfile(props) {
         userActions.editProfileApi({
           first_Name: firstName || profileDetailData.first_name,
           last_Name: lastName || profileDetailData.last_name,
-          notification_email: phone || profileDetailData.notification_email,
-          phone: email || profileDetailData.phone
+          notification_email: email || profileDetailData.notification_email,
+          phone: phone || profileDetailData.phone
         })
       );
     };
@@ -44,7 +47,7 @@ function EditProfile(props) {
   };
   return (
     <Fragment>
-      <div>
+      <div style={editProfileLoading ? { opacity: 0.5 } : { opacity: 1 }}>
         <div>
           <label>Change Profie Picture</label>
           <ImageUpload
@@ -60,6 +63,13 @@ function EditProfile(props) {
             onChange={handleFirstName}
           />
         </div>
+        {editProfileLoading && (
+          <Spinner
+            fontSize="40px"
+            marginLeft="40%"
+            position="absolute"
+          ></Spinner>
+        )}
         <div className="my-10">
           <TextField
             value={lastName || prop.last_name}

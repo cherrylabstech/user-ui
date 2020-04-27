@@ -42,11 +42,29 @@ export const TicketDetailStateApi = id => {
       });
   };
 };
+export const getTicketDetailPostState = TicketDetailPostStateData => {
+  return {
+    type: actionTypes.GET_TICKET_DETAIL_POST_STATE_DATA
+  };
+};
+export const setTicketDetailPosState = TicketDetailPostStateData => {
+  return {
+    type: actionTypes.SET_TICKET_DETAIL_POST_STATE_DATA,
+    TicketDetailPostStateData: TicketDetailPostStateData
+  };
+};
+export const TicketDetailPostStateFail = error => {
+  return {
+    type: actionTypes.TICKET_DETAIL_POST_STATE_DATA_FAIL,
+    error: error
+  };
+};
 
 export const TicketDetailStatePostApi = ({ stateData, location }) => {
   const token = localStorage.getItem("X-Auth-Token");
   const url = `${BASE_PATH}${SERVICE_PATH}/states/`;
   return dispatch => {
+    dispatch(getTicketDetailPostState());
     const apiToken = token !== null && { "X-Auth-Token": token };
     let ticketApi = () => {
       dispatch(userActions.TicketListApi(location.search));
@@ -57,9 +75,11 @@ export const TicketDetailStatePostApi = ({ stateData, location }) => {
       .post(url, stateData, { headers: apiToken })
       .then(res => {
         location.location === "/ticket" && ticketApi();
+        dispatch(setTicketDetailPosState());
       })
       .catch(error => {
-        console.log(error);
+        error.response && console.log(error.response);
+        dispatch(TicketDetailPostStateFail(error));
         error.response !== undefined && alert(error.response.data.message);
       });
   };

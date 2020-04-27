@@ -33,6 +33,9 @@ import TimeZoneReducer from "./TimeZoneReducer";
 import TimeZonePostReducer from "./TImeZonePostReducer";
 import TicketDetailReducer from "./TicketDetailReducer";
 import TicketDetailStateReducer from "./TicketDetailStateReducer";
+import TicketDetailPostStateReducer from "./TicketDetailsPostStateReducer";
+import PriorityPostReducer from "./PriorityPostReducer";
+import passwordReducer from "./PasswordReducer";
 export default combineReducers({
   posts,
   AuthReducer,
@@ -47,6 +50,7 @@ export default combineReducers({
   createTicketReducer,
   PlanReducer,
   PriorityReducer,
+  PriorityPostReducer,
   DashBoardReducer,
   TicketListReducer,
   TicketCountReducer,
@@ -67,5 +71,7 @@ export default combineReducers({
   TimeZoneReducer,
   TimeZonePostReducer,
   TicketDetailReducer,
-  TicketDetailStateReducer
+  TicketDetailStateReducer,
+  TicketDetailPostStateReducer,
+  passwordReducer
 });

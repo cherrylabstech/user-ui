@@ -47,9 +47,10 @@ export function auth(email, password) {
         window.location.reload();
       })
       .catch(error => {
-        dispatch(authFail(error.response.data));
+        error.response && dispatch(authFail(error.response.data));
         console.log(error.response);
-        error.response.status === 457 &&
+        error.response &&
+          error.response.status === 457 &&
           alert("You entered wrong username and password");
       });
   };
