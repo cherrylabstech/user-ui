@@ -48,8 +48,8 @@ export const TicketListApi = (location, value) => {
   };
 };
 
-export const TicketListRefreshApi = location => {
-  const Page = Pagination(location);
+export const TicketListRefreshApi = (location, value) => {
+  const Page = Pagination(location, value);
   const query = queryString.parse(location);
   const from = Page.from;
   const to = Page.to;

@@ -80,7 +80,9 @@ function MyRequest(props) {
   //Ticket List Refresh
   useEffect(() => {
     const interval = setInterval(() => {
-      dispatch(userActions.TicketListRefreshApi(props.location.search, 10));
+      dispatch(
+        userActions.TicketListRefreshApi(props.location.search, elementsPerPage)
+      );
     }, 60000);
     return () => {
       clearInterval(interval);
