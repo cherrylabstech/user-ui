@@ -1,6 +1,10 @@
 .sidenav-right {
   margin-top: 12px;
 }
+.sidenav-right-fixed {
+position: fixed;
+width: 250px;
+}
 
 .ask-a-question-block {
   height: 56px;

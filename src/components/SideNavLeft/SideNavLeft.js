@@ -7,9 +7,12 @@ import "./SideNavLeft.css";
 
 const SideNavLeft = props => {
   return (
-    <div className="sidenav-left">
+    <div className="flex-item" className="sidenav-left">
       {/* {props.location.pathname === "/" ? <HomeNav /> : <PostNav />} */}
+      <div className="sidenav-left-fixed">
       <HomeNav></HomeNav>
+      </div>
+     
     </div>
   );
 };

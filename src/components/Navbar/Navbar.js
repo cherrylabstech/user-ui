@@ -24,7 +24,7 @@ const Navbar = props => {
         <div className="header">
           <div className="logo-block">
             <Link to="/home">
-              <img src={Logo} alt="logo" className="brand-logo" />
+              <img src={"https://www.asista.com/static/media/asista-logo.png"} alt="logo" className="brand-logo" />
             </Link>
           </div>
           <div className="search-block">
@@ -44,12 +44,7 @@ const Navbar = props => {
           </div>
           <div className="user-profile-block cursor-pointer">
             <div className="nav-features">
-              <div className="nav-create-ticket" onClick={handleCreateTicket}>
-                <Button
-                  className="primary-btn btn-wide btn-height"
-                  text="Create Ticket"
-                ></Button>
-              </div>
+            
               {token ? (
                 <div className="logout-btn">
                   {props.profilePicture && (
@@ -59,9 +54,12 @@ const Navbar = props => {
                       className="brand-logo profile-pic"
                     />
                   )}
+                  {/*
                   <label onClick={handleLogout} className="logout-label">
                     Logout
                   </label>
+*/}
+                  
                 </div>
               ) : (
                 <div className="nav-features">

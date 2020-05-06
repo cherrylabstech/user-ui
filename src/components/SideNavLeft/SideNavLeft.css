@@ -1,6 +1,9 @@
 .sidenav-left {
   margin-top: 12px;
 }
+.sidenav-left-fixed  {
+position: fixed;
+}
 
 .hush-feed-label {
   color: var(--hush-feed-label-color);

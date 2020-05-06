@@ -55,7 +55,6 @@ const HomeNav = props => {
   const sideNavArray = filterArray(sideNavLeftArray);
   return (
     <div className="feed-group">
-      <div className="hush-feed-label">HUSH FEED</div>
       {sideNavArray.map(data => (
         <Link
           key={data.id}
