@@ -72,7 +72,8 @@ function Routes(props) {
   }
   return (
     <div className="App wrapper">
-      <Router basename="/agent/#" history={history}>
+      <Router history={history}>
+        {console.log(location)}
         {location !== "/login" && (
           <Navbar
             profilePicture={profileDetailData}
