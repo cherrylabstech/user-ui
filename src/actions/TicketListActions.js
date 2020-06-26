@@ -1,0 +1,3 @@
+export const GET_TICKET_LIST = "GET_TICKET_LIST";
+export const SET_TICKET_LIST = "SET_TICKET_LIST";
+export const TICKET_LIST_FAIL = "TICKET_LIST_FAIL";

@@ -1,0 +1,21 @@
+.profile-image {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    border: 1px solid grey;
+  }
+.cover-box{
+width: 100%;
+font-size: 16px;
+margin: 5px 0;
+}
+
+.slide-pane__content{
+  padding: 16px;
+}
+.slide-pane__close{
+  margin-left: 2px;
+}
+.slide-pane__title-wrapper{
+  margin-left: 0px;
+}

@@ -1,0 +1,23 @@
+.back-to-feed-block {
+  height: 32px;
+  background-color: var(--hush-white);
+  display: flex;
+  align-items: center;
+  padding: 0 6px;
+  border-radius: 4px;
+  margin-top: 2px;
+}
+
+.back-to-feed-image {
+  width: 20px;
+  height: 20px;
+  padding: 0 6px;
+}
+
+.back-to-feed-label {
+  margin-left: 10px;
+  font-size: 14px;
+  color: #333333;
+  letter-spacing: -0.23px;
+  line-height: 16px;
+}

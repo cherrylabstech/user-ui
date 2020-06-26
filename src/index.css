@@ -1,0 +1,217 @@
+
+:root {
+  --hush-feed-label-color: #5f748c;
+  --hush-white: rgb(255, 255, 255);
+  --hush-body-background: #f2f4f7;
+  --post-font-color: #333333;
+  --post-container-background-color: #ffffff;
+  --primary: purple;
+  --secondary: red;
+  --strong-orange: #2d2b37;
+    --light-orange: #fd975a;
+    --strong-brown: #342626;
+    --light-black: #323130;
+    --strong-silver: #605e5c;
+    --silver: #bbb;
+    --light-silver: #e8e9e8;
+    --strong-white: #f5f5f6;
+    --power-purple: #725ea7;
+    --power-green: #5cc856;
+    --power-red: #ff5b5b;
+    --power-blue: #63a4ef;
+    --main-bg-color: coral;
+    --facebook-logo-color: #2662e2;
+    --twitter-logo-color: #55acee;
+    --hover-color: #efefef;
+    --active-tab-color: #6860aa;
+    --button-color: #2d2b39;
+    --ticket-hover-color: #6860aa;
+    --text-light: #878787;
+}
+@import url("https://rsms.me/inter/inter.css");
+html {
+  font-family: "Inter", sans-serif;
+}
+@supports (font-variation-settings: normal) {
+  html {
+    font-family: "Inter var", sans-serif;
+  }
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--hush-body-background);
+  min-width: 320px;
+  width: 100%;
+}
+.wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  margin-top: 0px;
+  flex: 1;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: space-around;
+  align-items: stretch;
+  margin-top: 50px;
+}
+
+.columns {
+  display: flex;
+  flex: 1;
+}
+
+.sidenav-left {
+  width: 192px;
+  flex: 0 0 192px;
+  background-color: transparent;
+  order: 1;
+}
+
+.sidenav-right {
+  width: 256px;
+  flex: 0 0 256px;
+  background-color: transparent;
+  order: 3;
+}
+
+.main {
+  flex: 1;
+  order: 2;
+  margin: 12px 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px;
+  background-color: white;
+}
+.main-create-ticket {
+  align-items: flex-start !important;
+}
+
+.pull-right {
+  float: right;
+}
+
+.pull-left {
+  float: left;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+.margin-right-12 {
+  margin-right: 12px;
+}
+.mr-5{
+  margin-right:5px ;
+}
+.inline-block {
+  display: inline-block;
+}
+.text-left {
+  text-align: left;
+}
+
+.f-14 {
+  font-size: 14px;
+}
+.d-flex{
+  display: flex !important;
+}
+
+.block {
+  display: block;
+}
+.no-margin {
+  margin: 0;
+}
+.padding-10 {
+  padding: 10px;
+}
+
+.hidden {
+  display: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+.primary-btn {
+  border: none;
+  background-image: linear-gradient(
+    to right,
+    #4c74ab 0%,
+    #348ac7 51%,
+    #0c479a 100%
+  );
+  border-radius: 2px;
+  color: white;
+  padding: 0 10px;
+  cursor: pointer;
+}
+
+.secondary-btn {
+  border: none;
+  background-color: var(--secondary);
+  border-radius: 2px;
+  color: white;
+  padding: 0 10px;
+  cursor: pointer;
+}
+
+.d-box{
+  height: 30px;
+    border: 1px solid grey;
+    border-radius: 3px;
+    margin: 5px 0;
+    padding: 0 10px;
+    align-items: center;
+    display: flex;
+    font-size: 14px;
+}
+.my-10{
+  margin: 10px 0;
+}
+.btn-wide {
+  height: 35px;
+}
+
+.close-upload-button {
+  background: none;
+  border: none;
+  font-size: 17px;
+  color: gray;
+  cursor: pointer;
+}
+.close-upload-button:hover {
+  color: black;
+}
+.close-upload-button:active {
+  outline: none;
+}
+.close-upload-button:focus {
+  border: none;
+  outline: none;
+}
+td,
+th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}

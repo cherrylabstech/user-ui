@@ -1,0 +1,46 @@
+.text-field {
+  padding: 0 10px;
+  height: 25px;
+  border-radius: 2px;
+  border: 1px solid grey;
+  margin-top: 10px;
+  width: -webkit-fill-available;
+}
+
+.def-dropdown{
+  margin-top: 10px;
+  border: 1px solid blue;
+    width: 54%;
+    height: 25px;
+    background: white;
+    border-radius: 2px;
+    padding: 0 5px;
+}
+/* .text-area {
+  padding: 0 10px;
+  min-height: 50px;
+  border-radius: 2px;
+  border: 1px solid;
+  margin-top: 10px;
+} */
+.radio-field {
+  margin: 10px 0;
+}
+.create-ticket-field-cont {
+  margin: 20px 0;
+}
+.uploaded-file{
+  display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+}
+.open-attachment{
+  color: blue;
+    margin: 0 10px;
+}
+.attachment-link{
+  white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 80%;
+}

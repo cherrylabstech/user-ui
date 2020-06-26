@@ -1,0 +1,37 @@
+.asset-table {
+  background: white;
+  padding: 10px;
+}
+.asset-page {
+  background: white;
+}
+.asset-detail-page{
+    background-color: white;
+    width: 100%;
+}
+.asset-table table > thead > tr > td {
+  background-color: whitesmoke;
+  font-size: 14px;
+}
+.asset-table table > tbody > tr > td {
+  font-size: 12px;
+}
+.asset-table table > tbody > tr:hover {
+  background-color: whitesmoke;
+}
+
+.count-row {
+  padding: 6px;
+  border: 1px solid grey;
+  display: flex;
+  justify-content: space-between;
+}
+
+.pagination-box {
+  border: 1px solid gray;
+  font-size: 14px;
+  cursor: pointer;
+}
+.pagination-left-arrow {
+  border: 1px solid gray;
+}
